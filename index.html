@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unicorn Marketers - March 2026 Marketing Scorecard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --brand-primary: #2483C4;
+      --brand-primary-light: #4DA3E0;
+      --brand-primary-glow: rgba(36, 131, 196, 0.15);
+      --navy-dark: #191E28;
+      --navy-surface: #1f2533;
+      --cyan-accent: #00aae9;
+      --success: #28c840;
+      --error: #ff5f57;
+      --warning: #febc2e;
+      --white: #ffffff;
+      --text-primary: #191E28;
+      --text-muted: #9ca3af;
+      --text-secondary: #555e6b;
+      --bg-light: #f3fbff;
+      --bg-page: #f8fafb;
+      --card-border: rgba(25, 30, 40, 0.08);
+      --card-border-hover: rgba(25, 30, 40, 0.16);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-page);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--navy-dark);
+      padding: 48px 24px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -15%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--brand-primary-glow) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0, 170, 233, 0.06) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(36, 131, 196, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(36, 131, 196, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(36, 131, 196, 0.12);
+      border: 1px solid rgba(36, 131, 196, 0.25);
+      color: var(--brand-primary-light);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+    .hero h1 span { color: var(--brand-primary-light); }
+    .hero-subtitle {
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-bottom: 36px;
+    }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+    }
+    .hero-stat {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .hero-stat:hover {
+      transform: translateY(-2px);
+      border-color: rgba(36, 131, 196, 0.3);
+    }
+    .hero-stat-value {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--brand-primary-light);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .hero-stat-value.green { color: var(--success); }
+    .hero-stat-value.cyan { color: var(--cyan-accent); }
+    .hero-stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* MAIN */
+    .main {
+      max-width: 1200px;
+      margin: -24px auto 0;
+      padding: 0 24px 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* NOTE BANNER */
+    .note-banner {
+      background: var(--white);
+      border: 1px solid var(--card-border);
+      border-left: 4px solid var(--brand-primary);
+      border-radius: 8px;
+      padding: 14px 20px;
+      margin-bottom: 24px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .note-banner strong { color: var(--text-primary); }
+
+    /* SECTION CARDS */
+    .section {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 24px;
+      border: 1px solid var(--card-border);
+      transition: border-color 0.2s ease;
+    }
+    .section:hover { border-color: var(--card-border-hover); }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .section-icon.blue { background: rgba(36, 131, 196, 0.1); }
+    .section-icon.green { background: rgba(40, 200, 64, 0.1); }
+    .section-icon.gold { background: rgba(254, 188, 46, 0.1); }
+    .section-icon.red { background: rgba(255, 95, 87, 0.1); }
+    .section-icon.purple { background: rgba(139, 92, 246, 0.1); }
+    .section-icon.cyan-bg { background: rgba(0, 170, 233, 0.1); }
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy-dark);
+    }
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* METRIC GRID */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+    }
+    .metric-card {
+      background: var(--bg-light);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+    .metric-card-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--navy-dark);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .metric-card-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .metric-card-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* PIPELINE */
+    .pipeline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 24px 0;
+      overflow-x: auto;
+    }
+    .pipeline-stage { flex: 1; min-width: 100px; text-align: center; }
+    .pipeline-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 8px;
+      font-size: 22px;
+      font-weight: 800;
+      color: white;
+    }
+    .pipeline-circle.step1 { background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-light)); }
+    .pipeline-circle.step2 { background: linear-gradient(135deg, #1a7ab5, var(--cyan-accent)); }
+    .pipeline-circle.step2b { background: linear-gradient(135deg, #0095cc, #33bbee); }
+    .pipeline-circle.step3 { background: linear-gradient(135deg, #d4960c, var(--warning)); }
+    .pipeline-circle.step4 { background: linear-gradient(135deg, #1e9e38, var(--success)); }
+    .pipeline-label { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+    .pipeline-sub { font-size: 11px; color: var(--text-muted); }
+    .pipeline-arrow { color: #cbd5e1; font-size: 20px; flex-shrink: 0; }
+
+    /* TABLES */
+    .source-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+    .source-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 10px 16px;
+      border-bottom: 2px solid rgba(25, 30, 40, 0.06);
+    }
+    .source-table th.right { text-align: right; }
+    .source-table td {
+      padding: 12px 16px;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(25, 30, 40, 0.04);
+      color: var(--text-primary);
+    }
+    .source-table td.right { text-align: right; }
+    .source-table tr:last-child td { border-bottom: none; }
+
+    .source-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .source-tag.meta { background: rgba(36, 131, 196, 0.1); color: var(--brand-primary); }
+    .source-tag.cold { background: rgba(254, 188, 46, 0.12); color: #a37800; }
+    .source-tag.organic { background: rgba(40, 200, 64, 0.1); color: #1a7a2d; }
+    .source-tag.google { background: rgba(255, 95, 87, 0.1); color: #cc3d36; }
+    .source-tag.other { background: rgba(25, 30, 40, 0.06); color: var(--text-secondary); }
+    .source-tag.referral { background: rgba(139, 92, 246, 0.1); color: #6b3fc7; }
+    .source-tag.hampton { background: rgba(0, 170, 233, 0.1); color: #0088bb; }
+
+    .bar-container { width: 80px; height: 8px; background: rgba(25, 30, 40, 0.06); border-radius: 4px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 4px; }
+    .bar-fill.meta { background: linear-gradient(90deg, var(--brand-primary), var(--brand-primary-light)); }
+    .bar-fill.cold { background: linear-gradient(90deg, #d4960c, var(--warning)); }
+    .bar-fill.organic { background: linear-gradient(90deg, #1e9e38, var(--success)); }
+    .bar-fill.google { background: linear-gradient(90deg, #cc3d36, var(--error)); }
+    .bar-fill.other { background: linear-gradient(90deg, #6b7280, #9ca3af); }
+    .bar-fill.referral { background: linear-gradient(90deg, #6b3fc7, #8b5cf6); }
+
+    /* No-show rate badge */
+    .rate-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .rate-badge.good { background: rgba(40, 200, 64, 0.1); color: #1a7a2d; }
+    .rate-badge.warn { background: rgba(254, 188, 46, 0.12); color: #a37800; }
+    .rate-badge.bad { background: rgba(255, 95, 87, 0.1); color: #cc3d36; }
+
+    /* DEALS */
+    .deal-item {
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(25, 30, 40, 0.04);
+      gap: 16px;
+    }
+    .deal-item:last-child { border-bottom: none; }
+    .deal-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-light));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .deal-info { flex: 1; }
+    .deal-name { font-size: 14px; font-weight: 600; color: var(--navy-dark); }
+    .deal-business { font-size: 13px; color: var(--text-muted); }
+    .deal-amount { font-size: 14px; font-weight: 700; color: var(--success); white-space: nowrap; }
+    .deal-source { font-size: 11px; margin-top: 2px; }
+    .deal-date { font-size: 12px; color: var(--text-muted); font-weight: 500; text-align: right; }
+
+    /* SUMMARY ROW */
+    .summary-row {
+      background: var(--navy-dark);
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 16px;
+    }
+    .summary-row span { color: var(--text-muted); font-size: 13px; font-weight: 500; }
+    .summary-row strong { color: var(--white); font-size: 16px; font-weight: 700; }
+
+    /* TWO COL */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media (max-width: 768px) {
+      .two-col { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    .chart-container { position: relative; height: 260px; margin-top: 16px; }
+
+    /* EXPANDABLE INVESTMENT ROWS */
+    .invest-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+    .invest-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 10px 16px;
+      border-bottom: 2px solid rgba(25, 30, 40, 0.06);
+    }
+    .invest-table th.right { text-align: right; }
+    .invest-row {
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .invest-row:hover { background: var(--bg-light); }
+    .invest-row td {
+      padding: 14px 16px;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(25, 30, 40, 0.04);
+      color: var(--text-primary);
+    }
+    .invest-row td.right { text-align: right; font-weight: 600; }
+    .invest-row .expand-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-right: 8px;
+    }
+    .invest-row.expanded .expand-icon { transform: rotate(90deg); }
+    .invest-detail {
+      display: none;
+    }
+    .invest-detail.show { display: table-row; }
+    .invest-detail td {
+      padding: 0 16px 16px 48px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid rgba(25, 30, 40, 0.04);
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      padding: 12px 0;
+    }
+    .detail-item {
+      background: var(--bg-light);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+    .detail-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .detail-value {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy-dark);
+      margin-top: 2px;
+    }
+
+    /* TYPEFORM FUNNEL */
+    .funnel-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 20px 0;
+    }
+    .funnel-step {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .funnel-bar-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .funnel-bar {
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      padding-left: 16px;
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+      transition: width 0.6s ease;
+      min-width: 60px;
+    }
+    .funnel-step-label {
+      width: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .funnel-step-pct {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      width: 50px;
+      flex-shrink: 0;
+    }
+    .funnel-connector {
+      width: 100px;
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 8px;
+    }
+    .funnel-drop {
+      font-size: 11px;
+      color: var(--text-muted);
+      padding: 4px 0 4px 116px;
+    }
+
+    /* ICP QUALITY */
+    .icp-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .icp-bar-label {
+      width: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .icp-bar-track {
+      flex: 1;
+      height: 32px;
+      background: rgba(25, 30, 40, 0.04);
+      border-radius: 8px;
+      display: flex;
+      overflow: hidden;
+    }
+    .icp-bar-segment {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: white;
+      min-width: 30px;
+    }
+    .icp-bar-segment.icp { background: var(--success); }
+    .icp-bar-segment.fringy { background: var(--warning); }
+    .icp-bar-segment.non-icp { background: var(--error); }
+
+    /* CAC TABLE */
+    .cac-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+    .cac-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 10px 16px;
+      border-bottom: 2px solid rgba(25, 30, 40, 0.06);
+    }
+    .cac-table th.right { text-align: right; }
+    .cac-table td {
+      padding: 12px 16px;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(25, 30, 40, 0.04);
+      color: var(--text-primary);
+    }
+    .cac-table td.right { text-align: right; font-weight: 600; }
+    .cac-table tr:last-child td { border-bottom: none; }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="badge">Prepared by Unicorn Marketers</div>
+      <h1>March 2026 <span>Marketing Scorecard</span></h1>
+      <p class="hero-subtitle">Monthly performance overview - Full month ending March 31, 2026</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">61</div>
+          <div class="hero-stat-label">Applications</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value cyan">87</div>
+          <div class="hero-stat-label">Booked Calls</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value" style="color: #33bbee;">73</div>
+          <div class="hero-stat-label">Showed Calls</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value" style="color: var(--warning);">26</div>
+          <div class="hero-stat-label">Assessments</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value green">11</div>
+          <div class="hero-stat-label">Deals Closed</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value" style="color: var(--success); font-size: 28px;">$66,200</div>
+          <div class="hero-stat-label">New Monthly Rev</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <div class="note-banner">
+      <strong>Note:</strong> Lead gen partner costs are estimates pending final end-of-month invoices. All data reflects the full month of March 2026 (through 3/31).
+    </div>
+
+    <!-- FUNNEL -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon blue">&#9660;</div>
+        <div>
+          <div class="section-title">Sales Funnel Overview</div>
+          <div class="section-subtitle">Full pipeline from application to close</div>
+        </div>
+      </div>
+
+      <div class="pipeline">
+        <div class="pipeline-stage">
+          <div class="pipeline-circle step1">61</div>
+          <div class="pipeline-label">Applications</div>
+          <div class="pipeline-sub">Unique leads</div>
+        </div>
+        <div class="pipeline-arrow">&#10140;</div>
+        <div class="pipeline-stage">
+          <div class="pipeline-circle step2">87</div>
+          <div class="pipeline-label">Booked Calls</div>
+          <div class="pipeline-sub">Incl. partners</div>
+        </div>
+        <div class="pipeline-arrow">&#10140;</div>
+        <div class="pipeline-stage">
+          <div class="pipeline-circle step2b">73</div>
+          <div class="pipeline-label">Showed Calls</div>
+          <div class="pipeline-sub">83.9% show rate</div>
+        </div>
+        <div class="pipeline-arrow">&#10140;</div>
+        <div class="pipeline-stage">
+          <div class="pipeline-circle step3">26</div>
+          <div class="pipeline-label">Assessments</div>
+          <div class="pipeline-sub">35.6% of showed</div>
+        </div>
+        <div class="pipeline-arrow">&#10140;</div>
+        <div class="pipeline-stage">
+          <div class="pipeline-circle step4">11</div>
+          <div class="pipeline-label">Deals Closed</div>
+          <div class="pipeline-sub">$66,200/mo new rev</div>
+        </div>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div class="metric-card-value" style="color: var(--success);">83.9%</div>
+          <div class="metric-card-label">Show-up Rate</div>
+          <div class="metric-card-sub">73 of 87 showed</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-card-value" style="color: #d4960c;">35.6%</div>
+          <div class="metric-card-label">Showed to Assessment</div>
+          <div class="metric-card-sub">26 of 73 showed calls</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-card-value" style="color: var(--success);">11</div>
+          <div class="metric-card-label">Deals Closed</div>
+          <div class="metric-card-sub">From assessments across multiple months</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-card-value" style="color: var(--brand-primary);">$6,018</div>
+          <div class="metric-card-label">Avg Deal Size</div>
+          <div class="metric-card-sub">Monthly retainer</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INVESTMENT / COST SECTION -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon purple">&#128176;</div>
+        <div>
+          <div class="section-title">Investment by Source</div>
+          <div class="section-subtitle">March spend breakdown - click any source for details</div>
+        </div>
+      </div>
+
+      <table class="invest-table">
+        <thead>
+          <tr>
+            <th>Source</th>
+            <th>Booked</th>
+            <th>Showed</th>
+            <th class="right">Cost / Call</th>
+            <th class="right">March Spend</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Meta Ads -->
+          <tr class="invest-row" onclick="toggleDetail(this)">
+            <td><span class="expand-icon">&#9654;</span><span class="source-tag meta">Meta Ads</span></td>
+            <td>42</td>
+            <td>36</td>
+            <td class="right">$259.17</td>
+            <td class="right">$10,885.18</td>
+          </tr>
+          <tr class="invest-detail">
+            <td colspan="5">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <div class="detail-label">Ad Spend (March)</div>
+                  <div class="detail-value">$10,885.18</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Booked / Showed</div>
+                  <div class="detail-value">42 / 36</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Cost / Showed Call</div>
+                  <div class="detail-value">$302.37</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">March Assessments</div>
+                  <div class="detail-value">10</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Cost / Assessment</div>
+                  <div class="detail-value">$1,088.52</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">March Deals</div>
+                  <div class="detail-value">3</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">CAC</div>
+                  <div class="detail-value">$3,628</div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Ikoni Digital -->
+          <tr class="invest-row" onclick="toggleDetail(this)">
+            <td><span class="expand-icon">&#9654;</span><span class="source-tag cold">Ikoni Digital</span></td>
+            <td>10</td>
+            <td>6</td>
+            <td class="right">$140.00</td>
+            <td class="right">$1,400.00</td>
+          </tr>
+          <tr class="invest-detail">
+            <td colspan="5">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <div class="detail-label">Cost Per Booking</div>
+                  <div class="detail-value">$140.00</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Booked / Showed</div>
+                  <div class="detail-value">10 / 6</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">March Assessments</div>
+                  <div class="detail-value">2</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">March Deals</div>
+                  <div class="detail-value">1</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">CAC</div>
+                  <div class="detail-value">$1,400</div>
+                </div>
+              </div>
+              <div style="padding: 8px 0 0; font-size: 12px; color: var(--text-muted);">
+                10 bookings per Ikoni's March report. 4 billable calls at $350/call = $1,400.
+              </div>
+            </td>
+          </tr>
+
+          <!-- Cold Outreach Systems -->
+          <tr class="invest-row" onclick="toggleDetail(this)">
+            <td><span class="expand-icon">&#9654;</span><span class="source-tag cold">Cold Outreach</span></td>
+            <td>10</td>
+            <td>8</td>
+            <td class="right">$310.00</td>
+            <td class="right">$3,100.00</td>
+          </tr>
+          <tr class="invest-detail">
+            <td colspan="5">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <div class="detail-label">Monthly Retainer</div>
+                  <div class="detail-value">$1,000</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Cost Per Call</div>
+                  <div class="detail-value">$300</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">March Total</div>
+                  <div class="detail-value">$3,100</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Booked / Showed</div>
+                  <div class="detail-value">10 / 8</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">March Deals</div>
+                  <div class="detail-value">1</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">CAC</div>
+                  <div class="detail-value">$3,100</div>
+                </div>
+              </div>
+              <div style="padding: 8px 0 0; font-size: 12px; color: var(--text-muted);">
+                Retainer ($1,000/mo) + 7 billable calls ($300/call = $2,100) = $3,100. 10 total calls on tracker; 3 originally booked were cancelled and excluded from billing.
+              </div>
+            </td>
+          </tr>
+
+          <!-- Wolfscale -->
+          <tr class="invest-row" onclick="toggleDetail(this)">
+            <td><span class="expand-icon">&#9654;</span><span class="source-tag cold">Wolfscale</span></td>
+            <td>6</td>
+            <td>6</td>
+            <td class="right">$453.23</td>
+            <td class="right">$2,719.40</td>
+          </tr>
+          <tr class="invest-detail">
+            <td colspan="5">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <div class="detail-label">Monthly Retainer</div>
+                  <div class="detail-value">$1,995.00</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Software Cost</div>
+                  <div class="detail-value">$134.40/mo</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Calls Included</div>
+                  <div class="detail-value">4/mo</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Rate for Call 5+</div>
+                  <div class="detail-value">$295/call</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">March Extra Calls</div>
+                  <div class="detail-value">2 x $295 = $590</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">March Total</div>
+                  <div class="detail-value">$2,719.40</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">March Assessments</div>
+                  <div class="detail-value">2</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">March Deals</div>
+                  <div class="detail-value">0</div>
+                </div>
+              </div>
+              <div style="padding: 8px 0 0; font-size: 12px; color: var(--text-muted);">
+                Base ($1,995 + $134.40) + 2 extra calls ($590) = $2,719.40. 100% show rate.
+              </div>
+            </td>
+          </tr>
+
+          <!-- NuOpp -->
+          <tr class="invest-row" onclick="toggleDetail(this)">
+            <td><span class="expand-icon">&#9654;</span><span class="source-tag cold">NuOpp</span></td>
+            <td>0</td>
+            <td>0</td>
+            <td class="right">N/A</td>
+            <td class="right">$2,500.00</td>
+          </tr>
+          <tr class="invest-detail">
+            <td colspan="5">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <div class="detail-label">One-Time Setup Fee</div>
+                  <div class="detail-value">$2,500</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Rate Per Call</div>
+                  <div class="detail-value">$500/call</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">March Calls</div>
+                  <div class="detail-value">0</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">March Deals</div>
+                  <div class="detail-value">0</div>
+                </div>
+              </div>
+              <div style="padding: 8px 0 0; font-size: 12px; color: var(--text-muted);">
+                One-time setup fee paid in March. Going forward, charged $500 per booked call only.
+              </div>
+            </td>
+          </tr>
+
+          <!-- Google Ads -->
+          <tr class="invest-row" onclick="toggleDetail(this)">
+            <td><span class="expand-icon">&#9654;</span><span class="source-tag google">Google Ads</span></td>
+            <td>2</td>
+            <td>2</td>
+            <td class="right">$304.00</td>
+            <td class="right">$608.00</td>
+          </tr>
+          <tr class="invest-detail">
+            <td colspan="5">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <div class="detail-label">Ad Spend (March)</div>
+                  <div class="detail-value">$608.00</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Booked / Showed</div>
+                  <div class="detail-value">2 / 2</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">March Assessments</div>
+                  <div class="detail-value">1</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">March Deals</div>
+                  <div class="detail-value">1</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">CAC</div>
+                  <div class="detail-value">$608</div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Hampton -->
+          <tr class="invest-row" onclick="toggleDetail(this)">
+            <td><span class="expand-icon">&#9654;</span><span class="source-tag hampton">Hampton</span></td>
+            <td>-</td>
+            <td>-</td>
+            <td class="right">-</td>
+            <td class="right">$825.00</td>
+          </tr>
+          <tr class="invest-detail">
+            <td colspan="5">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <div class="detail-label">Annual Fee</div>
+                  <div class="detail-value">$9,900/yr</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Monthly Prorated</div>
+                  <div class="detail-value">$825/mo</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">March Deals</div>
+                  <div class="detail-value">1</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">CAC</div>
+                  <div class="detail-value">$825</div>
+                </div>
+              </div>
+              <div style="padding: 8px 0 0; font-size: 12px; color: var(--text-muted);">
+                Membership providing warm introductions. 1 deal closed from Hampton intro in March.
+              </div>
+            </td>
+          </tr>
+
+          <!-- Board of Advisors -->
+          <tr class="invest-row" onclick="toggleDetail(this)">
+            <td><span class="expand-icon">&#9654;</span><span class="source-tag hampton">Board of Advisors</span></td>
+            <td>-</td>
+            <td>-</td>
+            <td class="right">-</td>
+            <td class="right">$1,667.00</td>
+          </tr>
+          <tr class="invest-detail">
+            <td colspan="5">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <div class="detail-label">Annual Fee</div>
+                  <div class="detail-value">$20,000/yr</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Monthly Prorated</div>
+                  <div class="detail-value">$1,667/mo</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">March Deals</div>
+                  <div class="detail-value">1</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">CAC</div>
+                  <div class="detail-value">$1,667</div>
+                </div>
+              </div>
+              <div style="padding: 8px 0 0; font-size: 12px; color: var(--text-muted);">
+                Membership providing warm introductions. 1 deal closed from BA connection in March.
+              </div>
+            </td>
+          </tr>
+
+          <!-- Organic / Other / Unknown -->
+          <tr class="invest-row" onclick="toggleDetail(this)">
+            <td><span class="expand-icon">&#9654;</span><span class="source-tag organic">Organic / Other</span></td>
+            <td>17</td>
+            <td>15</td>
+            <td class="right">$0.00</td>
+            <td class="right">$0.00</td>
+          </tr>
+          <tr class="invest-detail">
+            <td colspan="5">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <div class="detail-label">Organic</div>
+                  <div class="detail-value">4</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Unknown / Blank</div>
+                  <div class="detail-value">12</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Email</div>
+                  <div class="detail-value">1</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">March Assessments</div>
+                  <div class="detail-value">7</div>
+                </div>
+              </div>
+              <div style="padding: 8px 0 0; font-size: 12px; color: var(--text-muted);">
+                Includes calls with no UTM source, organic traffic, email, and entries without source attribution.
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="summary-row" style="flex-wrap: wrap; gap: 12px;">
+        <div>
+          <span>Total March Investment</span><br>
+          <strong style="font-size: 20px;">$23,704.58</strong>
+        </div>
+        <div style="text-align: center;">
+          <span>Cost Per Booked Call (Avg)</span><br>
+          <strong style="font-size: 20px;">$272.47</strong>
+        </div>
+        <div style="text-align: right;">
+          <span>Blended CAC (All Sources)</span><br>
+          <strong style="font-size: 20px;">$2,155</strong>
+        </div>
+      </div>
+      <div style="margin-top: 12px; padding: 10px 14px; background: var(--bg-light); border-radius: 8px; font-size: 12px; color: var(--text-secondary);">
+        Lead gen partner totals are estimates pending final end-of-month invoices. Hampton and BA costs are prorated monthly from annual membership fees.
+      </div>
+    </div>
+
+    <!-- CAC & DEAL SIZE BY CHANNEL -->
+    <div class="two-col">
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon purple">&#128184;</div>
+          <div>
+            <div class="section-title">Cost to Acquire Customer (CAC)</div>
+            <div class="section-subtitle">By paid channel - referral deals excluded</div>
+          </div>
+        </div>
+        <table class="cac-table">
+          <thead><tr><th>Channel</th><th>Deals</th><th class="right">Spend</th><th class="right">CAC</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="source-tag google">Google Ads</span></td>
+              <td>1</td>
+              <td class="right">$608</td>
+              <td class="right" style="color: var(--success);">$608</td>
+            </tr>
+            <tr>
+              <td><span class="source-tag hampton">Hampton</span></td>
+              <td>1</td>
+              <td class="right">$825</td>
+              <td class="right" style="color: var(--success);">$825</td>
+            </tr>
+            <tr>
+              <td><span class="source-tag hampton">Board of Advisors</span></td>
+              <td>1</td>
+              <td class="right">$1,667</td>
+              <td class="right" style="color: #d4960c;">$1,667</td>
+            </tr>
+            <tr>
+              <td><span class="source-tag cold">Ikoni Digital</span></td>
+              <td>1</td>
+              <td class="right">$1,400</td>
+              <td class="right" style="color: #d4960c;">$1,400</td>
+            </tr>
+            <tr>
+              <td><span class="source-tag cold">Cold Outreach</span></td>
+              <td>1</td>
+              <td class="right">$3,100</td>
+              <td class="right" style="color: var(--error);">$3,100</td>
+            </tr>
+            <tr>
+              <td><span class="source-tag meta">Meta Ads</span></td>
+              <td>3</td>
+              <td class="right">$10,885</td>
+              <td class="right" style="color: var(--error);">$3,628</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="summary-row">
+          <span>Blended CAC (All 11 Deals)</span>
+          <strong>$2,155</strong>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon green">&#128200;</div>
+          <div>
+            <div class="section-title">Monthly Deal Size by Channel</div>
+            <div class="section-subtitle">Average monthly retainer per source</div>
+          </div>
+        </div>
+        <table class="cac-table">
+          <thead><tr><th>Channel</th><th>Deals</th><th class="right">Total $/mo</th><th class="right">Avg $/mo</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="source-tag meta">Meta Ads</span></td>
+              <td>3</td>
+              <td class="right">$16,700</td>
+              <td class="right">$5,567</td>
+            </tr>
+            <tr>
+              <td><span class="source-tag google">Google Ads</span></td>
+              <td>1</td>
+              <td class="right">$5,000</td>
+              <td class="right">$5,000</td>
+            </tr>
+            <tr>
+              <td><span class="source-tag cold">Cold Outreach</span></td>
+              <td>1</td>
+              <td class="right">$5,500</td>
+              <td class="right">$5,500</td>
+            </tr>
+            <tr>
+              <td><span class="source-tag cold">Ikoni Digital</span></td>
+              <td>1</td>
+              <td class="right">$5,900</td>
+              <td class="right">$5,900</td>
+            </tr>
+            <tr>
+              <td><span class="source-tag hampton">Hampton</span></td>
+              <td>1</td>
+              <td class="right">$6,900</td>
+              <td class="right">$6,900</td>
+            </tr>
+            <tr>
+              <td><span class="source-tag hampton">Board of Advisors</span></td>
+              <td>1</td>
+              <td class="right">$5,900</td>
+              <td class="right">$5,900</td>
+            </tr>
+            <tr>
+              <td><span class="source-tag referral">Referral</span></td>
+              <td>3</td>
+              <td class="right">$20,300</td>
+              <td class="right">$6,767</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="summary-row">
+          <span>Blended Avg Deal Size</span>
+          <strong>$6,018/mo</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- ICP QUALITY BREAKDOWN -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon blue">&#127919;</div>
+        <div>
+          <div class="section-title">ICP Quality Breakdown</div>
+          <div class="section-subtitle">Based on 44 Meta + Google booked calls scored by revenue ($50K+ threshold) and ad spend ($5K+ threshold)</div>
+        </div>
+      </div>
+
+      <div class="metric-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
+        <div class="metric-card" style="border-left: 4px solid var(--success);">
+          <div class="metric-card-value" style="color: var(--success);">17</div>
+          <div class="metric-card-label">Clear ICP</div>
+          <div class="metric-card-sub">$50K+ revenue AND $5K+ ad spend</div>
+        </div>
+        <div class="metric-card" style="border-left: 4px solid var(--warning);">
+          <div class="metric-card-value" style="color: #d4960c;">11</div>
+          <div class="metric-card-label">Fringy</div>
+          <div class="metric-card-sub">Lowest in one category only</div>
+        </div>
+        <div class="metric-card" style="border-left: 4px solid var(--error);">
+          <div class="metric-card-value" style="color: var(--error);">16</div>
+          <div class="metric-card-label">Clear Non-ICP</div>
+          <div class="metric-card-sub">Under $50K rev AND under $5K spend</div>
+        </div>
+      </div>
+
+      <!-- Stacked bars -->
+      <div style="margin-top: 8px;">
+        <div class="icp-bar-row">
+          <div class="icp-bar-label">Meta (42)</div>
+          <div class="icp-bar-track">
+            <div class="icp-bar-segment icp" style="width: 38.1%;">16</div>
+            <div class="icp-bar-segment fringy" style="width: 23.8%;">10</div>
+            <div class="icp-bar-segment non-icp" style="width: 38.1%;">16</div>
+          </div>
+        </div>
+        <div class="icp-bar-row">
+          <div class="icp-bar-label">Google (2)</div>
+          <div class="icp-bar-track">
+            <div class="icp-bar-segment icp" style="width: 50%;">1</div>
+            <div class="icp-bar-segment fringy" style="width: 50%;">1</div>
+          </div>
+        </div>
+        <div class="icp-bar-row" style="margin-top: 8px;">
+          <div class="icp-bar-label"><strong>Total (44)</strong></div>
+          <div class="icp-bar-track">
+            <div class="icp-bar-segment icp" style="width: 38.6%;">17</div>
+            <div class="icp-bar-segment fringy" style="width: 25%;">11</div>
+            <div class="icp-bar-segment non-icp" style="width: 36.4%;">16</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 24px; margin-top: 16px; font-size: 12px; color: var(--text-muted);">
+        <span><span style="display:inline-block;width:12px;height:12px;background:var(--success);border-radius:3px;margin-right:4px;vertical-align:middle;"></span> Clear ICP (38.6%)</span>
+        <span><span style="display:inline-block;width:12px;height:12px;background:var(--warning);border-radius:3px;margin-right:4px;vertical-align:middle;"></span> Fringy (25.0%)</span>
+        <span><span style="display:inline-block;width:12px;height:12px;background:var(--error);border-radius:3px;margin-right:4px;vertical-align:middle;"></span> Non-ICP (36.4%)</span>
+      </div>
+    </div>
+
+    <!-- TYPEFORM FUNNEL -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon cyan-bg">&#128203;</div>
+        <div>
+          <div class="section-title">Typeform Application Funnel</div>
+          <div class="section-subtitle">March 1-31 - visitor journey from page view to submission</div>
+        </div>
+      </div>
+
+      <div class="metric-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-bottom: 24px;">
+        <div class="metric-card">
+          <div class="metric-card-value" style="color: var(--navy-dark);">414</div>
+          <div class="metric-card-label">Page Views</div>
+          <div class="metric-card-sub">Unique visitors</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-card-value" style="color: var(--brand-primary);">150</div>
+          <div class="metric-card-label">Form Starts</div>
+          <div class="metric-card-sub">36.2% of views</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-card-value" style="color: var(--cyan-accent);">61</div>
+          <div class="metric-card-label">Submissions</div>
+          <div class="metric-card-sub">40.7% completion</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-card-value" style="color: var(--success);">3:03</div>
+          <div class="metric-card-label">Avg. Time</div>
+          <div class="metric-card-sub">To complete form</div>
+        </div>
+      </div>
+
+      <div class="funnel-visual">
+        <div class="funnel-step">
+          <div class="funnel-step-label">Views</div>
+          <div class="funnel-bar-wrap">
+            <div class="funnel-bar" style="width: 100%; background: linear-gradient(90deg, var(--navy-dark), #2a3040);">414</div>
+          </div>
+          <div class="funnel-step-pct">100%</div>
+        </div>
+        <div class="funnel-drop">264 visitors left without starting (63.8% drop-off)</div>
+        <div class="funnel-step">
+          <div class="funnel-step-label">Starts</div>
+          <div class="funnel-bar-wrap">
+            <div class="funnel-bar" style="width: 36.2%; background: linear-gradient(90deg, var(--brand-primary), var(--brand-primary-light));">150</div>
+          </div>
+          <div class="funnel-step-pct">36.2%</div>
+        </div>
+        <div class="funnel-drop">89 people abandoned during form (59.3% drop-off)</div>
+        <div class="funnel-step">
+          <div class="funnel-step-label">Submissions</div>
+          <div class="funnel-bar-wrap">
+            <div class="funnel-bar" style="width: 14.7%; background: linear-gradient(90deg, #0095cc, var(--cyan-accent));">61</div>
+          </div>
+          <div class="funnel-step-pct">14.7%</div>
+        </div>
+      </div>
+
+      <div class="summary-row">
+        <span>Overall Conversion (View to Submit)</span>
+        <strong>14.7%</strong>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <!-- APPLICATIONS BY SOURCE -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon blue">&#128200;</div>
+          <div>
+            <div class="section-title">Applications by Source</div>
+            <div class="section-subtitle">61 unique applications via Typeform (through 3/31)</div>
+          </div>
+        </div>
+        <table class="source-table">
+          <thead><tr><th>Source</th><th>Count</th><th>Share</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="source-tag meta">Meta</span></td>
+              <td><strong>43</strong></td>
+              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill meta" style="width:70.5%"></div></div>70.5%</div></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag other">Direct / Unknown</span></td>
+              <td><strong>8</strong></td>
+              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill other" style="width:13.1%"></div></div>13.1%</div></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag organic">Organic</span></td>
+              <td><strong>7</strong></td>
+              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill organic" style="width:11.5%"></div></div>11.5%</div></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag google">Google</span></td>
+              <td><strong>2</strong></td>
+              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill google" style="width:3.3%"></div></div>3.3%</div></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag other">Email</span></td>
+              <td><strong>1</strong></td>
+              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill other" style="width:1.6%"></div></div>1.6%</div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- BOOKED CALLS BY SOURCE -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon blue">&#128222;</div>
+          <div>
+            <div class="section-title">Booked Calls by Source</div>
+            <div class="section-subtitle">87 calls booked, 73 showed (83.9% show rate)</div>
+          </div>
+        </div>
+        <table class="source-table">
+          <thead><tr><th>Source</th><th>Booked</th><th>Showed</th><th>Share</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="source-tag meta">Meta</span></td>
+              <td><strong>42</strong></td>
+              <td>36</td>
+              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill meta" style="width:48.3%"></div></div>48.3%</div></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag other">Unknown / Blank</span></td>
+              <td><strong>12</strong></td>
+              <td>11</td>
+              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill other" style="width:13.8%"></div></div>13.8%</div></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag cold">Ikoni Digital</span></td>
+              <td><strong>10</strong></td>
+              <td>6</td>
+              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill cold" style="width:11.5%"></div></div>11.5%</div></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag cold">Cold Outreach</span></td>
+              <td><strong>10</strong></td>
+              <td>8</td>
+              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill cold" style="width:11.5%"></div></div>11.5%</div></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag cold">Wolfscale</span></td>
+              <td><strong>6</strong></td>
+              <td>6</td>
+              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill cold" style="width:6.9%"></div></div>6.9%</div></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag organic">Organic</span></td>
+              <td><strong>3</strong></td>
+              <td>3</td>
+              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill organic" style="width:3.4%"></div></div>3.4%</div></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag google">Google</span></td>
+              <td><strong>2</strong></td>
+              <td>2</td>
+              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill google" style="width:2.3%"></div></div>2.3%</div></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag other">Email / Other</span></td>
+              <td><strong>2</strong></td>
+              <td>1</td>
+              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill other" style="width:2.3%"></div></div>2.3%</div></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="summary-row">
+          <span>Lead Gen Partners (Combined)</span>
+          <strong>26 booked / 20 showed</strong>
+        </div>
+      </div>
+
+      <!-- ASSESSMENTS BY SOURCE -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon green">&#128202;</div>
+          <div>
+            <div class="section-title">Assessments Closed by Source</div>
+            <div class="section-subtitle">26 assessments sold in March - source from booked calls sheet</div>
+          </div>
+        </div>
+        <table class="source-table">
+          <thead><tr><th>Source</th><th>Assessments</th><th>Share</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="source-tag meta">Meta</span></td>
+              <td><strong>10</strong></td>
+              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill meta" style="width:40%"></div></div>40.0%</div></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag other">Organic / Unknown</span></td>
+              <td><strong>7</strong></td>
+              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill other" style="width:28%"></div></div>28.0%</div></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag cold">Cold Outreach</span></td>
+              <td><strong>3</strong></td>
+              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill cold" style="width:12%"></div></div>12.0%</div></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag cold">Wolfscale</span></td>
+              <td><strong>2</strong></td>
+              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill cold" style="width:8%"></div></div>8.0%</div></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag cold">Ikoni Digital</span></td>
+              <td><strong>2</strong></td>
+              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill cold" style="width:8%"></div></div>8.0%</div></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag google">Google</span></td>
+              <td><strong>1</strong></td>
+              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill google" style="width:4%"></div></div>4.0%</div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CALL OUTCOMES -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon green">&#9989;</div>
+        <div>
+          <div class="section-title">Call Outcomes</div>
+          <div class="section-subtitle">Pipeline stage breakdown for 87 March booked calls</div>
+        </div>
+      </div>
+      <div class="metric-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+        <div class="metric-card">
+          <div class="metric-card-value" style="font-size:32px; color: var(--brand-primary);">26</div>
+          <div class="metric-card-label">Closed Assessment</div>
+          <div class="metric-card-sub">Assessment sold</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-card-value" style="font-size:32px; color: var(--error);">25</div>
+          <div class="metric-card-label">Not an ICP Fit</div>
+          <div class="metric-card-sub">Disqualified on call</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-card-value" style="font-size:32px; color: var(--text-muted);">14</div>
+          <div class="metric-card-label">No Show</div>
+          <div class="metric-card-sub">Did not attend</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-card-value" style="font-size:32px; color: var(--text-secondary);">22</div>
+          <div class="metric-card-label">Pending Update</div>
+          <div class="metric-card-sub">In active pipeline</div>
+        </div>
+      </div>
+      <div style="margin-top: 24px;">
+        <canvas id="outcomeChart" style="max-height: 260px;"></canvas>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <!-- DEALS CLOSED -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon green">&#127942;</div>
+          <div>
+            <div class="section-title">Deals Closed in March</div>
+            <div class="section-subtitle">11 net new clients - $66,200/mo new revenue</div>
+          </div>
+        </div>
+        <div>
+          <div class="deal-item">
+            <div class="deal-number">1</div>
+            <div class="deal-info">
+              <div class="deal-name">Josh Eldridge</div>
+              <div class="deal-business">XLT Media Solutions</div>
+              <div class="deal-source"><span class="source-tag meta">Meta</span></div>
+            </div>
+            <div style="text-align:right;">
+              <div class="deal-amount">$5,900/mo</div>
+              <div class="deal-date">Mar 4 - 3 mo</div>
+            </div>
+          </div>
+          <div class="deal-item">
+            <div class="deal-number">2</div>
+            <div class="deal-info">
+              <div class="deal-name">Joseph Cosgray</div>
+              <div class="deal-business">Cow Guys</div>
+              <div class="deal-source"><span class="source-tag referral">Referral</span></div>
+            </div>
+            <div style="text-align:right;">
+              <div class="deal-amount">$4,900/mo</div>
+              <div class="deal-date">Mar 4 - 4 mo</div>
+            </div>
+          </div>
+          <div class="deal-item">
+            <div class="deal-number">3</div>
+            <div class="deal-info">
+              <div class="deal-name">Brandy Zachary</div>
+              <div class="deal-business">Dr Z Functional Medicine (2nd acct)</div>
+              <div class="deal-source"><span class="source-tag meta">Meta</span></div>
+            </div>
+            <div style="text-align:right;">
+              <div class="deal-amount">$5,900/mo</div>
+              <div class="deal-date">Mar 5 - 4 mo</div>
+            </div>
+          </div>
+          <div class="deal-item">
+            <div class="deal-number">4</div>
+            <div class="deal-info">
+              <div class="deal-name">Ed Durnil</div>
+              <div class="deal-business">Tranzon</div>
+              <div class="deal-source"><span class="source-tag cold">Ikoni</span></div>
+            </div>
+            <div style="text-align:right;">
+              <div class="deal-amount">$5,900/mo</div>
+              <div class="deal-date">Mar 9 - 3 mo</div>
+            </div>
+          </div>
+          <div class="deal-item">
+            <div class="deal-number">5</div>
+            <div class="deal-info">
+              <div class="deal-name">Julian Bryant</div>
+              <div class="deal-business">Beyond Driven Enterprises</div>
+              <div class="deal-source"><span class="source-tag referral">Referral</span></div>
+            </div>
+            <div style="text-align:right;">
+              <div class="deal-amount">$9,500/mo</div>
+              <div class="deal-date">Mar 10 - 3 mo</div>
+            </div>
+          </div>
+          <div class="deal-item">
+            <div class="deal-number">6</div>
+            <div class="deal-info">
+              <div class="deal-name">David Seruya</div>
+              <div class="deal-business">Service Plus</div>
+              <div class="deal-source"><span class="source-tag hampton">Board of Advisors</span></div>
+            </div>
+            <div style="text-align:right;">
+              <div class="deal-amount">$5,900/mo</div>
+              <div class="deal-date">Mar 16 - 4 mo</div>
+            </div>
+          </div>
+          <div class="deal-item">
+            <div class="deal-number">7</div>
+            <div class="deal-info">
+              <div class="deal-name">Anthony Paluzzi</div>
+              <div class="deal-business">Palo Media Group</div>
+              <div class="deal-source"><span class="source-tag google">Google</span></div>
+            </div>
+            <div style="text-align:right;">
+              <div class="deal-amount">$5,000/mo</div>
+              <div class="deal-date">Mar 17 - 4 mo</div>
+            </div>
+          </div>
+          <div class="deal-item">
+            <div class="deal-number">8</div>
+            <div class="deal-info">
+              <div class="deal-name">Andrew Beltran</div>
+              <div class="deal-business">VEA Health</div>
+              <div class="deal-source"><span class="source-tag cold">Cold Outreach</span></div>
+            </div>
+            <div style="text-align:right;">
+              <div class="deal-amount">$5,500/mo</div>
+              <div class="deal-date">Mar 20 - 4 mo</div>
+            </div>
+          </div>
+          <div class="deal-item">
+            <div class="deal-number">9</div>
+            <div class="deal-info">
+              <div class="deal-name">Joe Ventura</div>
+              <div class="deal-business">Natural Armor</div>
+              <div class="deal-source"><span class="source-tag referral">Referral</span></div>
+            </div>
+            <div style="text-align:right;">
+              <div class="deal-amount">$5,900/mo</div>
+              <div class="deal-date">Mar 25 - 4 mo</div>
+            </div>
+          </div>
+          <div class="deal-item">
+            <div class="deal-number">10</div>
+            <div class="deal-info">
+              <div class="deal-name">Aashish Chenna</div>
+              <div class="deal-business">Cardinal HVAC</div>
+              <div class="deal-source"><span class="source-tag meta">Meta</span></div>
+            </div>
+            <div style="text-align:right;">
+              <div class="deal-amount">$4,900/mo</div>
+              <div class="deal-date">Mar 26 - 4 mo</div>
+            </div>
+          </div>
+          <div class="deal-item">
+            <div class="deal-number">11</div>
+            <div class="deal-info">
+              <div class="deal-name">Sabrina Wall</div>
+              <div class="deal-business">Franchise Brokers Association</div>
+              <div class="deal-source"><span class="source-tag hampton">Hampton</span></div>
+            </div>
+            <div style="text-align:right;">
+              <div class="deal-amount">$6,900/mo</div>
+              <div class="deal-date">Mar 26 - 4 mo</div>
+            </div>
+          </div>
+        </div>
+        <div class="summary-row" style="flex-wrap: wrap; gap: 12px;">
+          <div>
+            <span>Total New Monthly Revenue</span><br>
+            <strong style="font-size: 20px;">$66,200/mo</strong>
+          </div>
+          <div style="text-align: center;">
+            <span>Total Contract Value</span><br>
+            <strong style="font-size: 20px;">$243,500</strong>
+          </div>
+          <div style="text-align: right;">
+            <span>Avg Contract Length</span><br>
+            <strong style="font-size: 20px;">3.7 months</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- NO-SHOW BREAKDOWN -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon red">&#128683;</div>
+          <div>
+            <div class="section-title">No-Show Breakdown by Source</div>
+            <div class="section-subtitle">14 no-shows across 87 booked calls (16.1% overall)</div>
+          </div>
+        </div>
+        <table class="source-table">
+          <thead>
+            <tr><th>Source</th><th>Booked</th><th>No-Shows</th><th class="right">No-Show Rate</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="source-tag meta">Meta</span></td>
+              <td>42</td>
+              <td><strong>6</strong></td>
+              <td class="right"><span class="rate-badge good">14%</span></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag cold">Ikoni Digital</span></td>
+              <td>10</td>
+              <td><strong>4</strong></td>
+              <td class="right"><span class="rate-badge warn">40%</span></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag cold">Cold Outreach</span></td>
+              <td>10</td>
+              <td><strong>2</strong></td>
+              <td class="right"><span class="rate-badge warn">20%</span></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag other">Unknown / Blank</span></td>
+              <td>12</td>
+              <td><strong>1</strong></td>
+              <td class="right"><span class="rate-badge good">8%</span></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag other">Email / Other</span></td>
+              <td>2</td>
+              <td><strong>1</strong></td>
+              <td class="right"><span class="rate-badge warn">50%</span></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag cold">Wolfscale</span></td>
+              <td>6</td>
+              <td><strong>0</strong></td>
+              <td class="right"><span class="rate-badge good">0%</span></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag organic">Organic</span></td>
+              <td>3</td>
+              <td><strong>0</strong></td>
+              <td class="right"><span class="rate-badge good">0%</span></td>
+            </tr>
+            <tr>
+              <td><span class="source-tag google">Google</span></td>
+              <td>2</td>
+              <td><strong>0</strong></td>
+              <td class="right"><span class="rate-badge good">0%</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="summary-row">
+          <span>Lead Gen Partners No-Show Rate</span>
+          <strong>6 of 26 (23.1%)</strong>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <p>Unicorn Marketers - March 2026 Marketing Scorecard</p>
+    <p style="margin-top:4px;">Full month data through March 31, 2026. Partner costs are estimates pending final invoices.</p>
+  </div>
+
+  <script>
+    // Expandable investment rows
+    function toggleDetail(row) {
+      const detail = row.nextElementSibling;
+      row.classList.toggle('expanded');
+      detail.classList.toggle('show');
+    }
+
+    // Call Outcomes Doughnut
+    const outcomeCtx = document.getElementById('outcomeChart').getContext('2d');
+    new Chart(outcomeCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Closed Assessment (26)', 'Not ICP Fit (25)', 'No Show (14)', 'Pending Update (22)'],
+        datasets: [{
+          data: [26, 25, 14, 22],
+          backgroundColor: ['#2483C4', '#ff5f57', '#9ca3af', '#d9dfe6'],
+          borderWidth: 0,
+          borderRadius: 4,
+          spacing: 2,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '65%',
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              padding: 16,
+              usePointStyle: true,
+              pointStyleWidth: 12,
+              font: { size: 12, family: 'Inter' }
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
