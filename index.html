@@ -1304,7 +1304,7 @@ const months = {
     metaSpend: 10561.37, googleSpend: 613, cosTotal: 3000, wolfTotal: 2585,
     ikoniTotal: 600, nuoppTotal: 0, hamptonTotal: 825, baTotal: 1667,
     totalInvest: 19851.37, costPerBooked: 315.10, blendedCAC: 2836,
-    typeform: { views: 726, starts: 249, subs: 87, completion: 34.9, overall: 12.0 },
+    typeform: { views: 304, starts: 106, subs: 34, completion: 32.1, overall: 11.2 },
     assessBySource: { "Meta": 7, "Cold Outreach": 4, "Organic": 4, "Hampton": 2, "Ikoni Digital": 2, "Personal Relationship": 2, "Referral": 2, "UI Website": 1, "N/A": 1 },
     dealsList: [
       { name: "LPT", source: "Personal Relationship", amount: 15000 },
@@ -1839,7 +1839,7 @@ function renderL90Tab() {
     assessments: 80, showedToAssess: 45.5,
     dealCount: 25, revenue: 171500, avgDeal: 6860,
     totalInvest: 60297.74, costPerBooked: 281.77, blendedCAC: 2412,
-    typeform: { views: 1517, starts: 506, subs: 174, overall: 11.5 }
+    typeform: { views: 1095, starts: 363, subs: 121, overall: 11.1 }
   };
 
   var html = '';
@@ -1873,12 +1873,12 @@ function renderL90Tab() {
 
   // MAIN
   html += '<div class="main">';
-  html += '<div class="note-banner"><strong>L90 Analytics:</strong> Covers April, May, and June 2026. Trend charts show all 4 months (Mar-Jun) for context. June partner costs are estimates (est).</div>';
+  html += '<div class="note-banner"><strong>L90 Analytics:</strong> Covers April, May, and June 2026. June partner costs are estimates (est).</div>';
 
   // TREND CHARTS SECTION
   // Chart 1: Pipeline Trend
   html += '<div class="section">';
-  html += '<div class="section-header"><div class="section-icon blue">&#128200;</div><div><div class="section-title">Pipeline Trend</div><div class="section-subtitle">Booked, Showed, Assessments, and Deals over 4 months</div></div></div>';
+  html += '<div class="section-header"><div class="section-icon blue">&#128200;</div><div><div class="section-title">Pipeline Trend</div><div class="section-subtitle">Booked, Showed, Assessments, and Deals (Apr - Jun 2026)</div></div></div>';
   html += '<div class="chart-container-tall"><canvas id="chart-pipeline-trend"></canvas></div>';
   html += '</div>';
 
@@ -1915,23 +1915,23 @@ function renderL90Tab() {
 
   // Top Assessment Sources
   html += '<div class="section">';
-  html += '<div class="section-header"><div class="section-icon purple">&#127942;</div><div><div class="section-title">Top Assessment Sources</div><div class="section-subtitle">All-time (Mar-Jun 2026)</div></div></div>';
+  html += '<div class="section-header"><div class="section-icon purple">&#127942;</div><div><div class="section-title">Top Assessment Sources</div><div class="section-subtitle">L90 (Apr - Jun 2026)</div></div></div>';
   var assessSources = [
-    { name: "Meta", count: 39 },
-    { name: "Cold Outreach", count: 19 },
-    { name: "Organic/Unknown/N/A", count: 18 },
-    { name: "Ikoni Digital", count: 7 },
-    { name: "Wolfscale", count: 6 },
+    { name: "Meta", count: 29 },
+    { name: "Cold Outreach", count: 16 },
+    { name: "Organic/Unknown/N/A", count: 13 },
+    { name: "Ikoni Digital", count: 5 },
+    { name: "Wolfscale", count: 4 },
     { name: "Board of Advisors", count: 4 },
     { name: "Hampton", count: 3 },
-    { name: "Google", count: 2 },
     { name: "Personal Relationship", count: 2 },
     { name: "Referral", count: 2 },
+    { name: "Google", count: 1 },
     { name: "UI Website", count: 1 }
   ];
   html += '<table class="source-table"><thead><tr><th>Source</th><th class="right">Assessments</th><th></th></tr></thead><tbody>';
   assessSources.forEach(function(s) {
-    var barW = Math.round(s.count / 39 * 100);
+    var barW = Math.round(s.count / 29 * 100);
     var tagCls = sourceTagClass(s.name);
     html += '<tr><td><span class="source-tag ' + tagCls + '">' + s.name + '</span></td><td class="right">' + s.count + '</td>';
     html += '<td><div class="bar-container"><div class="bar-fill ' + tagCls + '" style="width:' + barW + '%"></div></div></td></tr>';
@@ -1940,17 +1940,16 @@ function renderL90Tab() {
 
   // Top Revenue Sources
   html += '<div class="section">';
-  html += '<div class="section-header"><div class="section-icon green">&#128176;</div><div><div class="section-title">Top Revenue Sources</div><div class="section-subtitle">All deals across Mar-Jun 2026</div></div></div>';
+  html += '<div class="section-header"><div class="section-icon green">&#128176;</div><div><div class="section-title">Top Revenue Sources</div><div class="section-subtitle">L90 deals (Apr - Jun 2026)</div></div></div>';
   var revSources = [
-    { name: "Meta", revenue: 82300, deals: 12 },
-    { name: "Personal Referral/Relationship", revenue: 45200, deals: 6 },
-    { name: "Board of Advisors", revenue: 22700, deals: 4 },
+    { name: "Meta", revenue: 65600, deals: 9 },
+    { name: "Personal Referral/Relationship", revenue: 24900, deals: 3 },
     { name: "Hampton", revenue: 21300, deals: 3 },
     { name: "Organic", revenue: 18700, deals: 3 },
-    { name: "Ikoni Digital", revenue: 18700, deals: 3 },
-    { name: "Cold Outreach", revenue: 10400, deals: 2 },
+    { name: "Board of Advisors", revenue: 16800, deals: 3 },
+    { name: "Ikoni Digital", revenue: 12800, deals: 2 },
     { name: "Wolfscale", revenue: 6500, deals: 1 },
-    { name: "Google", revenue: 5000, deals: 1 }
+    { name: "Cold Outreach", revenue: 4900, deals: 1 }
   ];
   html += '<table class="source-table"><thead><tr><th>Source</th><th class="right">Revenue</th><th class="right">Deals</th></tr></thead><tbody>';
   revSources.forEach(function(s) {
@@ -2001,21 +2000,21 @@ function renderL90Tab() {
 
   // FORECASTING SECTION
   html += '<div class="section">';
-  html += '<div class="section-header"><div class="section-icon gold">&#128302;</div><div><div class="section-title">Trend Analysis and July Forecast</div><div class="section-subtitle">Based on 4-month data (Mar-Jun 2026)</div></div></div>';
+  html += '<div class="section-header"><div class="section-icon gold">&#128302;</div><div><div class="section-title">Trend Analysis and July Forecast</div><div class="section-subtitle">Based on L90 data (Apr - Jun 2026)</div></div></div>';
 
   var forecasts = [
-    { metric: "Booked Calls", values: [87,71,80,63], unit: '', direction: 'down', severity: 'down-bad', note: 'Declining avg -8/mo. Concerning.' },
-    { metric: "Show Rate", values: [83.9,88.7,85.0,71.4], unit: '%', direction: 'down', severity: 'critical', note: 'Sharp June drop. Critical concern.' },
-    { metric: "Assessments", values: [26,26,29,25], unit: '', direction: 'stable', severity: 'stable', note: 'Relatively stable but slight decline.' },
-    { metric: "Deals Closed", values: [11,8,10,7], unit: '', direction: 'down', severity: 'down-bad', note: 'Trending down. Watch closely.' },
-    { metric: "Revenue", values: [66200,57300,62800,51400], unit: '$', direction: 'down', severity: 'down-bad', note: 'Declining trend. Revenue pressure.' },
-    { metric: "Avg Deal Size", values: [6018,7163,6280,7343], unit: '$', direction: 'up', severity: 'up-good', note: 'Improving - higher quality deals.' },
-    { metric: "Blended CAC", values: [2155,2523,2027,2836], unit: '$', direction: 'up', severity: 'up-bad', note: 'Volatile, trending up. Efficiency concern.' },
-    { metric: "Typeform Views", values: [414,418,373,726], unit: '', direction: 'up', severity: 'up-good', note: 'Strong growth. June breakout.' },
-    { metric: "Typeform Subs", values: [61,45,42,87], unit: '', direction: 'up', severity: 'up-good', note: 'Strong June recovery.' }
+    { metric: "Booked Calls", values: [71,80,63], unit: '', direction: 'down', severity: 'down-bad', note: 'Dropped 21% in June. Concerning.' },
+    { metric: "Show Rate", values: [88.7,85.0,71.4], unit: '%', direction: 'down', severity: 'critical', note: 'Sharp June drop. Critical concern.' },
+    { metric: "Assessments", values: [26,29,25], unit: '', direction: 'stable', severity: 'stable', note: 'Relatively stable but slight decline.' },
+    { metric: "Deals Closed", values: [8,10,7], unit: '', direction: 'down', severity: 'down-bad', note: 'Trending down. Watch closely.' },
+    { metric: "Revenue", values: [57300,62800,51400], unit: '$', direction: 'down', severity: 'down-bad', note: 'June dipped to $51K. Revenue pressure.' },
+    { metric: "Avg Deal Size", values: [7163,6280,7343], unit: '$', direction: 'up', severity: 'up-good', note: 'Improving - higher quality deals.' },
+    { metric: "Blended CAC", values: [2523,2027,2836], unit: '$', direction: 'up', severity: 'up-bad', note: 'Volatile, trending up. Efficiency concern.' },
+    { metric: "Typeform Views", values: [418,373,304], unit: '', direction: 'down', severity: 'down-bad', note: 'Declining trend. Down 27% over L90.' },
+    { metric: "Typeform Subs", values: [45,42,34], unit: '', direction: 'down', severity: 'down-bad', note: 'Declining. Down 24% over L90.' }
   ];
 
-  html += '<table class="forecast-table"><thead><tr><th>Metric</th><th class="right">Mar</th><th class="right">Apr</th><th class="right">May</th><th class="right">Jun</th><th class="right">Trend</th><th>Assessment</th></tr></thead><tbody>';
+  html += '<table class="forecast-table"><thead><tr><th>Metric</th><th class="right">Apr</th><th class="right">May</th><th class="right">Jun</th><th class="right">Trend</th><th>Assessment</th></tr></thead><tbody>';
   forecasts.forEach(function(f) {
     html += '<tr><td style="font-weight:600">' + f.metric + '</td>';
     f.values.forEach(function(v) {
@@ -2032,30 +2031,30 @@ function renderL90Tab() {
 
   // MONTH-OVER-MONTH COMPARISON TABLE
   html += '<div class="section">';
-  html += '<div class="section-header"><div class="section-icon blue">&#128203;</div><div><div class="section-title">Month-over-Month Comparison</div><div class="section-subtitle">All key metrics across 4 months with L90 averages</div></div></div>';
+  html += '<div class="section-header"><div class="section-icon blue">&#128203;</div><div><div class="section-title">Month-over-Month Comparison</div><div class="section-subtitle">Key metrics across L90 period with averages</div></div></div>';
 
   var compRows = [
-    { label: 'Booked Calls', vals: [87,71,80,63], avg: 71.3, fmt: 'n' },
-    { label: 'Showed Calls', vals: [73,63,68,45], avg: 58.7, fmt: 'n' },
-    { label: 'Show Rate', vals: [83.9,88.7,85.0,71.4], avg: 81.7, fmt: '%' },
-    { label: 'Assessments', vals: [26,26,29,25], avg: 26.7, fmt: 'n' },
-    { label: 'Showed-to-Assess', vals: [35.6,41.3,42.6,55.6], avg: 46.5, fmt: '%' },
-    { label: 'Deals Closed', vals: [11,8,10,7], avg: 8.3, fmt: 'n' },
-    { label: 'Revenue', vals: [66200,57300,62800,51400], avg: 57167, fmt: '$' },
-    { label: 'Avg Deal', vals: [6018,7163,6280,7343], avg: 6862, fmt: '$' },
-    { label: 'Total Investment', vals: [23704.58,20180.61,20265.76,19851.37], avg: 20099.25, fmt: '$' },
-    { label: 'Cost/Booked', vals: [272.47,284.23,253.32,315.10], avg: 284.22, fmt: '$' },
-    { label: 'Blended CAC', vals: [2155,2523,2027,2836], avg: 2462, fmt: '$' },
-    { label: 'No-Show Rate', vals: [16.1,11.3,15.0,28.6], avg: 18.3, fmt: '%' },
-    { label: 'Typeform Views', vals: [414,418,373,726], avg: 505.7, fmt: 'n' },
-    { label: 'Typeform Subs', vals: [61,45,42,87], avg: 58, fmt: 'n' },
-    { label: 'TF Conversion', vals: [14.7,10.8,11.3,12.0], avg: 11.4, fmt: '%' }
+    { label: 'Booked Calls', vals: [71,80,63], avg: 71.3, fmt: 'n' },
+    { label: 'Showed Calls', vals: [63,68,45], avg: 58.7, fmt: 'n' },
+    { label: 'Show Rate', vals: [88.7,85.0,71.4], avg: 81.7, fmt: '%' },
+    { label: 'Assessments', vals: [26,29,25], avg: 26.7, fmt: 'n' },
+    { label: 'Showed-to-Assess', vals: [41.3,42.6,55.6], avg: 46.5, fmt: '%' },
+    { label: 'Deals Closed', vals: [8,10,7], avg: 8.3, fmt: 'n' },
+    { label: 'Revenue', vals: [57300,62800,51400], avg: 57167, fmt: '$' },
+    { label: 'Avg Deal', vals: [7163,6280,7343], avg: 6929, fmt: '$' },
+    { label: 'Total Investment', vals: [20180.61,20265.76,19851.37], avg: 20099.25, fmt: '$' },
+    { label: 'Cost/Booked', vals: [284.23,253.32,315.10], avg: 284.22, fmt: '$' },
+    { label: 'Blended CAC', vals: [2523,2027,2836], avg: 2462, fmt: '$' },
+    { label: 'No-Show Rate', vals: [11.3,15.0,28.6], avg: 18.3, fmt: '%' },
+    { label: 'Typeform Views', vals: [418,373,304], avg: 365, fmt: 'n' },
+    { label: 'Typeform Subs', vals: [45,42,34], avg: 40.3, fmt: 'n' },
+    { label: 'TF Conversion', vals: [10.8,11.3,11.2], avg: 11.1, fmt: '%' }
   ];
 
-  html += '<div style="overflow-x:auto"><table class="compare-table"><thead><tr><th>Metric</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th class="avg-col">L90 Avg</th></tr></thead><tbody>';
+  html += '<div style="overflow-x:auto"><table class="compare-table"><thead><tr><th>Metric</th><th>Apr</th><th>May</th><th>Jun</th><th class="avg-col">L90 Avg</th></tr></thead><tbody>';
   compRows.forEach(function(r) {
     html += '<tr><td>' + r.label + '</td>';
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < 3; i++) {
       var v = r.vals[i];
       var display = r.fmt === '$' ? fmtD(Math.round(v)) : r.fmt === '%' ? pct(v) : fmt(Math.round(v));
       var arrow = '';
@@ -2117,7 +2116,7 @@ function createOutcomeChart(key) {
 }
 
 function createL90Charts() {
-  var labels = ["Mar '26", "Apr '26", "May '26", "Jun '26"];
+  var labels = ["Apr '26", "May '26", "Jun '26"];
   var fontOpts = { family: 'Inter', size: 11 };
   var gridOpts = { color: 'rgba(25,30,40,0.06)' };
 
@@ -2129,10 +2128,10 @@ function createL90Charts() {
       data: {
         labels: labels,
         datasets: [
-          { label: 'Booked', data: [87,71,80,63], borderColor: '#00aae9', backgroundColor: 'rgba(0,170,233,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#00aae9' },
-          { label: 'Showed', data: [73,63,68,45], borderColor: '#2483C4', backgroundColor: 'rgba(36,131,196,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#2483C4' },
-          { label: 'Assessments', data: [26,26,29,25], borderColor: '#febc2e', backgroundColor: 'rgba(254,188,46,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#febc2e' },
-          { label: 'Deals', data: [11,8,10,7], borderColor: '#28c840', backgroundColor: 'rgba(40,200,64,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#28c840' }
+          { label: 'Booked', data: [71,80,63], borderColor: '#00aae9', backgroundColor: 'rgba(0,170,233,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#00aae9' },
+          { label: 'Showed', data: [63,68,45], borderColor: '#2483C4', backgroundColor: 'rgba(36,131,196,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#2483C4' },
+          { label: 'Assessments', data: [26,29,25], borderColor: '#febc2e', backgroundColor: 'rgba(254,188,46,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#febc2e' },
+          { label: 'Deals', data: [8,10,7], borderColor: '#28c840', backgroundColor: 'rgba(40,200,64,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#28c840' }
         ]
       },
       options: {
@@ -2157,8 +2156,8 @@ function createL90Charts() {
       data: {
         labels: labels,
         datasets: [
-          { label: 'Revenue', data: [66200,57300,62800,51400], borderColor: '#28c840', backgroundColor: 'rgba(40,200,64,0.1)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#28c840', yAxisID: 'y' },
-          { label: 'Avg Deal', data: [6018,7163,6280,7343], borderColor: '#2483C4', backgroundColor: 'rgba(36,131,196,0.1)', fill: false, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#2483C4', borderDash: [5,3], yAxisID: 'y1' }
+          { label: 'Revenue', data: [57300,62800,51400], borderColor: '#28c840', backgroundColor: 'rgba(40,200,64,0.1)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#28c840', yAxisID: 'y' },
+          { label: 'Avg Deal', data: [7163,6280,7343], borderColor: '#2483C4', backgroundColor: 'rgba(36,131,196,0.1)', fill: false, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#2483C4', borderDash: [5,3], yAxisID: 'y1' }
         ]
       },
       options: {
@@ -2184,9 +2183,9 @@ function createL90Charts() {
       data: {
         labels: labels,
         datasets: [
-          { label: 'Show Rate', data: [83.9,88.7,85.0,71.4], borderColor: '#2483C4', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#2483C4', fill: false },
-          { label: 'Showed-to-Assess', data: [35.6,41.3,42.6,55.6], borderColor: '#28c840', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#28c840', fill: false },
-          { label: 'No-Show Rate', data: [16.1,11.3,15.0,28.6], borderColor: '#ff5f57', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#ff5f57', fill: false, borderDash: [5,3] }
+          { label: 'Show Rate', data: [88.7,85.0,71.4], borderColor: '#2483C4', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#2483C4', fill: false },
+          { label: 'Showed-to-Assess', data: [41.3,42.6,55.6], borderColor: '#28c840', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#28c840', fill: false },
+          { label: 'No-Show Rate', data: [11.3,15.0,28.6], borderColor: '#ff5f57', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#ff5f57', fill: false, borderDash: [5,3] }
         ]
       },
       options: {
@@ -2211,9 +2210,9 @@ function createL90Charts() {
       data: {
         labels: labels,
         datasets: [
-          { label: 'Total Investment', data: [23704.58,20180.61,20265.76,19851.37], borderColor: '#febc2e', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#febc2e', fill: false, yAxisID: 'y' },
-          { label: 'Blended CAC', data: [2155,2523,2027,2836], borderColor: '#ff5f57', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#ff5f57', fill: false, yAxisID: 'y1' },
-          { label: 'Cost/Booked', data: [272.47,284.23,253.32,315.10], borderColor: '#00aae9', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#00aae9', fill: false, borderDash: [5,3], yAxisID: 'y1' }
+          { label: 'Total Investment', data: [20180.61,20265.76,19851.37], borderColor: '#febc2e', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#febc2e', fill: false, yAxisID: 'y' },
+          { label: 'Blended CAC', data: [2523,2027,2836], borderColor: '#ff5f57', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#ff5f57', fill: false, yAxisID: 'y1' },
+          { label: 'Cost/Booked', data: [284.23,253.32,315.10], borderColor: '#00aae9', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#00aae9', fill: false, borderDash: [5,3], yAxisID: 'y1' }
         ]
       },
       options: {
@@ -2239,9 +2238,9 @@ function createL90Charts() {
       data: {
         labels: labels,
         datasets: [
-          { label: 'Views', data: [414,418,373,726], borderColor: '#2483C4', backgroundColor: 'rgba(36,131,196,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#2483C4' },
-          { label: 'Starts', data: [150,138,119,249], borderColor: '#00aae9', backgroundColor: 'rgba(0,170,233,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#00aae9' },
-          { label: 'Submissions', data: [61,45,42,87], borderColor: '#28c840', backgroundColor: 'rgba(40,200,64,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#28c840' }
+          { label: 'Views', data: [418,373,304], borderColor: '#2483C4', backgroundColor: 'rgba(36,131,196,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#2483C4' },
+          { label: 'Starts', data: [138,119,106], borderColor: '#00aae9', backgroundColor: 'rgba(0,170,233,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#00aae9' },
+          { label: 'Submissions', data: [45,42,34], borderColor: '#28c840', backgroundColor: 'rgba(40,200,64,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#28c840' }
         ]
       },
       options: {
