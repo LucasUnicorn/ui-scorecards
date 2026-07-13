@@ -487,6 +487,48 @@
       border-top: 2px solid rgba(25, 30, 40, 0.1);
       background: var(--bg-light);
     }
+    .invest-row { cursor: pointer; transition: background 0.15s ease; }
+    .invest-row:hover { background: var(--bg-light); }
+    .invest-row .expand-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-right: 8px;
+    }
+    .invest-row.expanded .expand-icon { transform: rotate(90deg); }
+    .invest-detail { display: none; }
+    .invest-detail.show { display: table-row; }
+    .invest-detail td {
+      padding: 0 16px 16px 48px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid rgba(25, 30, 40, 0.04);
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      padding: 12px 0;
+    }
+    .detail-item {
+      background: var(--bg-light);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+    .detail-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .detail-value {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy-dark);
+      margin-top: 2px;
+    }
 
     /* TYPEFORM FUNNEL */
     .funnel-visual {
@@ -701,7 +743,119 @@ const months = {
     outcomes: { closed: 26, notICP: 25, noShow: 14, pending: 22 },
     noShowRate: 16.1,
     isEstimate: false,
-    nuoppNote: "One-time setup fee"
+    nuoppNote: "One-time setup fee",
+    investDetails: [
+      {
+        name: "Meta Ads", tagClass: "meta", booked: 42, showed: 36,
+        costPerBooked: "$259.17", total: 10885.18, momPct: null, momClass: null,
+        details: [
+          { label: "Ad Spend (March)", value: "$10,885.18" },
+          { label: "Booked / Showed", value: "42 / 36" },
+          { label: "Cost / Showed Call", value: "$302.37" },
+          { label: "March Assessments", value: "10" },
+          { label: "Cost / Assessment", value: "$1,088.52" },
+          { label: "March Deals", value: "3" },
+          { label: "CAC", value: "$3,628" }
+        ],
+        footnote: null
+      },
+      {
+        name: "Ikoni Digital", tagClass: "cold", booked: 10, showed: 6,
+        costPerBooked: "$140.00", total: 1400.00, momPct: null, momClass: null,
+        details: [
+          { label: "Cost Per Booking", value: "$140.00" },
+          { label: "Booked / Showed", value: "10 / 6" },
+          { label: "March Assessments", value: "2" },
+          { label: "March Deals", value: "1" },
+          { label: "CAC", value: "$1,400" }
+        ],
+        footnote: "10 bookings per Ikoni's March report. 4 billable calls at $350/call = $1,400."
+      },
+      {
+        name: "Cold Outreach", tagClass: "cold", booked: 10, showed: 8,
+        costPerBooked: "$310.00", total: 3100.00, momPct: null, momClass: null,
+        details: [
+          { label: "Monthly Retainer", value: "$1,000" },
+          { label: "Cost Per Call", value: "$300" },
+          { label: "March Total", value: "$3,100" },
+          { label: "Booked / Showed", value: "10 / 8" },
+          { label: "March Deals", value: "1" },
+          { label: "CAC", value: "$3,100" }
+        ],
+        footnote: "Retainer ($1,000/mo) + 7 billable calls ($300/call = $2,100) = $3,100. 10 total calls on tracker; 3 originally booked were cancelled and excluded from billing."
+      },
+      {
+        name: "Wolfscale", tagClass: "cold", booked: 6, showed: 6,
+        costPerBooked: "$453.23", total: 2719.40, momPct: null, momClass: null,
+        details: [
+          { label: "Monthly Retainer", value: "$1,995.00" },
+          { label: "Software Cost", value: "$134.40/mo" },
+          { label: "Calls Included", value: "4/mo" },
+          { label: "Rate for Call 5+", value: "$295/call" },
+          { label: "March Extra Calls", value: "2 x $295 = $590" },
+          { label: "March Total", value: "$2,719.40" },
+          { label: "March Assessments", value: "2" },
+          { label: "March Deals", value: "0" }
+        ],
+        footnote: "Base ($1,995 + $134.40) + 2 extra calls ($590) = $2,719.40. 100% show rate."
+      },
+      {
+        name: "NuOpp", tagClass: "cold", booked: 0, showed: 0,
+        costPerBooked: "N/A", total: 2500.00, momPct: null, momClass: null,
+        details: [
+          { label: "One-Time Setup Fee", value: "$2,500" },
+          { label: "Rate Per Call", value: "$500/call" },
+          { label: "March Calls", value: "0" },
+          { label: "March Deals", value: "0" }
+        ],
+        footnote: "One-time setup fee paid in March. Going forward, charged $500 per booked call only."
+      },
+      {
+        name: "Google Ads", tagClass: "google", booked: 2, showed: 2,
+        costPerBooked: "$304.00", total: 608.00, momPct: null, momClass: null,
+        details: [
+          { label: "Ad Spend (March)", value: "$608.00" },
+          { label: "Booked / Showed", value: "2 / 2" },
+          { label: "March Assessments", value: "1" },
+          { label: "March Deals", value: "1" },
+          { label: "CAC", value: "$608" }
+        ],
+        footnote: null
+      },
+      {
+        name: "Hampton", tagClass: "hampton", booked: "-", showed: "-",
+        costPerBooked: "-", total: 825.00, momPct: null, momClass: null,
+        details: [
+          { label: "Annual Fee", value: "$9,900/yr" },
+          { label: "Monthly Prorated", value: "$825/mo" },
+          { label: "March Deals", value: "1" },
+          { label: "CAC", value: "$825" }
+        ],
+        footnote: "Membership providing warm introductions. 1 deal closed from Hampton intro in March."
+      },
+      {
+        name: "Board of Advisors", tagClass: "hampton", booked: "-", showed: "-",
+        costPerBooked: "-", total: 1667.00, momPct: null, momClass: null,
+        details: [
+          { label: "Annual Fee", value: "$20,000/yr" },
+          { label: "Monthly Prorated", value: "$1,667/mo" },
+          { label: "March Deals", value: "1" },
+          { label: "CAC", value: "$1,667" }
+        ],
+        footnote: "Membership providing warm introductions. 1 deal closed from BA connection in March."
+      },
+      {
+        name: "Organic / Other", tagClass: "organic", booked: 17, showed: 15,
+        costPerBooked: "$0.00", total: 0.00, momPct: null, momClass: null,
+        details: [
+          { label: "Organic", value: "4" },
+          { label: "Unknown / Blank", value: "12" },
+          { label: "Email", value: "1" },
+          { label: "March Assessments", value: "7" }
+        ],
+        footnote: "Includes calls with no UTM source, organic traffic, email, and entries without source attribution."
+      }
+    ]
   },
   apr: {
     label: "April 2026", period: "Full month of April 2026 (through 4/30)",
@@ -725,7 +879,140 @@ const months = {
     outcomes: { closed: 26, notICP: 5, noShow: 8, pending: 32 },
     noShowRate: 11.3,
     isEstimate: false,
-    nuoppNote: "Prepaid - $0"
+    nuoppNote: "Prepaid - $0",
+    investDetails: [
+      {
+        name: "Meta Ads", tagClass: "meta", booked: 30, showed: 26,
+        costPerBooked: "$355.21", total: 10656.21, momPct: null, momClass: null,
+        details: [
+          { label: "Ad Spend (April)", value: "$10,656.21" },
+          { label: "Booked / Showed", value: "30 / 26" },
+          { label: "Cost / Showed Call", value: "$409.85" },
+          { label: "April Assessments", value: "12" },
+          { label: "Cost / Assessment", value: "$888.02" },
+          { label: "April Deals", value: "3" },
+          { label: "CAC", value: "$3,552" }
+        ],
+        footnote: null
+      },
+      {
+        name: "Cold Outreach", tagClass: "cold", booked: 15, showed: 5,
+        costPerBooked: "$200.00", total: 3000.00, momPct: "+11.1%", momClass: "down",
+        details: [
+          { label: "Monthly Retainer", value: "$1,500" },
+          { label: "Cost Per Call", value: "$300" },
+          { label: "Billable Calls", value: "5" },
+          { label: "April Total", value: "$3,000" },
+          { label: "Booked / Showed", value: "15 / 5" },
+          { label: "April Assessments", value: "4" },
+          { label: "April Deals", value: "0" },
+          { label: "March Total", value: "$2,700", style: "color: var(--text-muted)" },
+          { label: "MoM Change", value: "+11.1%", style: "color: var(--error)" }
+        ],
+        footnote: "Retainer ($1,500/mo) + 5 billable calls ($300/call = $1,500) = $3,000. March was $2,700 (retainer + 4 calls)."
+      },
+      {
+        name: "Wolfscale", tagClass: "cold", booked: 6, showed: 5,
+        costPerBooked: "$354.90", total: 2129.40, momPct: "0.0%", momClass: "flat",
+        details: [
+          { label: "Monthly Retainer", value: "$815.00" },
+          { label: "Software Cost", value: "$134.40/mo" },
+          { label: "Cost Per Call", value: "$295/call" },
+          { label: "April Calls", value: "4 x $295 = $1,180" },
+          { label: "April Total", value: "$2,129.40" },
+          { label: "April Assessments", value: "0" },
+          { label: "April Deals", value: "1" },
+          { label: "CAC", value: "$2,129" },
+          { label: "March Total", value: "$2,129.40", style: "color: var(--text-muted)" },
+          { label: "MoM Change", value: "0.0%", style: "color: var(--text-muted)" }
+        ],
+        footnote: "Base ($815 + $134.40) + 4 calls ($1,180) = $2,129.40. 1 deal closed (Amy Jo Robertson / ThirdHome)."
+      },
+      {
+        name: "Board of Advisors", tagClass: "hampton", booked: 2, showed: 2,
+        costPerBooked: "$833.50", total: 1667.00, momPct: null, momClass: null,
+        details: [
+          { label: "Annual Fee", value: "$20,000/yr" },
+          { label: "Monthly Prorated", value: "$1,667/mo" },
+          { label: "Booked / Showed", value: "2 / 2" },
+          { label: "April Assessments", value: "2" },
+          { label: "April Deals", value: "0" }
+        ],
+        footnote: "Membership providing warm introductions. No deals closed from BA connections in April."
+      },
+      {
+        name: "Ikoni Digital", tagClass: "cold", booked: 3, showed: 3,
+        costPerBooked: "$433.33", total: 1300.00, momPct: "-21.2%", momClass: "up",
+        details: [
+          { label: "Monthly Retainer", value: "$250.00" },
+          { label: "Cost Per Billable Call", value: "$350.00" },
+          { label: "Billable Calls", value: "3" },
+          { label: "April Total", value: "$1,300" },
+          { label: "Booked / Showed", value: "3 / 3" },
+          { label: "April Assessments", value: "2" },
+          { label: "April Deals", value: "1" },
+          { label: "CAC", value: "$1,300" },
+          { label: "March Total", value: "$1,650", style: "color: var(--text-muted)" },
+          { label: "MoM Change", value: "-21.2%", style: "color: var(--success)" }
+        ],
+        footnote: "Retainer ($250/mo) + 3 billable calls ($350/call = $1,050) = $1,300. 1 deal closed (Robert Waitte / CRE Income Fund). March was $1,650 (4 calls)."
+      },
+      {
+        name: "NuOpp", tagClass: "cold", booked: 2, showed: 2,
+        costPerBooked: "$500.00", total: 1000.00, momPct: null, momClass: null,
+        details: [
+          { label: "Rate Per Call", value: "$500/call" },
+          { label: "April Calls", value: "2" },
+          { label: "Booked / Showed", value: "2 / 2" },
+          { label: "April Assessments", value: "0" },
+          { label: "April Deals", value: "0" }
+        ],
+        footnote: "Prepaid from $2,500 setup fee at $500/call. 2 calls in April. March: $0 (0 calls)."
+      },
+      {
+        name: "Hampton", tagClass: "hampton", booked: "-", showed: "-",
+        costPerBooked: "-", total: 825.00, momPct: null, momClass: null,
+        details: [
+          { label: "Annual Fee", value: "$9,900/yr" },
+          { label: "Monthly Prorated", value: "$825/mo" },
+          { label: "April Deals", value: "1" },
+          { label: "CAC", value: "$825" }
+        ],
+        footnote: "Membership providing warm introductions. 1 deal closed from Hampton intro (Kish Vasnani / Nomad Lane)."
+      },
+      {
+        name: "Google Ads", tagClass: "google", booked: 1, showed: 1,
+        costPerBooked: "$603.00", total: 603.00, momPct: null, momClass: null,
+        details: [
+          { label: "Ad Spend (April)", value: "$603.00" },
+          { label: "Booked / Showed", value: "1 / 1" },
+          { label: "April Assessments", value: "1" },
+          { label: "April Deals", value: "0" }
+        ],
+        footnote: null
+      },
+      {
+        name: "Organic / Other", tagClass: "organic", booked: 12, showed: 11,
+        costPerBooked: "$0.00", total: 0.00, momPct: null, momClass: null,
+        details: [
+          { label: "Organic", value: "6" },
+          { label: "Unknown / Blank", value: "4" },
+          { label: "Email", value: "1" },
+          { label: "Showcase", value: "1" },
+          { label: "April Assessments", value: "2" }
+        ],
+        footnote: "Includes calls with no UTM source, organic traffic, email, showcase, and entries without source attribution."
+      },
+      {
+        name: "Personal Referral", tagClass: "referral", booked: "-", showed: "-",
+        costPerBooked: "$0.00", total: 0.00, momPct: null, momClass: null,
+        details: [
+          { label: "April Deals", value: "2" },
+          { label: "CAC", value: "$0" }
+        ],
+        footnote: "2 deals from personal referrals (Sean Agnew, Rod Santomassimo). No direct cost."
+      }
+    ]
   },
   may: {
     label: "May 2026", period: "Full month of May 2026 (through 5/31)",
@@ -750,7 +1037,145 @@ const months = {
     ],
     outcomes: { closed: 29, notICP: 5, noShow: 12, pending: 34 },
     noShowRate: 15.0,
-    isEstimate: false
+    isEstimate: false,
+    investDetails: [
+      {
+        name: "Meta Ads", tagClass: "meta", booked: 40, showed: 34,
+        costPerBooked: "$271.77", total: 10870.76, momPct: "+2.0%", momClass: "down",
+        details: [
+          { label: "Ad Spend (May)", value: "$10,870.76" },
+          { label: "Booked / Showed", value: "40 / 34" },
+          { label: "Cost / Showed Call", value: "$319.73" },
+          { label: "May Assessments", value: "10" },
+          { label: "May Deals", value: "5" },
+          { label: "CAC", value: "$2,174" },
+          { label: "April Total", value: "$10,656.21", style: "color: var(--text-muted)" },
+          { label: "MoM Change", value: "+2.0%", style: "color: var(--error)" }
+        ],
+        footnote: null
+      },
+      {
+        name: "Cold Outreach", tagClass: "cold", booked: 8, showed: 7,
+        costPerBooked: "$375.00", total: 3000.00, momPct: "0.0%", momClass: "flat",
+        details: [
+          { label: "Monthly Retainer", value: "$1,500" },
+          { label: "Cost Per Call", value: "$300" },
+          { label: "Billable Calls", value: "7" },
+          { label: "May Total (Invoiced)", value: "$3,000" },
+          { label: "Booked / Showed", value: "8 / 7" },
+          { label: "May Assessments", value: "4" },
+          { label: "May Deals", value: "0" },
+          { label: "April Total", value: "$3,000", style: "color: var(--text-muted)" },
+          { label: "MoM Change", value: "0.0%", style: "color: var(--text-muted)" }
+        ],
+        footnote: "Final invoice: $3,000. Retainer ($1,500/mo) + $300/call. April was $3,000."
+      },
+      {
+        name: "Wolfscale", tagClass: "cold", booked: 5, showed: 4,
+        costPerBooked: "$399.00", total: 1995.00, momPct: "-6.3%", momClass: "up",
+        details: [
+          { label: "Monthly Retainer", value: "$815.00" },
+          { label: "Software Cost", value: "$134.40/mo" },
+          { label: "Cost Per Call", value: "$295/call" },
+          { label: "May Calls", value: "4 billable calls" },
+          { label: "May Total (Invoiced)", value: "$1,995.00" },
+          { label: "May Assessments", value: "3" },
+          { label: "May Deals", value: "0" },
+          { label: "April Total", value: "$2,129.40", style: "color: var(--text-muted)" },
+          { label: "MoM Change", value: "-6.3%", style: "color: var(--success)" }
+        ],
+        footnote: "Final invoice: $1,995. Base ($815) + 4 billable calls ($295/call). No deals closed from Wolfscale in May."
+      },
+      {
+        name: "Board of Advisors", tagClass: "hampton", booked: 3, showed: 3,
+        costPerBooked: "$555.67", total: 1667.00, momPct: "0.0%", momClass: "flat",
+        details: [
+          { label: "Annual Fee", value: "$20,000/yr" },
+          { label: "Monthly Prorated", value: "$1,667/mo" },
+          { label: "Booked / Showed", value: "3 / 3" },
+          { label: "May Assessments", value: "2" },
+          { label: "May Deals", value: "1" }
+        ],
+        footnote: "Membership providing warm introductions. 1 deal closed from BA connections in May (Merin Hospitality Group)."
+      },
+      {
+        name: "Ikoni Digital", tagClass: "cold", booked: 3, showed: 3,
+        costPerBooked: "$433.33", total: 1300.00, momPct: "0.0%", momClass: "flat",
+        details: [
+          { label: "Monthly Retainer", value: "$250.00" },
+          { label: "Cost Per Billable Call", value: "$350.00" },
+          { label: "Billable Calls", value: "3" },
+          { label: "May Total", value: "$1,300" },
+          { label: "Booked / Showed", value: "3 / 3" },
+          { label: "May Assessments", value: "3" },
+          { label: "May Deals", value: "1" },
+          { label: "CAC", value: "$1,300" },
+          { label: "April Total", value: "$1,300", style: "color: var(--text-muted)" },
+          { label: "MoM Change", value: "0.0%", style: "color: var(--text-muted)" }
+        ],
+        footnote: "Retainer ($250/mo) + 3 billable calls ($350/call = $1,050) = $1,300. 1 deal closed (JumpSport). April was $1,300 (3 calls)."
+      },
+      {
+        name: "NuOpp", tagClass: "cold", booked: 1, showed: 1,
+        costPerBooked: "$0.00", total: 0.00, momPct: "0.0%", momClass: "flat",
+        details: [
+          { label: "Rate Per Call", value: "$500/call" },
+          { label: "May Calls", value: "1" },
+          { label: "Booked / Showed", value: "1 / 1" },
+          { label: "May Invoice", value: "$0" },
+          { label: "May Assessments", value: "0" },
+          { label: "May Deals", value: "0" },
+          { label: "April Total", value: "$0", style: "color: var(--text-muted)" },
+          { label: "MoM Change", value: "0.0%", style: "color: var(--text-muted)" }
+        ],
+        footnote: "$0 invoiced. Calls are $500/call but prepaid for 5 calls upfront - threshold not yet reached. Same in April."
+      },
+      {
+        name: "Hampton", tagClass: "hampton", booked: "-", showed: "-",
+        costPerBooked: "-", total: 825.00, momPct: "0.0%", momClass: "flat",
+        details: [
+          { label: "Annual Fee", value: "$9,900/yr" },
+          { label: "Monthly Prorated", value: "$825/mo" },
+          { label: "May Assessments", value: "1" },
+          { label: "May Deals", value: "2" },
+          { label: "CAC", value: "$412.50" }
+        ],
+        footnote: "Membership providing warm introductions. 1 assessment (Rollout.AI). 2 deals closed from Hampton intros (Speede, Rollout AI)."
+      },
+      {
+        name: "Google Ads", tagClass: "google", booked: 3, showed: 2,
+        costPerBooked: "$202.67", total: 608.00, momPct: null, momClass: null,
+        details: [
+          { label: "Ad Spend (May)", value: "$608.00" },
+          { label: "Booked / Showed", value: "3 / 2" },
+          { label: "May Assessments", value: "0" },
+          { label: "May Deals", value: "0" }
+        ],
+        footnote: null
+      },
+      {
+        name: "Organic / Other", tagClass: "organic", booked: 12, showed: 10,
+        costPerBooked: "$0.00", total: 0.00, momPct: null, momClass: null,
+        details: [
+          { label: "Organic", value: "5" },
+          { label: "Unknown / Blank", value: "4" },
+          { label: "Email", value: "2" },
+          { label: "Showcase", value: "1" },
+          { label: "May Assessments", value: "6 (1 Organic, 5 N/A)" },
+          { label: "May Deals", value: "1 (organic)" }
+        ],
+        footnote: "Includes calls with no UTM source, organic traffic, email, showcase, and entries without source attribution. 1 organic deal (My Zoo Box). 5 assessments with no confirmed source."
+      },
+      {
+        name: "Personal Referral", tagClass: "referral", booked: "-", showed: "-",
+        costPerBooked: "$0.00", total: 0.00, momPct: null, momClass: null,
+        details: [
+          { label: "May Deals", value: "0" },
+          { label: "CAC", value: "N/A" }
+        ],
+        footnote: "0 deals from personal referrals in May."
+      }
+    ]
   },
   jun: {
     label: "June 2026", period: "Full month of June 2026 (through 6/30)",
@@ -772,7 +1197,148 @@ const months = {
     ],
     outcomes: { closed: 25, notICP: 11, noShow: 18, pending: 9 },
     noShowRate: 28.6,
-    isEstimate: true
+    isEstimate: true,
+    investDetails: [
+      {
+        name: "Meta Ads", tagClass: "meta", booked: 21, showed: "-",
+        costPerBooked: "$502.92", total: 10561.37, momPct: "-2.8%", momClass: "up",
+        details: [
+          { label: "Ad Spend (June)", value: "$10,561.37" },
+          { label: "Booked / Showed", value: "21 / -" },
+          { label: "June Assessments", value: "7" },
+          { label: "June Deals", value: "1" },
+          { label: "CAC", value: "$10,561" },
+          { label: "May Total", value: "$10,870.76", style: "color: var(--text-muted)" },
+          { label: "MoM Change", value: "-2.8%", style: "color: var(--success)" }
+        ],
+        footnote: "1 deal closed (Surrogacy Is - $6,900)."
+      },
+      {
+        name: "Cold Outreach (COS)", tagClass: "cold", booked: 15, showed: "-",
+        costPerBooked: "$200.00", total: 3000.00, momPct: "0.0%", momClass: "flat",
+        details: [
+          { label: "Monthly Retainer", value: "$1,500" },
+          { label: "Cost Per Call", value: "$300" },
+          { label: "June Total (est)", value: "$3,000" },
+          { label: "Booked / Showed", value: "15 / -" },
+          { label: "June Assessments", value: "4" },
+          { label: "June Deals", value: "1" },
+          { label: "CAC", value: "$3,000" },
+          { label: "May Total", value: "$3,000", style: "color: var(--text-muted)" },
+          { label: "MoM Change", value: "0.0%", style: "color: var(--text-muted)" }
+        ],
+        footnote: "Estimated: Retainer ($1,500/mo) + $300/call. 1 deal closed (Kinzie Foods - $4,900). Final invoice pending."
+      },
+      {
+        name: "Wolfscale", tagClass: "cold", booked: 7, showed: "-",
+        costPerBooked: "$369.29", total: 2585.00, momPct: "+29.6%", momClass: "down",
+        details: [
+          { label: "Monthly Retainer", value: "$815.00" },
+          { label: "Software Cost", value: "$134.40/mo" },
+          { label: "Cost Per Call", value: "$295/call" },
+          { label: "June Calls (est)", value: "7 billable calls" },
+          { label: "June Total (est)", value: "$2,585.00" },
+          { label: "June Assessments", value: "0" },
+          { label: "June Deals", value: "0" },
+          { label: "May Total", value: "$1,995.00", style: "color: var(--text-muted)" },
+          { label: "MoM Change", value: "+29.6%", style: "color: var(--error)" }
+        ],
+        footnote: "Estimated: Base ($815 + $134.40) + 7 calls ($295/call). No assessments or deals from Wolfscale in June. Final invoice pending."
+      },
+      {
+        name: "Ikoni Digital", tagClass: "cold", booked: 1, showed: "-",
+        costPerBooked: "$600.00", total: 600.00, momPct: "-53.8%", momClass: "up",
+        details: [
+          { label: "Monthly Retainer", value: "$250.00" },
+          { label: "Cost Per Billable Call", value: "$350.00" },
+          { label: "Billable Calls (est)", value: "1" },
+          { label: "June Total (est)", value: "$600" },
+          { label: "Booked / Showed", value: "1 / -" },
+          { label: "June Assessments", value: "2" },
+          { label: "June Deals", value: "0" },
+          { label: "May Total", value: "$1,300", style: "color: var(--text-muted)" },
+          { label: "MoM Change", value: "-53.8%", style: "color: var(--success)" }
+        ],
+        footnote: "Estimated: Retainer ($250/mo) + 1 billable call ($350). Final invoice pending."
+      },
+      {
+        name: "NuOpp", tagClass: "cold", booked: 0, showed: 0,
+        costPerBooked: "N/A", total: 0.00, momPct: "0.0%", momClass: "flat",
+        details: [
+          { label: "Rate Per Call", value: "$500/call (prepaid)" },
+          { label: "June Calls", value: "0" },
+          { label: "June Assessments", value: "0" },
+          { label: "June Deals", value: "0" }
+        ],
+        footnote: "$0 invoiced. Prepaid credits from initial setup fee."
+      },
+      {
+        name: "Hampton", tagClass: "hampton", booked: "-", showed: "-",
+        costPerBooked: "-", total: 825.00, momPct: "0.0%", momClass: "flat",
+        details: [
+          { label: "Annual Fee", value: "$9,900/yr" },
+          { label: "Monthly Prorated", value: "$825/mo" },
+          { label: "June Assessments", value: "2" },
+          { label: "June Deals", value: "0" }
+        ],
+        footnote: "Membership providing warm introductions. 2 assessments in June, no deals closed from Hampton intros."
+      },
+      {
+        name: "Board of Advisors", tagClass: "hampton", booked: "-", showed: "-",
+        costPerBooked: "-", total: 1667.00, momPct: "0.0%", momClass: "flat",
+        details: [
+          { label: "Annual Fee", value: "$20,000/yr" },
+          { label: "Monthly Prorated", value: "$1,667/mo" },
+          { label: "June Assessments", value: "0" },
+          { label: "June Deals", value: "2" },
+          { label: "CAC", value: "$833.50" }
+        ],
+        footnote: "Membership providing warm introductions. 2 deals closed from BA connections (Meet Caddy, Meditech Marketing)."
+      },
+      {
+        name: "Google Ads", tagClass: "google", booked: 3, showed: "-",
+        costPerBooked: "$204.33", total: 613.00, momPct: null, momClass: null,
+        details: [
+          { label: "Ad Spend (June)", value: "$613.00" },
+          { label: "Booked / Showed", value: "3 / -" },
+          { label: "June Assessments", value: "0" },
+          { label: "June Deals", value: "0" }
+        ],
+        footnote: null
+      },
+      {
+        name: "Organic / Other", tagClass: "organic", booked: 16, showed: "-",
+        costPerBooked: "$0.00", total: 0.00, momPct: null, momClass: null,
+        details: [
+          { label: "Unattributed", value: "11" },
+          { label: "Organic", value: "3" },
+          { label: "UM Footer", value: "1" },
+          { label: "Showcase", value: "1" },
+          { label: "June Assessments", value: "4 (organic)" },
+          { label: "June Deals", value: "2 (organic)" }
+        ],
+        footnote: "Includes unattributed calls, organic traffic, UM footer, and showcase. 2 organic deals (Healthy Gut, Growth Shop)."
+      },
+      {
+        name: "Personal Relationship", tagClass: "referral", booked: "-", showed: "-",
+        costPerBooked: "$0.00", total: 0.00, momPct: null, momClass: null,
+        details: [
+          { label: "June Assessments", value: "2" },
+          { label: "June Deals", value: "1" },
+          { label: "CAC", value: "$0" }
+        ],
+        footnote: "1 deal from personal relationship (LPT - $15,000). No direct cost."
+      },
+      {
+        name: "Referral", tagClass: "referral", booked: "-", showed: "-",
+        costPerBooked: "$0.00", total: 0.00, momPct: null, momClass: null,
+        details: [
+          { label: "June Assessments", value: "2" },
+          { label: "June Deals", value: "0" }
+        ],
+        footnote: "2 assessments from referrals, no deals closed."
+      }
+    ]
   }
 };
 
@@ -824,6 +1390,12 @@ function sourceTagClass(source) {
   if (s.includes('wolf')) return 'wolf';
   if (s.includes('ikoni')) return 'ikoni';
   return 'other';
+}
+
+function toggleDetail(row) {
+  var detail = row.nextElementSibling;
+  row.classList.toggle('expanded');
+  detail.classList.toggle('show');
 }
 
 // ===== CHART TRACKING =====
@@ -938,26 +1510,61 @@ function renderMonthTab(key) {
   html += '</div></div>';
   html += '</div></div>';
 
-  // INVESTMENT SUMMARY
+  // INVESTMENT BY SOURCE (detailed expandable)
   html += '<div class="section">';
-  html += '<div class="section-header"><div class="section-icon gold">&#128176;</div><div><div class="section-title">Investment Summary</div><div class="section-subtitle">Spend breakdown by channel</div></div></div>';
-  var est = d.isEstimate ? ' (est)' : '';
-  html += '<table class="invest-table"><thead><tr><th>Source</th><th class="right">Amount</th></tr></thead><tbody>';
-  html += '<tr><td>Meta Ads</td><td class="right">' + fmtDec(d.metaSpend) + '</td></tr>';
-  html += '<tr><td>Google Ads</td><td class="right">' + fmtDec(d.googleSpend) + '</td></tr>';
-  html += '<tr><td>Cold Outreach (COS)' + est + '</td><td class="right">' + fmtDec(d.cosTotal) + '</td></tr>';
-  html += '<tr><td>Wolfscale' + est + '</td><td class="right">' + fmtDec(d.wolfTotal) + '</td></tr>';
-  html += '<tr><td>Ikoni Digital' + est + '</td><td class="right">' + fmtDec(d.ikoniTotal) + '</td></tr>';
-  var nuoppLabel = 'NuOpp';
-  if (d.nuoppNote) nuoppLabel += ' (' + d.nuoppNote + ')';
-  html += '<tr><td>' + nuoppLabel + est + '</td><td class="right">' + fmtDec(d.nuoppTotal) + '</td></tr>';
-  html += '<tr><td>Hampton' + est + '</td><td class="right">' + fmtDec(d.hamptonTotal) + '</td></tr>';
-  html += '<tr><td>Board of Advisors' + est + '</td><td class="right">' + fmtDec(d.baTotal) + '</td></tr>';
-  html += '<tr class="total-row"><td><strong>Total Investment</strong></td><td class="right"><strong>' + fmtDec(d.totalInvest) + '</strong></td></tr>';
-  html += '</tbody></table>';
+  html += '<div class="section-header"><div class="section-icon purple">&#128176;</div><div><div class="section-title">Investment by Source</div><div class="section-subtitle">' + d.label.split(' ')[0] + ' spend breakdown - click any source for details</div></div></div>';
 
-  html += '<div class="summary-row"><span>Cost / Booked Call</span><strong>' + fmtDec(d.costPerBooked) + '</strong></div>';
-  html += '<div class="summary-row" style="margin-top:8px"><span>Blended CAC</span><strong>' + fmtDec(d.blendedCAC) + '</strong></div>';
+  if (d.investDetails) {
+    var monthName = d.label.split(' ')[0];
+    html += '<table class="invest-table"><thead><tr><th>Source</th><th>Booked</th><th>Showed</th><th class="right">Cost / Booked</th><th class="right">' + monthName + ' Spend</th></tr></thead><tbody>';
+
+    d.investDetails.forEach(function(src) {
+      var bookedDisplay = (src.booked === '-' || src.booked === 0) ? (src.booked === 0 ? '0' : '-') : src.booked;
+      var showedDisplay = (src.showed === '-' || src.showed === 0) ? (src.showed === 0 ? '0' : '-') : src.showed;
+      var momBadge = '';
+      if (src.momPct && src.momClass) {
+        momBadge = ' <span class="mom-badge ' + src.momClass + '">' + src.momPct + '</span>';
+      }
+
+      html += '<tr class="invest-row" onclick="toggleDetail(this)">';
+      html += '<td><span class="expand-icon">&#9654;</span><span class="source-tag ' + src.tagClass + '">' + src.name + '</span></td>';
+      html += '<td>' + bookedDisplay + '</td>';
+      html += '<td>' + showedDisplay + '</td>';
+      html += '<td class="right">' + src.costPerBooked + '</td>';
+      html += '<td class="right">' + fmtDec(src.total) + momBadge + '</td>';
+      html += '</tr>';
+
+      html += '<tr class="invest-detail"><td colspan="5"><div class="detail-grid">';
+      src.details.forEach(function(det) {
+        html += '<div class="detail-item"><div class="detail-label">' + det.label + '</div>';
+        if (det.style) {
+          html += '<div class="detail-value" style="' + det.style + '">' + det.value + '</div>';
+        } else {
+          html += '<div class="detail-value">' + det.value + '</div>';
+        }
+        html += '</div>';
+      });
+      html += '</div>';
+      if (src.footnote) {
+        html += '<div style="padding: 8px 0 0; font-size: 12px; color: var(--text-muted);">' + src.footnote + '</div>';
+      }
+      html += '</td></tr>';
+    });
+
+    html += '</tbody></table>';
+  }
+
+  html += '<div class="summary-row" style="flex-wrap: wrap; gap: 12px;">';
+  html += '<div><span>Total ' + d.label.split(' ')[0] + ' Investment</span><br><strong style="font-size: 20px;">' + fmtDec(d.totalInvest) + '</strong></div>';
+  html += '<div style="text-align: center;"><span>Cost Per Booked Call (Avg)</span><br><strong style="font-size: 20px;">' + fmtDec(d.costPerBooked) + '</strong></div>';
+  html += '<div style="text-align: right;"><span>Blended CAC (All Sources)</span><br><strong style="font-size: 20px;">' + fmtDec(d.blendedCAC) + '</strong></div>';
+  html += '</div>';
+
+  if (d.isEstimate) {
+    html += '<div style="margin-top: 12px; padding: 10px 14px; background: var(--bg-light); border-radius: 8px; font-size: 12px; color: var(--text-secondary);">Lead gen partner totals are estimates pending final end-of-month invoices (est). Hampton and BA costs are prorated monthly from annual membership fees.</div>';
+  } else {
+    html += '<div style="margin-top: 12px; padding: 10px 14px; background: var(--bg-light); border-radius: 8px; font-size: 12px; color: var(--text-secondary);">Lead gen partner costs finalized from Lead Gen Partner/Ad Reporting reconciliation. Hampton and BA costs are prorated monthly from annual membership fees.</div>';
+  }
   html += '</div>';
 
   // ASSESSMENTS BY SOURCE + CALL OUTCOMES (two col)
