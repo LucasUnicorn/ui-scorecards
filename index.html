@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unicorn Marketers - March 2026 Marketing Scorecard</title>
+  <title>Unicorn Marketers - Marketing Scorecards</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <style>
@@ -35,7 +35,60 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* HERO */
+    /* ===== TAB BAR ===== */
+    .tab-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--navy-dark);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .tab-pills {
+      display: flex;
+      gap: 6px;
+    }
+    .tab-pill {
+      padding: 7px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .tab-pill:hover {
+      color: var(--white);
+      background: rgba(255,255,255,0.06);
+    }
+    .tab-pill.active {
+      background: var(--brand-primary);
+      color: var(--white);
+      border-color: var(--brand-primary);
+    }
+    .tab-bar-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+    @media (max-width: 600px) {
+      .tab-bar { flex-direction: column; gap: 6px; }
+      .tab-bar-label { display: none; }
+      .tab-pill { padding: 6px 12px; font-size: 12px; }
+    }
+
+    /* ===== TAB CONTENT ===== */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ===== HERO ===== */
     .hero {
       background: var(--navy-dark);
       padding: 48px 24px 56px;
@@ -135,8 +188,33 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
+    .hero-stat-change {
+      font-size: 11px;
+      font-weight: 600;
+      margin-top: 6px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .hero-stat-change.up { background: rgba(40, 200, 64, 0.15); color: #28c840; }
+    .hero-stat-change.down { background: rgba(255, 95, 87, 0.15); color: #ff5f57; }
+    .hero-stat-change.flat { background: rgba(156, 163, 175, 0.15); color: #9ca3af; }
 
-    /* MAIN */
+    /* MoM BADGES (inline) */
+    .mom-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 4px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .mom-badge.up { background: rgba(40, 200, 64, 0.12); color: #1a7a2d; }
+    .mom-badge.down { background: rgba(255, 95, 87, 0.12); color: #cc3d36; }
+    .mom-badge.flat { background: rgba(156, 163, 175, 0.12); color: #777; }
+
+    /* ===== MAIN ===== */
     .main {
       max-width: 1200px;
       margin: -24px auto 0;
@@ -257,8 +335,8 @@
       color: white;
     }
     .pipeline-circle.step1 { background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-light)); }
-    .pipeline-circle.step2 { background: linear-gradient(135deg, #1a7ab5, var(--cyan-accent)); }
-    .pipeline-circle.step2b { background: linear-gradient(135deg, #0095cc, #33bbee); }
+    .pipeline-circle.step2 { background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-light)); }
+    .pipeline-circle.step2b { background: linear-gradient(135deg, #1a7ab5, var(--cyan-accent)); }
     .pipeline-circle.step3 { background: linear-gradient(135deg, #d4960c, var(--warning)); }
     .pipeline-circle.step4 { background: linear-gradient(135deg, #1e9e38, var(--success)); }
     .pipeline-label { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
@@ -301,6 +379,9 @@
     .source-tag.other { background: rgba(25, 30, 40, 0.06); color: var(--text-secondary); }
     .source-tag.referral { background: rgba(139, 92, 246, 0.1); color: #6b3fc7; }
     .source-tag.hampton { background: rgba(0, 170, 233, 0.1); color: #0088bb; }
+    .source-tag.ba { background: rgba(139, 92, 246, 0.08); color: #7c3aed; }
+    .source-tag.wolf { background: rgba(245, 158, 11, 0.1); color: #b45309; }
+    .source-tag.ikoni { background: rgba(236, 72, 153, 0.1); color: #be185d; }
 
     .bar-container { width: 80px; height: 8px; background: rgba(25, 30, 40, 0.06); border-radius: 4px; overflow: hidden; }
     .bar-fill { height: 100%; border-radius: 4px; }
@@ -347,10 +428,8 @@
     }
     .deal-info { flex: 1; }
     .deal-name { font-size: 14px; font-weight: 600; color: var(--navy-dark); }
-    .deal-business { font-size: 13px; color: var(--text-muted); }
-    .deal-amount { font-size: 14px; font-weight: 700; color: var(--success); white-space: nowrap; }
     .deal-source { font-size: 11px; margin-top: 2px; }
-    .deal-date { font-size: 12px; color: var(--text-muted); font-weight: 500; text-align: right; }
+    .deal-amount { font-size: 14px; font-weight: 700; color: var(--success); white-space: nowrap; }
 
     /* SUMMARY ROW */
     .summary-row {
@@ -380,8 +459,9 @@
     }
 
     .chart-container { position: relative; height: 260px; margin-top: 16px; }
+    .chart-container-tall { position: relative; height: 340px; margin-top: 16px; }
 
-    /* EXPANDABLE INVESTMENT ROWS */
+    /* INVESTMENT TABLE */
     .invest-table { width: 100%; border-collapse: separate; border-spacing: 0; }
     .invest-table th {
       text-align: left;
@@ -394,59 +474,18 @@
       border-bottom: 2px solid rgba(25, 30, 40, 0.06);
     }
     .invest-table th.right { text-align: right; }
-    .invest-row {
-      cursor: pointer;
-      transition: background 0.15s ease;
-    }
-    .invest-row:hover { background: var(--bg-light); }
-    .invest-row td {
-      padding: 14px 16px;
+    .invest-table td {
+      padding: 12px 16px;
       font-size: 14px;
       border-bottom: 1px solid rgba(25, 30, 40, 0.04);
       color: var(--text-primary);
     }
-    .invest-row td.right { text-align: right; font-weight: 600; }
-    .invest-row .expand-icon {
-      display: inline-block;
-      transition: transform 0.2s ease;
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-right: 8px;
-    }
-    .invest-row.expanded .expand-icon { transform: rotate(90deg); }
-    .invest-detail {
-      display: none;
-    }
-    .invest-detail.show { display: table-row; }
-    .invest-detail td {
-      padding: 0 16px 16px 48px;
-      font-size: 13px;
-      color: var(--text-secondary);
-      border-bottom: 1px solid rgba(25, 30, 40, 0.04);
-    }
-    .detail-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 10px;
-      padding: 12px 0;
-    }
-    .detail-item {
-      background: var(--bg-light);
-      border-radius: 8px;
-      padding: 10px 14px;
-    }
-    .detail-label {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .detail-value {
-      font-size: 16px;
+    .invest-table td.right { text-align: right; font-weight: 600; }
+    .invest-table tr:last-child td { border-bottom: none; }
+    .invest-table .total-row td {
       font-weight: 700;
-      color: var(--navy-dark);
-      margin-top: 2px;
+      border-top: 2px solid rgba(25, 30, 40, 0.1);
+      background: var(--bg-light);
     }
 
     /* TYPEFORM FUNNEL */
@@ -494,58 +533,34 @@
       width: 50px;
       flex-shrink: 0;
     }
-    .funnel-connector {
-      width: 100px;
-      display: flex;
-      justify-content: flex-end;
-      padding-right: 8px;
-    }
     .funnel-drop {
       font-size: 11px;
       color: var(--text-muted);
       padding: 4px 0 4px 116px;
     }
 
-    /* ICP QUALITY */
-    .icp-bar-row {
-      display: flex;
+    /* L90 SPECIFIC */
+    .l90-hero {
+      background: linear-gradient(135deg, #0f1520 0%, var(--navy-dark) 50%, #1a2538 100%);
+    }
+    .trend-indicator {
+      display: inline-flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-    .icp-bar-label {
-      width: 100px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      text-align: right;
-      flex-shrink: 0;
-    }
-    .icp-bar-track {
-      flex: 1;
-      height: 32px;
-      background: rgba(25, 30, 40, 0.04);
-      border-radius: 8px;
-      display: flex;
-      overflow: hidden;
-    }
-    .icp-bar-segment {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      gap: 4px;
       font-size: 12px;
-      font-weight: 700;
-      color: white;
-      min-width: 30px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 6px;
     }
-    .icp-bar-segment.icp { background: var(--success); }
-    .icp-bar-segment.fringy { background: var(--warning); }
-    .icp-bar-segment.non-icp { background: var(--error); }
+    .trend-indicator.up-good { background: rgba(40, 200, 64, 0.1); color: #1a7a2d; }
+    .trend-indicator.down-bad { background: rgba(255, 95, 87, 0.1); color: #cc3d36; }
+    .trend-indicator.down-good { background: rgba(40, 200, 64, 0.1); color: #1a7a2d; }
+    .trend-indicator.up-bad { background: rgba(255, 95, 87, 0.1); color: #cc3d36; }
+    .trend-indicator.stable { background: rgba(254, 188, 46, 0.1); color: #a37800; }
+    .trend-indicator.critical { background: rgba(255, 95, 87, 0.2); color: #cc3d36; font-weight: 700; }
 
-    /* CAC TABLE */
-    .cac-table { width: 100%; border-collapse: separate; border-spacing: 0; }
-    .cac-table th {
+    .forecast-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+    .forecast-table th {
       text-align: left;
       font-size: 11px;
       font-weight: 600;
@@ -555,1231 +570,950 @@
       padding: 10px 16px;
       border-bottom: 2px solid rgba(25, 30, 40, 0.06);
     }
-    .cac-table th.right { text-align: right; }
-    .cac-table td {
-      padding: 12px 16px;
-      font-size: 14px;
+    .forecast-table th.right { text-align: right; }
+    .forecast-table td {
+      padding: 10px 16px;
+      font-size: 13px;
       border-bottom: 1px solid rgba(25, 30, 40, 0.04);
       color: var(--text-primary);
     }
-    .cac-table td.right { text-align: right; font-weight: 600; }
-    .cac-table tr:last-child td { border-bottom: none; }
+    .forecast-table td.right { text-align: right; font-weight: 600; }
+    .forecast-table tr:last-child td { border-bottom: none; }
+
+    .cac-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .cac-bar-label {
+      width: 130px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .cac-bar-track {
+      flex: 1;
+      height: 28px;
+      background: rgba(25, 30, 40, 0.04);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+    .cac-bar-fill {
+      height: 100%;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      padding-left: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: white;
+      min-width: fit-content;
+      padding-right: 10px;
+    }
+    .cac-bar-fill.green { background: linear-gradient(90deg, #1e9e38, var(--success)); }
+    .cac-bar-fill.yellow { background: linear-gradient(90deg, #d4960c, var(--warning)); }
+    .cac-bar-fill.red { background: linear-gradient(90deg, #cc3d36, var(--error)); }
+
+    /* COMPARISON TABLE */
+    .compare-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; }
+    .compare-table th {
+      text-align: right;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 10px 12px;
+      border-bottom: 2px solid rgba(25, 30, 40, 0.06);
+    }
+    .compare-table th:first-child { text-align: left; }
+    .compare-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(25, 30, 40, 0.04);
+      text-align: right;
+      font-weight: 500;
+    }
+    .compare-table td:first-child { text-align: left; font-weight: 600; color: var(--text-secondary); }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table .avg-col { background: var(--bg-light); font-weight: 700; }
+
+    /* PRINT */
+    @media print {
+      .tab-bar { display: none !important; }
+      .tab-content { display: block !important; page-break-after: always; }
+      .hero { padding-top: 24px; }
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-grid"></div>
-    <div class="hero-content">
-      <div class="badge">Prepared by Unicorn Marketers</div>
-      <h1>March 2026 <span>Marketing Scorecard</span></h1>
-      <p class="hero-subtitle">Monthly performance overview - Full month ending March 31, 2026</p>
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="hero-stat-value">61</div>
-          <div class="hero-stat-label">Applications</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-value cyan">87</div>
-          <div class="hero-stat-label">Booked Calls</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-value" style="color: #33bbee;">73</div>
-          <div class="hero-stat-label">Showed Calls</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-value" style="color: var(--warning);">26</div>
-          <div class="hero-stat-label">Assessments</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-value green">11</div>
-          <div class="hero-stat-label">Deals Closed</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-value" style="color: var(--success); font-size: 28px;">$66,200</div>
-          <div class="hero-stat-label">New Monthly Rev</div>
-        </div>
-      </div>
-    </div>
+<!-- ===== TAB BAR ===== -->
+<div class="tab-bar">
+  <div class="tab-pills">
+    <button class="tab-pill" data-tab="mar">Mar '26</button>
+    <button class="tab-pill" data-tab="apr">Apr '26</button>
+    <button class="tab-pill" data-tab="may">May '26</button>
+    <button class="tab-pill" data-tab="jun">Jun '26</button>
+    <button class="tab-pill" data-tab="l90">L90</button>
   </div>
+  <div class="tab-bar-label">Unicorn Marketers Marketing Scorecards</div>
+</div>
 
-  <!-- MAIN -->
-  <div class="main">
+<!-- Tab content containers -->
+<div id="tab-mar" class="tab-content"></div>
+<div id="tab-apr" class="tab-content"></div>
+<div id="tab-may" class="tab-content"></div>
+<div id="tab-jun" class="tab-content"></div>
+<div id="tab-l90" class="tab-content"></div>
 
-    <div class="note-banner">
-      <strong>Note:</strong> Lead gen partner costs are estimates pending final end-of-month invoices. All data reflects the full month of March 2026 (through 3/31).
-    </div>
+<div class="footer">Unicorn Marketers - Marketing Scorecards - Mar-Jun 2026</div>
 
-    <!-- FUNNEL -->
-    <div class="section">
-      <div class="section-header">
-        <div class="section-icon blue">&#9660;</div>
-        <div>
-          <div class="section-title">Sales Funnel Overview</div>
-          <div class="section-subtitle">Full pipeline from application to close</div>
-        </div>
-      </div>
+<script>
+// ===== DATA =====
+const months = {
+  mar: {
+    label: "March 2026", period: "Full month of March 2026 (through 3/31)",
+    booked: 87, showed: 73, showRate: 83.9, assessments: 26,
+    showedToAssess: 35.6, dealCount: 11, revenue: 66200, avgDeal: 6018,
+    metaSpend: 10885.18, googleSpend: 608, cosTotal: 3100, wolfTotal: 2719.40,
+    ikoniTotal: 1400, nuoppTotal: 2500, hamptonTotal: 825, baTotal: 1667,
+    totalInvest: 23704.58, costPerBooked: 272.47, blendedCAC: 2155,
+    typeform: { views: 414, starts: 150, subs: 61, completion: 40.7, overall: 14.7 },
+    assessBySource: { "Meta": 10, "Organic/Unknown": 7, "Cold Outreach": 3, "Wolfscale": 2, "Ikoni Digital": 2, "Google": 1 },
+    dealsList: [
+      { name: "XLT Media Solutions", source: "Meta", amount: 5900 },
+      { name: "Cow Guys", source: "Referral", amount: 4900 },
+      { name: "Dr Z Functional Medicine", source: "Meta", amount: 5900 },
+      { name: "Tranzon", source: "Ikoni Digital", amount: 5900 },
+      { name: "Beyond Driven Enterprises", source: "Referral", amount: 9500 },
+      { name: "Service Plus", source: "Board of Advisors", amount: 5900 },
+      { name: "Palo Media Group", source: "Google", amount: 5000 },
+      { name: "VEA Health", source: "Cold Outreach", amount: 5500 },
+      { name: "Natural Armor", source: "Referral", amount: 5900 },
+      { name: "Cardinal HVAC", source: "Meta", amount: 4900 },
+      { name: "Franchise Brokers Assoc.", source: "Hampton", amount: 6900 }
+    ],
+    outcomes: { closed: 26, notICP: 25, noShow: 14, pending: 22 },
+    noShowRate: 16.1,
+    isEstimate: false,
+    nuoppNote: "One-time setup fee"
+  },
+  apr: {
+    label: "April 2026", period: "Full month of April 2026 (through 4/30)",
+    booked: 71, showed: 63, showRate: 88.7, assessments: 26,
+    showedToAssess: 41.3, dealCount: 8, revenue: 57300, avgDeal: 7163,
+    metaSpend: 10656.21, googleSpend: 603, cosTotal: 3000, wolfTotal: 2129.40,
+    ikoniTotal: 1300, nuoppTotal: 0, hamptonTotal: 825, baTotal: 1667,
+    totalInvest: 20180.61, costPerBooked: 284.23, blendedCAC: 2523,
+    typeform: { views: 418, starts: 138, subs: 45, completion: 32.6, overall: 10.8 },
+    assessBySource: { "Meta": 12, "Cold Outreach": 8, "Board of Advisors": 2, "Organic": 1, "Google": 1, "Wolfscale": 1, "Unknown": 1 },
+    dealsList: [
+      { name: "Stacked Media", source: "Personal Referral", amount: 4000 },
+      { name: "Massimo", source: "Personal Referral", amount: 5900 },
+      { name: "Nextiva", source: "Meta", amount: 6000 },
+      { name: "Third Home", source: "Wolfscale", amount: 6500 },
+      { name: "CRE Income Fund", source: "Ikoni Digital", amount: 4900 },
+      { name: "Eleris", source: "Meta", amount: 15000 },
+      { name: "Shift", source: "Meta", amount: 6500 },
+      { name: "Nomad Lane", source: "Hampton", amount: 8500 }
+    ],
+    outcomes: { closed: 26, notICP: 5, noShow: 8, pending: 32 },
+    noShowRate: 11.3,
+    isEstimate: false,
+    nuoppNote: "Prepaid - $0"
+  },
+  may: {
+    label: "May 2026", period: "Full month of May 2026 (through 5/31)",
+    booked: 80, showed: 68, showRate: 85.0, assessments: 29,
+    showedToAssess: 42.6, dealCount: 10, revenue: 62800, avgDeal: 6280,
+    metaSpend: 10870.76, googleSpend: 608, cosTotal: 3000, wolfTotal: 1995,
+    ikoniTotal: 1300, nuoppTotal: 0, hamptonTotal: 825, baTotal: 1667,
+    totalInvest: 20265.76, costPerBooked: 253.32, blendedCAC: 2027,
+    typeform: { views: 373, starts: 119, subs: 42, completion: 35.3, overall: 11.3 },
+    assessBySource: { "Meta": 10, "N/A": 5, "Cold Outreach": 4, "Ikoni Digital": 3, "Wolfscale": 3, "Board of Advisors": 2, "Hampton": 1, "Organic": 1 },
+    dealsList: [
+      { name: "Ridley Academy", source: "Meta", amount: 8000 },
+      { name: "JumpSport", source: "Ikoni Digital", amount: 7900 },
+      { name: "Speede", source: "Hampton", amount: 7900 },
+      { name: "Priority Plus Financial", source: "Meta", amount: 6900 },
+      { name: "Revenued", source: "Meta", amount: 6500 },
+      { name: "My Zoo Box", source: "Organic", amount: 5900 },
+      { name: "Merin Hospitality", source: "Board of Advisors", amount: 5000 },
+      { name: "Product Air", source: "Meta", amount: 4900 },
+      { name: "Fem-Force", source: "Meta", amount: 4900 },
+      { name: "Rollout AI", source: "Hampton", amount: 4900 }
+    ],
+    outcomes: { closed: 29, notICP: 5, noShow: 12, pending: 34 },
+    noShowRate: 15.0,
+    isEstimate: false
+  },
+  jun: {
+    label: "June 2026", period: "Full month of June 2026 (through 6/30)",
+    booked: 63, showed: 45, showRate: 71.4, assessments: 25,
+    showedToAssess: 55.6, dealCount: 7, revenue: 51400, avgDeal: 7343,
+    metaSpend: 10561.37, googleSpend: 613, cosTotal: 3000, wolfTotal: 2585,
+    ikoniTotal: 600, nuoppTotal: 0, hamptonTotal: 825, baTotal: 1667,
+    totalInvest: 19851.37, costPerBooked: 315.10, blendedCAC: 2836,
+    typeform: { views: 726, starts: 249, subs: 87, completion: 34.9, overall: 12.0 },
+    assessBySource: { "Meta": 7, "Cold Outreach": 4, "Organic": 4, "Hampton": 2, "Ikoni Digital": 2, "Personal Relationship": 2, "Referral": 2, "UI Website": 1, "N/A": 1 },
+    dealsList: [
+      { name: "LPT", source: "Personal Relationship", amount: 15000 },
+      { name: "Surrogacy Is", source: "Meta", amount: 6900 },
+      { name: "Healthy Gut", source: "Organic", amount: 6900 },
+      { name: "Meet Caddy", source: "Board of Advisors", amount: 5900 },
+      { name: "Meditech Marketing", source: "Board of Advisors", amount: 5900 },
+      { name: "Growth Shop", source: "Organic", amount: 5900 },
+      { name: "Kinzie Foods", source: "Cold Outreach", amount: 4900 }
+    ],
+    outcomes: { closed: 25, notICP: 11, noShow: 18, pending: 9 },
+    noShowRate: 28.6,
+    isEstimate: true
+  }
+};
 
-      <div class="pipeline">
-        <div class="pipeline-stage">
-          <div class="pipeline-circle step1">61</div>
-          <div class="pipeline-label">Applications</div>
-          <div class="pipeline-sub">Unique leads</div>
-        </div>
-        <div class="pipeline-arrow">&#10140;</div>
-        <div class="pipeline-stage">
-          <div class="pipeline-circle step2">87</div>
-          <div class="pipeline-label">Booked Calls</div>
-          <div class="pipeline-sub">Incl. partners</div>
-        </div>
-        <div class="pipeline-arrow">&#10140;</div>
-        <div class="pipeline-stage">
-          <div class="pipeline-circle step2b">73</div>
-          <div class="pipeline-label">Showed Calls</div>
-          <div class="pipeline-sub">83.9% show rate</div>
-        </div>
-        <div class="pipeline-arrow">&#10140;</div>
-        <div class="pipeline-stage">
-          <div class="pipeline-circle step3">26</div>
-          <div class="pipeline-label">Assessments</div>
-          <div class="pipeline-sub">35.6% of showed</div>
-        </div>
-        <div class="pipeline-arrow">&#10140;</div>
-        <div class="pipeline-stage">
-          <div class="pipeline-circle step4">11</div>
-          <div class="pipeline-label">Deals Closed</div>
-          <div class="pipeline-sub">$66,200/mo new rev</div>
-        </div>
-      </div>
+const monthOrder = ['mar', 'apr', 'may', 'jun'];
 
-      <div class="metric-grid">
-        <div class="metric-card">
-          <div class="metric-card-value" style="color: var(--success);">83.9%</div>
-          <div class="metric-card-label">Show-up Rate</div>
-          <div class="metric-card-sub">73 of 87 showed</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-card-value" style="color: #d4960c;">35.6%</div>
-          <div class="metric-card-label">Showed to Assessment</div>
-          <div class="metric-card-sub">26 of 73 showed calls</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-card-value" style="color: var(--success);">11</div>
-          <div class="metric-card-label">Deals Closed</div>
-          <div class="metric-card-sub">From assessments across multiple months</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-card-value" style="color: var(--brand-primary);">$6,018</div>
-          <div class="metric-card-label">Avg Deal Size</div>
-          <div class="metric-card-sub">Monthly retainer</div>
-        </div>
-      </div>
-    </div>
+// ===== UTILITY FUNCTIONS =====
+function fmt(n) { return n.toLocaleString('en-US'); }
+function fmtD(n) { return '$' + n.toLocaleString('en-US'); }
+function fmtDec(n) { return '$' + n.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}); }
+function pct(n) { return n.toFixed(1) + '%'; }
 
-    <!-- INVESTMENT / COST SECTION -->
-    <div class="section">
-      <div class="section-header">
-        <div class="section-icon purple">&#128176;</div>
-        <div>
-          <div class="section-title">Investment by Source</div>
-          <div class="section-subtitle">March spend breakdown - click any source for details</div>
-        </div>
-      </div>
+function momPct(cur, prev) {
+  if (prev === 0) return { val: 'N/A', cls: 'flat' };
+  var change = ((cur - prev) / prev * 100);
+  var sign = change >= 0 ? '+' : '';
+  var cls = change > 0 ? 'up' : change < 0 ? 'down' : 'flat';
+  return { val: sign + change.toFixed(1) + '%', cls: cls };
+}
 
-      <table class="invest-table">
-        <thead>
-          <tr>
-            <th>Source</th>
-            <th>Booked</th>
-            <th>Showed</th>
-            <th class="right">Cost / Call</th>
-            <th class="right">March Spend</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Meta Ads -->
-          <tr class="invest-row" onclick="toggleDetail(this)">
-            <td><span class="expand-icon">&#9654;</span><span class="source-tag meta">Meta Ads</span></td>
-            <td>42</td>
-            <td>36</td>
-            <td class="right">$259.17</td>
-            <td class="right">$10,885.18</td>
-          </tr>
-          <tr class="invest-detail">
-            <td colspan="5">
-              <div class="detail-grid">
-                <div class="detail-item">
-                  <div class="detail-label">Ad Spend (March)</div>
-                  <div class="detail-value">$10,885.18</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">Booked / Showed</div>
-                  <div class="detail-value">42 / 36</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">Cost / Showed Call</div>
-                  <div class="detail-value">$302.37</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">March Assessments</div>
-                  <div class="detail-value">10</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">Cost / Assessment</div>
-                  <div class="detail-value">$1,088.52</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">March Deals</div>
-                  <div class="detail-value">3</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">CAC</div>
-                  <div class="detail-value">$3,628</div>
-                </div>
-              </div>
-            </td>
-          </tr>
+function momPP(cur, prev) {
+  var change = cur - prev;
+  var sign = change >= 0 ? '+' : '';
+  var cls = change > 0 ? 'up' : change < 0 ? 'down' : 'flat';
+  return { val: sign + change.toFixed(1) + 'pp', cls: cls };
+}
 
-          <!-- Ikoni Digital -->
-          <tr class="invest-row" onclick="toggleDetail(this)">
-            <td><span class="expand-icon">&#9654;</span><span class="source-tag cold">Ikoni Digital</span></td>
-            <td>10</td>
-            <td>6</td>
-            <td class="right">$140.00</td>
-            <td class="right">$1,400.00</td>
-          </tr>
-          <tr class="invest-detail">
-            <td colspan="5">
-              <div class="detail-grid">
-                <div class="detail-item">
-                  <div class="detail-label">Cost Per Booking</div>
-                  <div class="detail-value">$140.00</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">Booked / Showed</div>
-                  <div class="detail-value">10 / 6</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">March Assessments</div>
-                  <div class="detail-value">2</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">March Deals</div>
-                  <div class="detail-value">1</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">CAC</div>
-                  <div class="detail-value">$1,400</div>
-                </div>
-              </div>
-              <div style="padding: 8px 0 0; font-size: 12px; color: var(--text-muted);">
-                10 bookings per Ikoni's March report. 4 billable calls at $350/call = $1,400.
-              </div>
-            </td>
-          </tr>
+// For hero stat, invert "good" direction for some metrics
+function heroMomBadge(cur, prev, isRate) {
+  if (prev === undefined) return '';
+  var m = isRate ? momPP(cur, prev) : momPct(cur, prev);
+  return '<div class="hero-stat-change ' + m.cls + '">' + m.val + ' MoM</div>';
+}
 
-          <!-- Cold Outreach Systems -->
-          <tr class="invest-row" onclick="toggleDetail(this)">
-            <td><span class="expand-icon">&#9654;</span><span class="source-tag cold">Cold Outreach</span></td>
-            <td>10</td>
-            <td>8</td>
-            <td class="right">$310.00</td>
-            <td class="right">$3,100.00</td>
-          </tr>
-          <tr class="invest-detail">
-            <td colspan="5">
-              <div class="detail-grid">
-                <div class="detail-item">
-                  <div class="detail-label">Monthly Retainer</div>
-                  <div class="detail-value">$1,000</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">Cost Per Call</div>
-                  <div class="detail-value">$300</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">March Total</div>
-                  <div class="detail-value">$3,100</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">Booked / Showed</div>
-                  <div class="detail-value">10 / 8</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">March Deals</div>
-                  <div class="detail-value">1</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">CAC</div>
-                  <div class="detail-value">$3,100</div>
-                </div>
-              </div>
-              <div style="padding: 8px 0 0; font-size: 12px; color: var(--text-muted);">
-                Retainer ($1,000/mo) + 7 billable calls ($300/call = $2,100) = $3,100. 10 total calls on tracker; 3 originally booked were cancelled and excluded from billing.
-              </div>
-            </td>
-          </tr>
+function inlineMomBadge(cur, prev, isRate) {
+  if (prev === undefined) return '';
+  var m = isRate ? momPP(cur, prev) : momPct(cur, prev);
+  return '<span class="mom-badge ' + m.cls + '">' + m.val + '</span>';
+}
 
-          <!-- Wolfscale -->
-          <tr class="invest-row" onclick="toggleDetail(this)">
-            <td><span class="expand-icon">&#9654;</span><span class="source-tag cold">Wolfscale</span></td>
-            <td>6</td>
-            <td>6</td>
-            <td class="right">$453.23</td>
-            <td class="right">$2,719.40</td>
-          </tr>
-          <tr class="invest-detail">
-            <td colspan="5">
-              <div class="detail-grid">
-                <div class="detail-item">
-                  <div class="detail-label">Monthly Retainer</div>
-                  <div class="detail-value">$1,995.00</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">Software Cost</div>
-                  <div class="detail-value">$134.40/mo</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">Calls Included</div>
-                  <div class="detail-value">4/mo</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">Rate for Call 5+</div>
-                  <div class="detail-value">$295/call</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">March Extra Calls</div>
-                  <div class="detail-value">2 x $295 = $590</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">March Total</div>
-                  <div class="detail-value">$2,719.40</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">March Assessments</div>
-                  <div class="detail-value">2</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">March Deals</div>
-                  <div class="detail-value">0</div>
-                </div>
-              </div>
-              <div style="padding: 8px 0 0; font-size: 12px; color: var(--text-muted);">
-                Base ($1,995 + $134.40) + 2 extra calls ($590) = $2,719.40. 100% show rate.
-              </div>
-            </td>
-          </tr>
+function sourceTagClass(source) {
+  var s = source.toLowerCase();
+  if (s.includes('meta')) return 'meta';
+  if (s.includes('cold')) return 'cold';
+  if (s.includes('organic') || s.includes('unknown') || s === 'n/a') return 'organic';
+  if (s.includes('google')) return 'google';
+  if (s.includes('referral') || s.includes('personal')) return 'referral';
+  if (s.includes('hampton')) return 'hampton';
+  if (s.includes('board') || s.includes('advisor')) return 'ba';
+  if (s.includes('wolf')) return 'wolf';
+  if (s.includes('ikoni')) return 'ikoni';
+  return 'other';
+}
 
-          <!-- NuOpp -->
-          <tr class="invest-row" onclick="toggleDetail(this)">
-            <td><span class="expand-icon">&#9654;</span><span class="source-tag cold">NuOpp</span></td>
-            <td>0</td>
-            <td>0</td>
-            <td class="right">N/A</td>
-            <td class="right">$2,500.00</td>
-          </tr>
-          <tr class="invest-detail">
-            <td colspan="5">
-              <div class="detail-grid">
-                <div class="detail-item">
-                  <div class="detail-label">One-Time Setup Fee</div>
-                  <div class="detail-value">$2,500</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">Rate Per Call</div>
-                  <div class="detail-value">$500/call</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">March Calls</div>
-                  <div class="detail-value">0</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">March Deals</div>
-                  <div class="detail-value">0</div>
-                </div>
-              </div>
-              <div style="padding: 8px 0 0; font-size: 12px; color: var(--text-muted);">
-                One-time setup fee paid in March. Going forward, charged $500 per booked call only.
-              </div>
-            </td>
-          </tr>
-
-          <!-- Google Ads -->
-          <tr class="invest-row" onclick="toggleDetail(this)">
-            <td><span class="expand-icon">&#9654;</span><span class="source-tag google">Google Ads</span></td>
-            <td>2</td>
-            <td>2</td>
-            <td class="right">$304.00</td>
-            <td class="right">$608.00</td>
-          </tr>
-          <tr class="invest-detail">
-            <td colspan="5">
-              <div class="detail-grid">
-                <div class="detail-item">
-                  <div class="detail-label">Ad Spend (March)</div>
-                  <div class="detail-value">$608.00</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">Booked / Showed</div>
-                  <div class="detail-value">2 / 2</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">March Assessments</div>
-                  <div class="detail-value">1</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">March Deals</div>
-                  <div class="detail-value">1</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">CAC</div>
-                  <div class="detail-value">$608</div>
-                </div>
-              </div>
-            </td>
-          </tr>
-
-          <!-- Hampton -->
-          <tr class="invest-row" onclick="toggleDetail(this)">
-            <td><span class="expand-icon">&#9654;</span><span class="source-tag hampton">Hampton</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td class="right">-</td>
-            <td class="right">$825.00</td>
-          </tr>
-          <tr class="invest-detail">
-            <td colspan="5">
-              <div class="detail-grid">
-                <div class="detail-item">
-                  <div class="detail-label">Annual Fee</div>
-                  <div class="detail-value">$9,900/yr</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">Monthly Prorated</div>
-                  <div class="detail-value">$825/mo</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">March Deals</div>
-                  <div class="detail-value">1</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">CAC</div>
-                  <div class="detail-value">$825</div>
-                </div>
-              </div>
-              <div style="padding: 8px 0 0; font-size: 12px; color: var(--text-muted);">
-                Membership providing warm introductions. 1 deal closed from Hampton intro in March.
-              </div>
-            </td>
-          </tr>
-
-          <!-- Board of Advisors -->
-          <tr class="invest-row" onclick="toggleDetail(this)">
-            <td><span class="expand-icon">&#9654;</span><span class="source-tag hampton">Board of Advisors</span></td>
-            <td>-</td>
-            <td>-</td>
-            <td class="right">-</td>
-            <td class="right">$1,667.00</td>
-          </tr>
-          <tr class="invest-detail">
-            <td colspan="5">
-              <div class="detail-grid">
-                <div class="detail-item">
-                  <div class="detail-label">Annual Fee</div>
-                  <div class="detail-value">$20,000/yr</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">Monthly Prorated</div>
-                  <div class="detail-value">$1,667/mo</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">March Deals</div>
-                  <div class="detail-value">1</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">CAC</div>
-                  <div class="detail-value">$1,667</div>
-                </div>
-              </div>
-              <div style="padding: 8px 0 0; font-size: 12px; color: var(--text-muted);">
-                Membership providing warm introductions. 1 deal closed from BA connection in March.
-              </div>
-            </td>
-          </tr>
-
-          <!-- Organic / Other / Unknown -->
-          <tr class="invest-row" onclick="toggleDetail(this)">
-            <td><span class="expand-icon">&#9654;</span><span class="source-tag organic">Organic / Other</span></td>
-            <td>17</td>
-            <td>15</td>
-            <td class="right">$0.00</td>
-            <td class="right">$0.00</td>
-          </tr>
-          <tr class="invest-detail">
-            <td colspan="5">
-              <div class="detail-grid">
-                <div class="detail-item">
-                  <div class="detail-label">Organic</div>
-                  <div class="detail-value">4</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">Unknown / Blank</div>
-                  <div class="detail-value">12</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">Email</div>
-                  <div class="detail-value">1</div>
-                </div>
-                <div class="detail-item">
-                  <div class="detail-label">March Assessments</div>
-                  <div class="detail-value">7</div>
-                </div>
-              </div>
-              <div style="padding: 8px 0 0; font-size: 12px; color: var(--text-muted);">
-                Includes calls with no UTM source, organic traffic, email, and entries without source attribution.
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="summary-row" style="flex-wrap: wrap; gap: 12px;">
-        <div>
-          <span>Total March Investment</span><br>
-          <strong style="font-size: 20px;">$23,704.58</strong>
-        </div>
-        <div style="text-align: center;">
-          <span>Cost Per Booked Call (Avg)</span><br>
-          <strong style="font-size: 20px;">$272.47</strong>
-        </div>
-        <div style="text-align: right;">
-          <span>Blended CAC (All Sources)</span><br>
-          <strong style="font-size: 20px;">$2,155</strong>
-        </div>
-      </div>
-      <div style="margin-top: 12px; padding: 10px 14px; background: var(--bg-light); border-radius: 8px; font-size: 12px; color: var(--text-secondary);">
-        Lead gen partner totals are estimates pending final end-of-month invoices. Hampton and BA costs are prorated monthly from annual membership fees.
-      </div>
-    </div>
-
-    <!-- CAC & DEAL SIZE BY CHANNEL -->
-    <div class="two-col">
-      <div class="section">
-        <div class="section-header">
-          <div class="section-icon purple">&#128184;</div>
-          <div>
-            <div class="section-title">Cost to Acquire Customer (CAC)</div>
-            <div class="section-subtitle">By paid channel - referral deals excluded</div>
-          </div>
-        </div>
-        <table class="cac-table">
-          <thead><tr><th>Channel</th><th>Deals</th><th class="right">Spend</th><th class="right">CAC</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><span class="source-tag google">Google Ads</span></td>
-              <td>1</td>
-              <td class="right">$608</td>
-              <td class="right" style="color: var(--success);">$608</td>
-            </tr>
-            <tr>
-              <td><span class="source-tag hampton">Hampton</span></td>
-              <td>1</td>
-              <td class="right">$825</td>
-              <td class="right" style="color: var(--success);">$825</td>
-            </tr>
-            <tr>
-              <td><span class="source-tag hampton">Board of Advisors</span></td>
-              <td>1</td>
-              <td class="right">$1,667</td>
-              <td class="right" style="color: #d4960c;">$1,667</td>
-            </tr>
-            <tr>
-              <td><span class="source-tag cold">Ikoni Digital</span></td>
-              <td>1</td>
-              <td class="right">$1,400</td>
-              <td class="right" style="color: #d4960c;">$1,400</td>
-            </tr>
-            <tr>
-              <td><span class="source-tag cold">Cold Outreach</span></td>
-              <td>1</td>
-              <td class="right">$3,100</td>
-              <td class="right" style="color: var(--error);">$3,100</td>
-            </tr>
-            <tr>
-              <td><span class="source-tag meta">Meta Ads</span></td>
-              <td>3</td>
-              <td class="right">$10,885</td>
-              <td class="right" style="color: var(--error);">$3,628</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="summary-row">
-          <span>Blended CAC (All 11 Deals)</span>
-          <strong>$2,155</strong>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-header">
-          <div class="section-icon green">&#128200;</div>
-          <div>
-            <div class="section-title">Monthly Deal Size by Channel</div>
-            <div class="section-subtitle">Average monthly retainer per source</div>
-          </div>
-        </div>
-        <table class="cac-table">
-          <thead><tr><th>Channel</th><th>Deals</th><th class="right">Total $/mo</th><th class="right">Avg $/mo</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><span class="source-tag meta">Meta Ads</span></td>
-              <td>3</td>
-              <td class="right">$16,700</td>
-              <td class="right">$5,567</td>
-            </tr>
-            <tr>
-              <td><span class="source-tag google">Google Ads</span></td>
-              <td>1</td>
-              <td class="right">$5,000</td>
-              <td class="right">$5,000</td>
-            </tr>
-            <tr>
-              <td><span class="source-tag cold">Cold Outreach</span></td>
-              <td>1</td>
-              <td class="right">$5,500</td>
-              <td class="right">$5,500</td>
-            </tr>
-            <tr>
-              <td><span class="source-tag cold">Ikoni Digital</span></td>
-              <td>1</td>
-              <td class="right">$5,900</td>
-              <td class="right">$5,900</td>
-            </tr>
-            <tr>
-              <td><span class="source-tag hampton">Hampton</span></td>
-              <td>1</td>
-              <td class="right">$6,900</td>
-              <td class="right">$6,900</td>
-            </tr>
-            <tr>
-              <td><span class="source-tag hampton">Board of Advisors</span></td>
-              <td>1</td>
-              <td class="right">$5,900</td>
-              <td class="right">$5,900</td>
-            </tr>
-            <tr>
-              <td><span class="source-tag referral">Referral</span></td>
-              <td>3</td>
-              <td class="right">$20,300</td>
-              <td class="right">$6,767</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="summary-row">
-          <span>Blended Avg Deal Size</span>
-          <strong>$6,018/mo</strong>
-        </div>
-      </div>
-    </div>
-
-    <!-- ICP QUALITY BREAKDOWN -->
-    <div class="section">
-      <div class="section-header">
-        <div class="section-icon blue">&#127919;</div>
-        <div>
-          <div class="section-title">ICP Quality Breakdown</div>
-          <div class="section-subtitle">Based on 44 Meta + Google booked calls scored by revenue ($50K+ threshold) and ad spend ($5K+ threshold)</div>
-        </div>
-      </div>
-
-      <div class="metric-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
-        <div class="metric-card" style="border-left: 4px solid var(--success);">
-          <div class="metric-card-value" style="color: var(--success);">17</div>
-          <div class="metric-card-label">Clear ICP</div>
-          <div class="metric-card-sub">$50K+ revenue AND $5K+ ad spend</div>
-        </div>
-        <div class="metric-card" style="border-left: 4px solid var(--warning);">
-          <div class="metric-card-value" style="color: #d4960c;">11</div>
-          <div class="metric-card-label">Fringy</div>
-          <div class="metric-card-sub">Lowest in one category only</div>
-        </div>
-        <div class="metric-card" style="border-left: 4px solid var(--error);">
-          <div class="metric-card-value" style="color: var(--error);">16</div>
-          <div class="metric-card-label">Clear Non-ICP</div>
-          <div class="metric-card-sub">Under $50K rev AND under $5K spend</div>
-        </div>
-      </div>
-
-      <!-- Stacked bars -->
-      <div style="margin-top: 8px;">
-        <div class="icp-bar-row">
-          <div class="icp-bar-label">Meta (42)</div>
-          <div class="icp-bar-track">
-            <div class="icp-bar-segment icp" style="width: 38.1%;">16</div>
-            <div class="icp-bar-segment fringy" style="width: 23.8%;">10</div>
-            <div class="icp-bar-segment non-icp" style="width: 38.1%;">16</div>
-          </div>
-        </div>
-        <div class="icp-bar-row">
-          <div class="icp-bar-label">Google (2)</div>
-          <div class="icp-bar-track">
-            <div class="icp-bar-segment icp" style="width: 50%;">1</div>
-            <div class="icp-bar-segment fringy" style="width: 50%;">1</div>
-          </div>
-        </div>
-        <div class="icp-bar-row" style="margin-top: 8px;">
-          <div class="icp-bar-label"><strong>Total (44)</strong></div>
-          <div class="icp-bar-track">
-            <div class="icp-bar-segment icp" style="width: 38.6%;">17</div>
-            <div class="icp-bar-segment fringy" style="width: 25%;">11</div>
-            <div class="icp-bar-segment non-icp" style="width: 36.4%;">16</div>
-          </div>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 24px; margin-top: 16px; font-size: 12px; color: var(--text-muted);">
-        <span><span style="display:inline-block;width:12px;height:12px;background:var(--success);border-radius:3px;margin-right:4px;vertical-align:middle;"></span> Clear ICP (38.6%)</span>
-        <span><span style="display:inline-block;width:12px;height:12px;background:var(--warning);border-radius:3px;margin-right:4px;vertical-align:middle;"></span> Fringy (25.0%)</span>
-        <span><span style="display:inline-block;width:12px;height:12px;background:var(--error);border-radius:3px;margin-right:4px;vertical-align:middle;"></span> Non-ICP (36.4%)</span>
-      </div>
-    </div>
-
-    <!-- TYPEFORM FUNNEL -->
-    <div class="section">
-      <div class="section-header">
-        <div class="section-icon cyan-bg">&#128203;</div>
-        <div>
-          <div class="section-title">Typeform Application Funnel</div>
-          <div class="section-subtitle">March 1-31 - visitor journey from page view to submission</div>
-        </div>
-      </div>
-
-      <div class="metric-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-bottom: 24px;">
-        <div class="metric-card">
-          <div class="metric-card-value" style="color: var(--navy-dark);">414</div>
-          <div class="metric-card-label">Page Views</div>
-          <div class="metric-card-sub">Unique visitors</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-card-value" style="color: var(--brand-primary);">150</div>
-          <div class="metric-card-label">Form Starts</div>
-          <div class="metric-card-sub">36.2% of views</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-card-value" style="color: var(--cyan-accent);">61</div>
-          <div class="metric-card-label">Submissions</div>
-          <div class="metric-card-sub">40.7% completion</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-card-value" style="color: var(--success);">3:03</div>
-          <div class="metric-card-label">Avg. Time</div>
-          <div class="metric-card-sub">To complete form</div>
-        </div>
-      </div>
-
-      <div class="funnel-visual">
-        <div class="funnel-step">
-          <div class="funnel-step-label">Views</div>
-          <div class="funnel-bar-wrap">
-            <div class="funnel-bar" style="width: 100%; background: linear-gradient(90deg, var(--navy-dark), #2a3040);">414</div>
-          </div>
-          <div class="funnel-step-pct">100%</div>
-        </div>
-        <div class="funnel-drop">264 visitors left without starting (63.8% drop-off)</div>
-        <div class="funnel-step">
-          <div class="funnel-step-label">Starts</div>
-          <div class="funnel-bar-wrap">
-            <div class="funnel-bar" style="width: 36.2%; background: linear-gradient(90deg, var(--brand-primary), var(--brand-primary-light));">150</div>
-          </div>
-          <div class="funnel-step-pct">36.2%</div>
-        </div>
-        <div class="funnel-drop">89 people abandoned during form (59.3% drop-off)</div>
-        <div class="funnel-step">
-          <div class="funnel-step-label">Submissions</div>
-          <div class="funnel-bar-wrap">
-            <div class="funnel-bar" style="width: 14.7%; background: linear-gradient(90deg, #0095cc, var(--cyan-accent));">61</div>
-          </div>
-          <div class="funnel-step-pct">14.7%</div>
-        </div>
-      </div>
-
-      <div class="summary-row">
-        <span>Overall Conversion (View to Submit)</span>
-        <strong>14.7%</strong>
-      </div>
-    </div>
-
-    <div class="two-col">
-      <!-- APPLICATIONS BY SOURCE -->
-      <div class="section">
-        <div class="section-header">
-          <div class="section-icon blue">&#128200;</div>
-          <div>
-            <div class="section-title">Applications by Source</div>
-            <div class="section-subtitle">61 unique applications via Typeform (through 3/31)</div>
-          </div>
-        </div>
-        <table class="source-table">
-          <thead><tr><th>Source</th><th>Count</th><th>Share</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><span class="source-tag meta">Meta</span></td>
-              <td><strong>43</strong></td>
-              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill meta" style="width:70.5%"></div></div>70.5%</div></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag other">Direct / Unknown</span></td>
-              <td><strong>8</strong></td>
-              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill other" style="width:13.1%"></div></div>13.1%</div></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag organic">Organic</span></td>
-              <td><strong>7</strong></td>
-              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill organic" style="width:11.5%"></div></div>11.5%</div></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag google">Google</span></td>
-              <td><strong>2</strong></td>
-              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill google" style="width:3.3%"></div></div>3.3%</div></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag other">Email</span></td>
-              <td><strong>1</strong></td>
-              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill other" style="width:1.6%"></div></div>1.6%</div></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- BOOKED CALLS BY SOURCE -->
-      <div class="section">
-        <div class="section-header">
-          <div class="section-icon blue">&#128222;</div>
-          <div>
-            <div class="section-title">Booked Calls by Source</div>
-            <div class="section-subtitle">87 calls booked, 73 showed (83.9% show rate)</div>
-          </div>
-        </div>
-        <table class="source-table">
-          <thead><tr><th>Source</th><th>Booked</th><th>Showed</th><th>Share</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><span class="source-tag meta">Meta</span></td>
-              <td><strong>42</strong></td>
-              <td>36</td>
-              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill meta" style="width:48.3%"></div></div>48.3%</div></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag other">Unknown / Blank</span></td>
-              <td><strong>12</strong></td>
-              <td>11</td>
-              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill other" style="width:13.8%"></div></div>13.8%</div></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag cold">Ikoni Digital</span></td>
-              <td><strong>10</strong></td>
-              <td>6</td>
-              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill cold" style="width:11.5%"></div></div>11.5%</div></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag cold">Cold Outreach</span></td>
-              <td><strong>10</strong></td>
-              <td>8</td>
-              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill cold" style="width:11.5%"></div></div>11.5%</div></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag cold">Wolfscale</span></td>
-              <td><strong>6</strong></td>
-              <td>6</td>
-              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill cold" style="width:6.9%"></div></div>6.9%</div></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag organic">Organic</span></td>
-              <td><strong>3</strong></td>
-              <td>3</td>
-              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill organic" style="width:3.4%"></div></div>3.4%</div></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag google">Google</span></td>
-              <td><strong>2</strong></td>
-              <td>2</td>
-              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill google" style="width:2.3%"></div></div>2.3%</div></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag other">Email / Other</span></td>
-              <td><strong>2</strong></td>
-              <td>1</td>
-              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill other" style="width:2.3%"></div></div>2.3%</div></td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="summary-row">
-          <span>Lead Gen Partners (Combined)</span>
-          <strong>26 booked / 20 showed</strong>
-        </div>
-      </div>
-
-      <!-- ASSESSMENTS BY SOURCE -->
-      <div class="section">
-        <div class="section-header">
-          <div class="section-icon green">&#128202;</div>
-          <div>
-            <div class="section-title">Assessments Closed by Source</div>
-            <div class="section-subtitle">26 assessments sold in March - source from booked calls sheet</div>
-          </div>
-        </div>
-        <table class="source-table">
-          <thead><tr><th>Source</th><th>Assessments</th><th>Share</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><span class="source-tag meta">Meta</span></td>
-              <td><strong>10</strong></td>
-              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill meta" style="width:40%"></div></div>40.0%</div></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag other">Organic / Unknown</span></td>
-              <td><strong>7</strong></td>
-              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill other" style="width:28%"></div></div>28.0%</div></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag cold">Cold Outreach</span></td>
-              <td><strong>3</strong></td>
-              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill cold" style="width:12%"></div></div>12.0%</div></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag cold">Wolfscale</span></td>
-              <td><strong>2</strong></td>
-              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill cold" style="width:8%"></div></div>8.0%</div></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag cold">Ikoni Digital</span></td>
-              <td><strong>2</strong></td>
-              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill cold" style="width:8%"></div></div>8.0%</div></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag google">Google</span></td>
-              <td><strong>1</strong></td>
-              <td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill google" style="width:4%"></div></div>4.0%</div></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- CALL OUTCOMES -->
-    <div class="section">
-      <div class="section-header">
-        <div class="section-icon green">&#9989;</div>
-        <div>
-          <div class="section-title">Call Outcomes</div>
-          <div class="section-subtitle">Pipeline stage breakdown for 87 March booked calls</div>
-        </div>
-      </div>
-      <div class="metric-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
-        <div class="metric-card">
-          <div class="metric-card-value" style="font-size:32px; color: var(--brand-primary);">26</div>
-          <div class="metric-card-label">Closed Assessment</div>
-          <div class="metric-card-sub">Assessment sold</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-card-value" style="font-size:32px; color: var(--error);">25</div>
-          <div class="metric-card-label">Not an ICP Fit</div>
-          <div class="metric-card-sub">Disqualified on call</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-card-value" style="font-size:32px; color: var(--text-muted);">14</div>
-          <div class="metric-card-label">No Show</div>
-          <div class="metric-card-sub">Did not attend</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-card-value" style="font-size:32px; color: var(--text-secondary);">22</div>
-          <div class="metric-card-label">Pending Update</div>
-          <div class="metric-card-sub">In active pipeline</div>
-        </div>
-      </div>
-      <div style="margin-top: 24px;">
-        <canvas id="outcomeChart" style="max-height: 260px;"></canvas>
-      </div>
-    </div>
-
-    <div class="two-col">
-      <!-- DEALS CLOSED -->
-      <div class="section">
-        <div class="section-header">
-          <div class="section-icon green">&#127942;</div>
-          <div>
-            <div class="section-title">Deals Closed in March</div>
-            <div class="section-subtitle">11 net new clients - $66,200/mo new revenue</div>
-          </div>
-        </div>
-        <div>
-          <div class="deal-item">
-            <div class="deal-number">1</div>
-            <div class="deal-info">
-              <div class="deal-name">Josh Eldridge</div>
-              <div class="deal-business">XLT Media Solutions</div>
-              <div class="deal-source"><span class="source-tag meta">Meta</span></div>
-            </div>
-            <div style="text-align:right;">
-              <div class="deal-amount">$5,900/mo</div>
-              <div class="deal-date">Mar 4 - 3 mo</div>
-            </div>
-          </div>
-          <div class="deal-item">
-            <div class="deal-number">2</div>
-            <div class="deal-info">
-              <div class="deal-name">Joseph Cosgray</div>
-              <div class="deal-business">Cow Guys</div>
-              <div class="deal-source"><span class="source-tag referral">Referral</span></div>
-            </div>
-            <div style="text-align:right;">
-              <div class="deal-amount">$4,900/mo</div>
-              <div class="deal-date">Mar 4 - 4 mo</div>
-            </div>
-          </div>
-          <div class="deal-item">
-            <div class="deal-number">3</div>
-            <div class="deal-info">
-              <div class="deal-name">Brandy Zachary</div>
-              <div class="deal-business">Dr Z Functional Medicine (2nd acct)</div>
-              <div class="deal-source"><span class="source-tag meta">Meta</span></div>
-            </div>
-            <div style="text-align:right;">
-              <div class="deal-amount">$5,900/mo</div>
-              <div class="deal-date">Mar 5 - 4 mo</div>
-            </div>
-          </div>
-          <div class="deal-item">
-            <div class="deal-number">4</div>
-            <div class="deal-info">
-              <div class="deal-name">Ed Durnil</div>
-              <div class="deal-business">Tranzon</div>
-              <div class="deal-source"><span class="source-tag cold">Ikoni</span></div>
-            </div>
-            <div style="text-align:right;">
-              <div class="deal-amount">$5,900/mo</div>
-              <div class="deal-date">Mar 9 - 3 mo</div>
-            </div>
-          </div>
-          <div class="deal-item">
-            <div class="deal-number">5</div>
-            <div class="deal-info">
-              <div class="deal-name">Julian Bryant</div>
-              <div class="deal-business">Beyond Driven Enterprises</div>
-              <div class="deal-source"><span class="source-tag referral">Referral</span></div>
-            </div>
-            <div style="text-align:right;">
-              <div class="deal-amount">$9,500/mo</div>
-              <div class="deal-date">Mar 10 - 3 mo</div>
-            </div>
-          </div>
-          <div class="deal-item">
-            <div class="deal-number">6</div>
-            <div class="deal-info">
-              <div class="deal-name">David Seruya</div>
-              <div class="deal-business">Service Plus</div>
-              <div class="deal-source"><span class="source-tag hampton">Board of Advisors</span></div>
-            </div>
-            <div style="text-align:right;">
-              <div class="deal-amount">$5,900/mo</div>
-              <div class="deal-date">Mar 16 - 4 mo</div>
-            </div>
-          </div>
-          <div class="deal-item">
-            <div class="deal-number">7</div>
-            <div class="deal-info">
-              <div class="deal-name">Anthony Paluzzi</div>
-              <div class="deal-business">Palo Media Group</div>
-              <div class="deal-source"><span class="source-tag google">Google</span></div>
-            </div>
-            <div style="text-align:right;">
-              <div class="deal-amount">$5,000/mo</div>
-              <div class="deal-date">Mar 17 - 4 mo</div>
-            </div>
-          </div>
-          <div class="deal-item">
-            <div class="deal-number">8</div>
-            <div class="deal-info">
-              <div class="deal-name">Andrew Beltran</div>
-              <div class="deal-business">VEA Health</div>
-              <div class="deal-source"><span class="source-tag cold">Cold Outreach</span></div>
-            </div>
-            <div style="text-align:right;">
-              <div class="deal-amount">$5,500/mo</div>
-              <div class="deal-date">Mar 20 - 4 mo</div>
-            </div>
-          </div>
-          <div class="deal-item">
-            <div class="deal-number">9</div>
-            <div class="deal-info">
-              <div class="deal-name">Joe Ventura</div>
-              <div class="deal-business">Natural Armor</div>
-              <div class="deal-source"><span class="source-tag referral">Referral</span></div>
-            </div>
-            <div style="text-align:right;">
-              <div class="deal-amount">$5,900/mo</div>
-              <div class="deal-date">Mar 25 - 4 mo</div>
-            </div>
-          </div>
-          <div class="deal-item">
-            <div class="deal-number">10</div>
-            <div class="deal-info">
-              <div class="deal-name">Aashish Chenna</div>
-              <div class="deal-business">Cardinal HVAC</div>
-              <div class="deal-source"><span class="source-tag meta">Meta</span></div>
-            </div>
-            <div style="text-align:right;">
-              <div class="deal-amount">$4,900/mo</div>
-              <div class="deal-date">Mar 26 - 4 mo</div>
-            </div>
-          </div>
-          <div class="deal-item">
-            <div class="deal-number">11</div>
-            <div class="deal-info">
-              <div class="deal-name">Sabrina Wall</div>
-              <div class="deal-business">Franchise Brokers Association</div>
-              <div class="deal-source"><span class="source-tag hampton">Hampton</span></div>
-            </div>
-            <div style="text-align:right;">
-              <div class="deal-amount">$6,900/mo</div>
-              <div class="deal-date">Mar 26 - 4 mo</div>
-            </div>
-          </div>
-        </div>
-        <div class="summary-row" style="flex-wrap: wrap; gap: 12px;">
-          <div>
-            <span>Total New Monthly Revenue</span><br>
-            <strong style="font-size: 20px;">$66,200/mo</strong>
-          </div>
-          <div style="text-align: center;">
-            <span>Total Contract Value</span><br>
-            <strong style="font-size: 20px;">$243,500</strong>
-          </div>
-          <div style="text-align: right;">
-            <span>Avg Contract Length</span><br>
-            <strong style="font-size: 20px;">3.7 months</strong>
-          </div>
-        </div>
-      </div>
-
-      <!-- NO-SHOW BREAKDOWN -->
-      <div class="section">
-        <div class="section-header">
-          <div class="section-icon red">&#128683;</div>
-          <div>
-            <div class="section-title">No-Show Breakdown by Source</div>
-            <div class="section-subtitle">14 no-shows across 87 booked calls (16.1% overall)</div>
-          </div>
-        </div>
-        <table class="source-table">
-          <thead>
-            <tr><th>Source</th><th>Booked</th><th>No-Shows</th><th class="right">No-Show Rate</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span class="source-tag meta">Meta</span></td>
-              <td>42</td>
-              <td><strong>6</strong></td>
-              <td class="right"><span class="rate-badge good">14%</span></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag cold">Ikoni Digital</span></td>
-              <td>10</td>
-              <td><strong>4</strong></td>
-              <td class="right"><span class="rate-badge warn">40%</span></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag cold">Cold Outreach</span></td>
-              <td>10</td>
-              <td><strong>2</strong></td>
-              <td class="right"><span class="rate-badge warn">20%</span></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag other">Unknown / Blank</span></td>
-              <td>12</td>
-              <td><strong>1</strong></td>
-              <td class="right"><span class="rate-badge good">8%</span></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag other">Email / Other</span></td>
-              <td>2</td>
-              <td><strong>1</strong></td>
-              <td class="right"><span class="rate-badge warn">50%</span></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag cold">Wolfscale</span></td>
-              <td>6</td>
-              <td><strong>0</strong></td>
-              <td class="right"><span class="rate-badge good">0%</span></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag organic">Organic</span></td>
-              <td>3</td>
-              <td><strong>0</strong></td>
-              <td class="right"><span class="rate-badge good">0%</span></td>
-            </tr>
-            <tr>
-              <td><span class="source-tag google">Google</span></td>
-              <td>2</td>
-              <td><strong>0</strong></td>
-              <td class="right"><span class="rate-badge good">0%</span></td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="summary-row">
-          <span>Lead Gen Partners No-Show Rate</span>
-          <strong>6 of 26 (23.1%)</strong>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="footer">
-    <p>Unicorn Marketers - March 2026 Marketing Scorecard</p>
-    <p style="margin-top:4px;">Full month data through March 31, 2026. Partner costs are estimates pending final invoices.</p>
-  </div>
-
-  <script>
-    // Expandable investment rows
-    function toggleDetail(row) {
-      const detail = row.nextElementSibling;
-      row.classList.toggle('expanded');
-      detail.classList.toggle('show');
+// ===== CHART TRACKING =====
+var activeCharts = {};
+function destroyCharts(prefix) {
+  Object.keys(activeCharts).forEach(function(key) {
+    if (key.startsWith(prefix)) {
+      activeCharts[key].destroy();
+      delete activeCharts[key];
     }
+  });
+}
 
-    // Call Outcomes Doughnut
-    const outcomeCtx = document.getElementById('outcomeChart').getContext('2d');
-    new Chart(outcomeCtx, {
-      type: 'doughnut',
+// ===== RENDER MONTH TAB =====
+function renderMonthTab(key) {
+  var d = months[key];
+  var idx = monthOrder.indexOf(key);
+  var prev = idx > 0 ? months[monthOrder[idx - 1]] : null;
+  var hasMoM = !!prev;
+
+  var html = '';
+
+  // HERO
+  html += '<div class="hero">';
+  html += '<div class="hero-grid"></div>';
+  html += '<div class="hero-content">';
+  html += '<div class="badge">' + d.label.toUpperCase() + '</div>';
+  html += '<h1>' + d.label + ' <span>Marketing Scorecard</span></h1>';
+  html += '<p class="hero-subtitle">' + d.period + '</p>';
+  html += '<div class="hero-stats">';
+
+  // Booked
+  html += '<div class="hero-stat"><div class="hero-stat-value cyan">' + d.booked + '</div>';
+  html += '<div class="hero-stat-label">Booked Calls</div>';
+  if (hasMoM) html += heroMomBadge(d.booked, prev.booked, false);
+  html += '</div>';
+
+  // Showed
+  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--brand-primary-light)">' + d.showed + '</div>';
+  html += '<div class="hero-stat-label">Showed Calls</div>';
+  if (hasMoM) html += heroMomBadge(d.showed, prev.showed, false);
+  html += '</div>';
+
+  // Show Rate
+  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:#33bbee">' + pct(d.showRate) + '</div>';
+  html += '<div class="hero-stat-label">Show Rate</div>';
+  if (hasMoM) html += heroMomBadge(d.showRate, prev.showRate, true);
+  html += '</div>';
+
+  // Assessments
+  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--warning)">' + d.assessments + '</div>';
+  html += '<div class="hero-stat-label">Assessments Closed</div>';
+  if (hasMoM) html += heroMomBadge(d.assessments, prev.assessments, false);
+  html += '</div>';
+
+  // Deals
+  html += '<div class="hero-stat"><div class="hero-stat-value green">' + d.dealCount + '</div>';
+  html += '<div class="hero-stat-label">Deals Closed</div>';
+  if (hasMoM) html += heroMomBadge(d.dealCount, prev.dealCount, false);
+  html += '</div>';
+
+  // Revenue
+  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--success);font-size:28px">' + fmtD(d.revenue) + '</div>';
+  html += '<div class="hero-stat-label">New Monthly Rev</div>';
+  if (hasMoM) html += heroMomBadge(d.revenue, prev.revenue, false);
+  html += '</div>';
+
+  html += '</div></div></div>';
+
+  // MAIN
+  html += '<div class="main">';
+
+  // Note banner
+  html += '<div class="note-banner"><strong>Note:</strong> All data reflects the ' + d.period + '.';
+  if (d.isEstimate) html += ' Lead gen partner costs are estimates pending final invoices (est).';
+  html += '</div>';
+
+  // PIPELINE FUNNEL
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon blue">&#9660;</div><div><div class="section-title">Sales Funnel Overview</div><div class="section-subtitle">Full pipeline from booked calls to close</div></div></div>';
+  html += '<div class="pipeline">';
+  html += '<div class="pipeline-stage"><div class="pipeline-circle step2">' + d.booked + '</div><div class="pipeline-label">Booked Calls</div><div class="pipeline-sub">All sources</div></div>';
+  html += '<div class="pipeline-arrow">&#10140;</div>';
+  html += '<div class="pipeline-stage"><div class="pipeline-circle step2b">' + d.showed + '</div><div class="pipeline-label">Showed Calls</div><div class="pipeline-sub">' + pct(d.showRate) + ' show rate</div></div>';
+  html += '<div class="pipeline-arrow">&#10140;</div>';
+  html += '<div class="pipeline-stage"><div class="pipeline-circle step3">' + d.assessments + '</div><div class="pipeline-label">Assessments</div><div class="pipeline-sub">' + pct(d.showedToAssess) + ' of showed</div></div>';
+  html += '<div class="pipeline-arrow">&#10140;</div>';
+  html += '<div class="pipeline-stage"><div class="pipeline-circle step4">' + d.dealCount + '</div><div class="pipeline-label">Deals Closed</div><div class="pipeline-sub">' + fmtD(d.revenue) + '/mo new rev</div></div>';
+  html += '</div>';
+
+  // KEY METRIC CARDS
+  var showRateColor = d.showRate >= 80 ? 'var(--success)' : d.showRate >= 70 ? 'var(--warning)' : 'var(--error)';
+  html += '<div class="metric-grid">';
+  html += '<div class="metric-card"><div class="metric-card-value" style="color:' + showRateColor + '">' + pct(d.showRate) + '</div><div class="metric-card-label">Show Rate</div>';
+  html += '<div class="metric-card-sub">' + d.showed + ' of ' + d.booked + ' showed';
+  if (hasMoM) html += inlineMomBadge(d.showRate, prev.showRate, true);
+  html += '</div></div>';
+
+  html += '<div class="metric-card"><div class="metric-card-value" style="color:var(--success)">' + pct(d.showedToAssess) + '</div><div class="metric-card-label">Showed to Assessment</div>';
+  html += '<div class="metric-card-sub">' + d.assessments + ' of ' + d.showed + ' showed calls';
+  if (hasMoM) html += inlineMomBadge(d.showedToAssess, prev.showedToAssess, true);
+  html += '</div></div>';
+
+  html += '<div class="metric-card"><div class="metric-card-value">' + d.dealCount + '</div><div class="metric-card-label">Deals Closed</div>';
+  html += '<div class="metric-card-sub">From assessments';
+  if (hasMoM) html += inlineMomBadge(d.dealCount, prev.dealCount, false);
+  html += '</div></div>';
+
+  html += '<div class="metric-card"><div class="metric-card-value" style="color:var(--success)">' + fmtD(d.avgDeal) + '</div><div class="metric-card-label">Avg Deal Size</div>';
+  html += '<div class="metric-card-sub">Per closed deal';
+  if (hasMoM) html += inlineMomBadge(d.avgDeal, prev.avgDeal, false);
+  html += '</div></div>';
+  html += '</div></div>';
+
+  // INVESTMENT SUMMARY
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon gold">&#128176;</div><div><div class="section-title">Investment Summary</div><div class="section-subtitle">Spend breakdown by channel</div></div></div>';
+  var est = d.isEstimate ? ' (est)' : '';
+  html += '<table class="invest-table"><thead><tr><th>Source</th><th class="right">Amount</th></tr></thead><tbody>';
+  html += '<tr><td>Meta Ads</td><td class="right">' + fmtDec(d.metaSpend) + '</td></tr>';
+  html += '<tr><td>Google Ads</td><td class="right">' + fmtDec(d.googleSpend) + '</td></tr>';
+  html += '<tr><td>Cold Outreach (COS)' + est + '</td><td class="right">' + fmtDec(d.cosTotal) + '</td></tr>';
+  html += '<tr><td>Wolfscale' + est + '</td><td class="right">' + fmtDec(d.wolfTotal) + '</td></tr>';
+  html += '<tr><td>Ikoni Digital' + est + '</td><td class="right">' + fmtDec(d.ikoniTotal) + '</td></tr>';
+  var nuoppLabel = 'NuOpp';
+  if (d.nuoppNote) nuoppLabel += ' (' + d.nuoppNote + ')';
+  html += '<tr><td>' + nuoppLabel + est + '</td><td class="right">' + fmtDec(d.nuoppTotal) + '</td></tr>';
+  html += '<tr><td>Hampton' + est + '</td><td class="right">' + fmtDec(d.hamptonTotal) + '</td></tr>';
+  html += '<tr><td>Board of Advisors' + est + '</td><td class="right">' + fmtDec(d.baTotal) + '</td></tr>';
+  html += '<tr class="total-row"><td><strong>Total Investment</strong></td><td class="right"><strong>' + fmtDec(d.totalInvest) + '</strong></td></tr>';
+  html += '</tbody></table>';
+
+  html += '<div class="summary-row"><span>Cost / Booked Call</span><strong>' + fmtDec(d.costPerBooked) + '</strong></div>';
+  html += '<div class="summary-row" style="margin-top:8px"><span>Blended CAC</span><strong>' + fmtDec(d.blendedCAC) + '</strong></div>';
+  html += '</div>';
+
+  // ASSESSMENTS BY SOURCE + CALL OUTCOMES (two col)
+  html += '<div class="two-col">';
+
+  // Assessments by Source
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon purple">&#128202;</div><div><div class="section-title">Assessments by Source</div><div class="section-subtitle">' + d.assessments + ' total assessments</div></div></div>';
+  var sources = Object.entries(d.assessBySource).sort(function(a,b){ return b[1]-a[1]; });
+  var maxAssess = sources[0][1];
+  html += '<table class="source-table"><thead><tr><th>Source</th><th class="right">Count</th><th></th></tr></thead><tbody>';
+  sources.forEach(function(s) {
+    var barW = Math.round(s[1] / maxAssess * 100);
+    var tagCls = sourceTagClass(s[0]);
+    html += '<tr><td><span class="source-tag ' + tagCls + '">' + s[0] + '</span></td><td class="right">' + s[1] + '</td>';
+    html += '<td><div class="bar-container"><div class="bar-fill ' + tagCls + '" style="width:' + barW + '%"></div></div></td></tr>';
+  });
+  html += '</tbody></table></div>';
+
+  // Call Outcomes (doughnut)
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon red">&#128200;</div><div><div class="section-title">Call Outcomes</div><div class="section-subtitle">No-show rate: ';
+  var nsBadge = d.noShowRate <= 15 ? 'good' : d.noShowRate <= 20 ? 'warn' : 'bad';
+  html += '<span class="rate-badge ' + nsBadge + '">' + pct(d.noShowRate) + '</span>';
+  html += '</div></div></div>';
+  html += '<div class="chart-container"><canvas id="chart-outcomes-' + key + '"></canvas></div>';
+  html += '</div>';
+
+  html += '</div>'; // end two-col
+
+  // DEALS CLOSED
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon green">&#9989;</div><div><div class="section-title">Deals Closed</div><div class="section-subtitle">' + d.dealCount + ' deals totaling ' + fmtD(d.revenue) + '/mo</div></div></div>';
+  d.dealsList.forEach(function(deal, i) {
+    var tagCls = sourceTagClass(deal.source);
+    html += '<div class="deal-item"><div class="deal-number">' + (i+1) + '</div>';
+    html += '<div class="deal-info"><div class="deal-name">' + deal.name + '</div><div class="deal-source"><span class="source-tag ' + tagCls + '">' + deal.source + '</span></div></div>';
+    html += '<div class="deal-amount">' + fmtD(deal.amount) + '/mo</div></div>';
+  });
+  html += '<div class="summary-row"><span>Total: ' + d.dealCount + ' deals</span><strong>' + fmtD(d.revenue) + '/mo | Avg ' + fmtD(d.avgDeal) + '</strong></div>';
+  html += '</div>';
+
+  // TYPEFORM FUNNEL
+  var tf = d.typeform;
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon cyan-bg">&#128203;</div><div><div class="section-title">Typeform Funnel</div><div class="section-subtitle">Application form performance</div></div></div>';
+  html += '<div class="funnel-visual">';
+  // Views
+  html += '<div class="funnel-step"><div class="funnel-step-label">Views</div><div class="funnel-bar-wrap"><div class="funnel-bar" style="width:100%;background:linear-gradient(90deg,var(--brand-primary),var(--brand-primary-light))">' + fmt(tf.views) + '</div></div><div class="funnel-step-pct">100%</div></div>';
+  var startsPct = (tf.starts / tf.views * 100);
+  html += '<div class="funnel-drop">&#8595; ' + startsPct.toFixed(1) + '% started</div>';
+  // Starts
+  html += '<div class="funnel-step"><div class="funnel-step-label">Starts</div><div class="funnel-bar-wrap"><div class="funnel-bar" style="width:' + startsPct.toFixed(0) + '%;background:linear-gradient(90deg,#1a7ab5,var(--cyan-accent))">' + fmt(tf.starts) + '</div></div><div class="funnel-step-pct">' + startsPct.toFixed(1) + '%</div></div>';
+  html += '<div class="funnel-drop">&#8595; ' + pct(tf.completion) + ' completed</div>';
+  // Submissions
+  var subPct = (tf.subs / tf.views * 100);
+  html += '<div class="funnel-step"><div class="funnel-step-label">Submissions</div><div class="funnel-bar-wrap"><div class="funnel-bar" style="width:' + Math.max(subPct, 8).toFixed(0) + '%;background:linear-gradient(90deg,#1e9e38,var(--success))">' + fmt(tf.subs) + '</div></div><div class="funnel-step-pct">' + pct(tf.overall) + '</div></div>';
+  html += '</div>';
+  html += '<div class="summary-row"><span>Overall Conversion (Views to Submissions)</span><strong>' + pct(tf.overall) + '</strong></div>';
+  html += '</div>';
+
+  html += '</div>'; // end main
+  return html;
+}
+
+// ===== RENDER L90 TAB =====
+function renderL90Tab() {
+  // L90 = Apr + May + Jun
+  var l90Keys = ['apr', 'may', 'jun'];
+  var l90 = {
+    booked: 214, showed: 176, showRate: 82.2,
+    assessments: 80, showedToAssess: 45.5,
+    dealCount: 25, revenue: 171500, avgDeal: 6860,
+    totalInvest: 60297.74, costPerBooked: 281.77, blendedCAC: 2412,
+    typeform: { views: 1517, starts: 506, subs: 174, overall: 11.5 }
+  };
+
+  var html = '';
+
+  // HERO
+  html += '<div class="hero l90-hero">';
+  html += '<div class="hero-grid"></div>';
+  html += '<div class="hero-content">';
+  html += '<div class="badge">L90 ANALYTICS</div>';
+  html += '<h1>Last 90 Days <span>Analytics View</span></h1>';
+  html += '<p class="hero-subtitle">Aggregated data from April + May + June 2026</p>';
+  html += '<div class="hero-stats">';
+  html += '<div class="hero-stat"><div class="hero-stat-value cyan">' + l90.booked + '</div><div class="hero-stat-label">Booked Calls</div></div>';
+  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--brand-primary-light)">' + l90.showed + '</div><div class="hero-stat-label">Showed Calls</div></div>';
+  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:#33bbee">' + pct(l90.showRate) + '</div><div class="hero-stat-label">Show Rate</div></div>';
+  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--warning)">' + l90.assessments + '</div><div class="hero-stat-label">Assessments</div></div>';
+  html += '<div class="hero-stat"><div class="hero-stat-value green">' + l90.dealCount + '</div><div class="hero-stat-label">Deals Closed</div></div>';
+  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--success);font-size:28px">' + fmtD(l90.revenue) + '</div><div class="hero-stat-label">L90 Revenue</div></div>';
+  html += '</div>';
+
+  // Second row of hero stats
+  html += '<div class="hero-stats" style="margin-top:16px">';
+  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--warning);font-size:28px">' + fmtDec(l90.totalInvest) + '</div><div class="hero-stat-label">Total Investment</div></div>';
+  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--cyan-accent);font-size:28px">' + fmtDec(l90.costPerBooked) + '</div><div class="hero-stat-label">Cost / Booked</div></div>';
+  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--brand-primary-light);font-size:28px">' + fmtDec(l90.blendedCAC) + '</div><div class="hero-stat-label">Blended CAC</div></div>';
+  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--success);font-size:28px">' + fmtD(l90.avgDeal) + '</div><div class="hero-stat-label">Avg Deal Size</div></div>';
+  html += '<div class="hero-stat"><div class="hero-stat-value cyan" style="font-size:28px">' + fmt(l90.typeform.views) + '</div><div class="hero-stat-label">Typeform Views</div></div>';
+  html += '<div class="hero-stat"><div class="hero-stat-value green" style="font-size:28px">' + fmt(l90.typeform.subs) + '</div><div class="hero-stat-label">Typeform Subs (' + pct(l90.typeform.overall) + ')</div></div>';
+  html += '</div>';
+  html += '</div></div>';
+
+  // MAIN
+  html += '<div class="main">';
+  html += '<div class="note-banner"><strong>L90 Analytics:</strong> Covers April, May, and June 2026. Trend charts show all 4 months (Mar-Jun) for context. June partner costs are estimates (est).</div>';
+
+  // TREND CHARTS SECTION
+  // Chart 1: Pipeline Trend
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon blue">&#128200;</div><div><div class="section-title">Pipeline Trend</div><div class="section-subtitle">Booked, Showed, Assessments, and Deals over 4 months</div></div></div>';
+  html += '<div class="chart-container-tall"><canvas id="chart-pipeline-trend"></canvas></div>';
+  html += '</div>';
+
+  // Chart 2: Revenue & Avg Deal
+  html += '<div class="two-col">';
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon green">&#128176;</div><div><div class="section-title">Revenue Trend</div><div class="section-subtitle">Monthly revenue and avg deal size</div></div></div>';
+  html += '<div class="chart-container-tall"><canvas id="chart-revenue-trend"></canvas></div>';
+  html += '</div>';
+
+  // Chart 3: Efficiency Metrics
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon purple">&#128202;</div><div><div class="section-title">Efficiency Metrics</div><div class="section-subtitle">Show Rate, Assessment Rate, No-Show Rate</div></div></div>';
+  html += '<div class="chart-container-tall"><canvas id="chart-efficiency-trend"></canvas></div>';
+  html += '</div>';
+  html += '</div>';
+
+  // Chart 4: Cost Metrics
+  html += '<div class="two-col">';
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon gold">&#128178;</div><div><div class="section-title">Cost Metrics Trend</div><div class="section-subtitle">Investment, Cost/Booked, CAC</div></div></div>';
+  html += '<div class="chart-container-tall"><canvas id="chart-cost-trend"></canvas></div>';
+  html += '</div>';
+
+  // Chart 5: Typeform Funnel Trend
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon cyan-bg">&#128203;</div><div><div class="section-title">Typeform Funnel Trend</div><div class="section-subtitle">Views, Starts, Submissions over time</div></div></div>';
+  html += '<div class="chart-container-tall"><canvas id="chart-typeform-trend"></canvas></div>';
+  html += '</div>';
+  html += '</div>';
+
+  // SOURCE PERFORMANCE RANKINGS
+  html += '<div class="two-col">';
+
+  // Top Assessment Sources
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon purple">&#127942;</div><div><div class="section-title">Top Assessment Sources</div><div class="section-subtitle">All-time (Mar-Jun 2026)</div></div></div>';
+  var assessSources = [
+    { name: "Meta", count: 39 },
+    { name: "Cold Outreach", count: 19 },
+    { name: "Organic/Unknown/N/A", count: 18 },
+    { name: "Ikoni Digital", count: 7 },
+    { name: "Wolfscale", count: 6 },
+    { name: "Board of Advisors", count: 4 },
+    { name: "Hampton", count: 3 },
+    { name: "Google", count: 2 },
+    { name: "Personal Relationship", count: 2 },
+    { name: "Referral", count: 2 },
+    { name: "UI Website", count: 1 }
+  ];
+  html += '<table class="source-table"><thead><tr><th>Source</th><th class="right">Assessments</th><th></th></tr></thead><tbody>';
+  assessSources.forEach(function(s) {
+    var barW = Math.round(s.count / 39 * 100);
+    var tagCls = sourceTagClass(s.name);
+    html += '<tr><td><span class="source-tag ' + tagCls + '">' + s.name + '</span></td><td class="right">' + s.count + '</td>';
+    html += '<td><div class="bar-container"><div class="bar-fill ' + tagCls + '" style="width:' + barW + '%"></div></div></td></tr>';
+  });
+  html += '</tbody></table></div>';
+
+  // Top Revenue Sources
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon green">&#128176;</div><div><div class="section-title">Top Revenue Sources</div><div class="section-subtitle">All deals across Mar-Jun 2026</div></div></div>';
+  var revSources = [
+    { name: "Meta", revenue: 82300, deals: 12 },
+    { name: "Personal Referral/Relationship", revenue: 45200, deals: 6 },
+    { name: "Board of Advisors", revenue: 22700, deals: 4 },
+    { name: "Hampton", revenue: 21300, deals: 3 },
+    { name: "Organic", revenue: 18700, deals: 3 },
+    { name: "Ikoni Digital", revenue: 18700, deals: 3 },
+    { name: "Cold Outreach", revenue: 10400, deals: 2 },
+    { name: "Wolfscale", revenue: 6500, deals: 1 },
+    { name: "Google", revenue: 5000, deals: 1 }
+  ];
+  html += '<table class="source-table"><thead><tr><th>Source</th><th class="right">Revenue</th><th class="right">Deals</th></tr></thead><tbody>';
+  revSources.forEach(function(s) {
+    var tagCls = sourceTagClass(s.name);
+    html += '<tr><td><span class="source-tag ' + tagCls + '">' + s.name + '</span></td>';
+    html += '<td class="right" style="font-weight:700;color:var(--success)">' + fmtD(s.revenue) + '</td>';
+    html += '<td class="right">' + s.deals + '</td></tr>';
+  });
+  html += '</tbody></table></div>';
+
+  html += '</div>'; // end two-col
+
+  // CAC BY SOURCE (L90)
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon red">&#128184;</div><div><div class="section-title">CAC by Source (L90)</div><div class="section-subtitle">Cost to acquire a customer by channel - Apr+May+Jun</div></div></div>';
+
+  var cacData = [
+    { name: "Hampton", spend: 2475, deals: 2, cac: 1238, color: 'green' },
+    { name: "Board of Advisors", spend: 5001, deals: 3, cac: 1667, color: 'green' },
+    { name: "Ikoni Digital", spend: 3200, deals: 1, cac: 3200, color: 'yellow' },
+    { name: "Meta", spend: 32088.34, deals: 9, cac: 3565, color: 'yellow' },
+    { name: "Wolfscale", spend: 6709.40, deals: 1, cac: 6709, color: 'red' },
+    { name: "Cold Outreach", spend: 9000, deals: 1, cac: 9000, color: 'red' },
+    { name: "Google", spend: 1824, deals: 0, cac: null, color: 'red' }
+  ];
+  var maxCac = 9000;
+
+  cacData.forEach(function(c) {
+    html += '<div class="cac-bar-row">';
+    html += '<div class="cac-bar-label">' + c.name + '</div>';
+    html += '<div class="cac-bar-track">';
+    if (c.cac !== null) {
+      var w = Math.round(c.cac / maxCac * 100);
+      html += '<div class="cac-bar-fill ' + c.color + '" style="width:' + Math.max(w, 12) + '%">' + fmtD(c.cac) + '</div>';
+    } else {
+      html += '<div class="cac-bar-fill red" style="width:20%;opacity:0.5">N/A (0 deals)</div>';
+    }
+    html += '</div>';
+    html += '</div>';
+  });
+
+  html += '<div style="display:flex;gap:20px;margin-top:16px;font-size:11px;color:var(--text-muted)">';
+  html += '<span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--success);margin-right:4px"></span>Under $2,000</span>';
+  html += '<span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--warning);margin-right:4px"></span>$2,000 - $5,000</span>';
+  html += '<span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--error);margin-right:4px"></span>Over $5,000</span>';
+  html += '</div>';
+  html += '</div>';
+
+  // FORECASTING SECTION
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon gold">&#128302;</div><div><div class="section-title">Trend Analysis and July Forecast</div><div class="section-subtitle">Based on 4-month data (Mar-Jun 2026)</div></div></div>';
+
+  var forecasts = [
+    { metric: "Booked Calls", values: [87,71,80,63], unit: '', direction: 'down', severity: 'down-bad', note: 'Declining avg -8/mo. Concerning.' },
+    { metric: "Show Rate", values: [83.9,88.7,85.0,71.4], unit: '%', direction: 'down', severity: 'critical', note: 'Sharp June drop. Critical concern.' },
+    { metric: "Assessments", values: [26,26,29,25], unit: '', direction: 'stable', severity: 'stable', note: 'Relatively stable but slight decline.' },
+    { metric: "Deals Closed", values: [11,8,10,7], unit: '', direction: 'down', severity: 'down-bad', note: 'Trending down. Watch closely.' },
+    { metric: "Revenue", values: [66200,57300,62800,51400], unit: '$', direction: 'down', severity: 'down-bad', note: 'Declining trend. Revenue pressure.' },
+    { metric: "Avg Deal Size", values: [6018,7163,6280,7343], unit: '$', direction: 'up', severity: 'up-good', note: 'Improving - higher quality deals.' },
+    { metric: "Blended CAC", values: [2155,2523,2027,2836], unit: '$', direction: 'up', severity: 'up-bad', note: 'Volatile, trending up. Efficiency concern.' },
+    { metric: "Typeform Views", values: [414,418,373,726], unit: '', direction: 'up', severity: 'up-good', note: 'Strong growth. June breakout.' },
+    { metric: "Typeform Subs", values: [61,45,42,87], unit: '', direction: 'up', severity: 'up-good', note: 'Strong June recovery.' }
+  ];
+
+  html += '<table class="forecast-table"><thead><tr><th>Metric</th><th class="right">Mar</th><th class="right">Apr</th><th class="right">May</th><th class="right">Jun</th><th class="right">Trend</th><th>Assessment</th></tr></thead><tbody>';
+  forecasts.forEach(function(f) {
+    html += '<tr><td style="font-weight:600">' + f.metric + '</td>';
+    f.values.forEach(function(v) {
+      var display = f.unit === '$' ? fmtD(v) : f.unit === '%' ? pct(v) : fmt(v);
+      html += '<td class="right">' + display + '</td>';
+    });
+    var arrow = f.direction === 'up' ? '&#9650;' : f.direction === 'down' ? '&#9660;' : '&#9654;';
+    html += '<td class="right"><span class="trend-indicator ' + f.severity + '">' + arrow + '</span></td>';
+    html += '<td style="font-size:12px;color:var(--text-secondary)">' + f.note + '</td>';
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  html += '</div>';
+
+  // MONTH-OVER-MONTH COMPARISON TABLE
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon blue">&#128203;</div><div><div class="section-title">Month-over-Month Comparison</div><div class="section-subtitle">All key metrics across 4 months with L90 averages</div></div></div>';
+
+  var compRows = [
+    { label: 'Booked Calls', vals: [87,71,80,63], avg: 71.3, fmt: 'n' },
+    { label: 'Showed Calls', vals: [73,63,68,45], avg: 58.7, fmt: 'n' },
+    { label: 'Show Rate', vals: [83.9,88.7,85.0,71.4], avg: 81.7, fmt: '%' },
+    { label: 'Assessments', vals: [26,26,29,25], avg: 26.7, fmt: 'n' },
+    { label: 'Showed-to-Assess', vals: [35.6,41.3,42.6,55.6], avg: 46.5, fmt: '%' },
+    { label: 'Deals Closed', vals: [11,8,10,7], avg: 8.3, fmt: 'n' },
+    { label: 'Revenue', vals: [66200,57300,62800,51400], avg: 57167, fmt: '$' },
+    { label: 'Avg Deal', vals: [6018,7163,6280,7343], avg: 6862, fmt: '$' },
+    { label: 'Total Investment', vals: [23704.58,20180.61,20265.76,19851.37], avg: 20099.25, fmt: '$' },
+    { label: 'Cost/Booked', vals: [272.47,284.23,253.32,315.10], avg: 284.22, fmt: '$' },
+    { label: 'Blended CAC', vals: [2155,2523,2027,2836], avg: 2462, fmt: '$' },
+    { label: 'No-Show Rate', vals: [16.1,11.3,15.0,28.6], avg: 18.3, fmt: '%' },
+    { label: 'Typeform Views', vals: [414,418,373,726], avg: 505.7, fmt: 'n' },
+    { label: 'Typeform Subs', vals: [61,45,42,87], avg: 58, fmt: 'n' },
+    { label: 'TF Conversion', vals: [14.7,10.8,11.3,12.0], avg: 11.4, fmt: '%' }
+  ];
+
+  html += '<div style="overflow-x:auto"><table class="compare-table"><thead><tr><th>Metric</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th class="avg-col">L90 Avg</th></tr></thead><tbody>';
+  compRows.forEach(function(r) {
+    html += '<tr><td>' + r.label + '</td>';
+    for (var i = 0; i < 4; i++) {
+      var v = r.vals[i];
+      var display = r.fmt === '$' ? fmtD(Math.round(v)) : r.fmt === '%' ? pct(v) : fmt(Math.round(v));
+      var arrow = '';
+      if (i > 0) {
+        var prev = r.vals[i-1];
+        // For rates and costs, meaning of up/down differs
+        var isUp = v > prev;
+        // Simple color: green for good metrics going up, red for going down
+        var badUp = ['No-Show Rate', 'Cost/Booked', 'Blended CAC', 'Total Investment'].indexOf(r.label) >= 0;
+        var cls = '';
+        if (v > prev) cls = badUp ? 'down' : 'up';
+        else if (v < prev) cls = badUp ? 'up' : 'down';
+        else cls = 'flat';
+        var sym = v > prev ? '&#9650;' : v < prev ? '&#9660;' : '&#9654;';
+        arrow = ' <span class="mom-badge ' + cls + '" style="font-size:9px;padding:1px 4px">' + sym + '</span>';
+      }
+      html += '<td>' + display + arrow + '</td>';
+    }
+    var avgDisplay = r.fmt === '$' ? fmtD(Math.round(r.avg)) : r.fmt === '%' ? pct(r.avg) : r.avg.toFixed(r.avg % 1 ? 1 : 0);
+    html += '<td class="avg-col">' + avgDisplay + '</td>';
+    html += '</tr>';
+  });
+  html += '</tbody></table></div>';
+  html += '</div>';
+
+  html += '</div>'; // end main
+  return html;
+}
+
+// ===== CHART CREATION FUNCTIONS =====
+function createOutcomeChart(key) {
+  var d = months[key];
+  var ctx = document.getElementById('chart-outcomes-' + key);
+  if (!ctx) return;
+  var total = d.outcomes.closed + d.outcomes.notICP + d.outcomes.noShow + d.outcomes.pending;
+  activeCharts['outcomes-' + key] = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Assessment Closed (' + d.outcomes.closed + ')', 'Not ICP (' + d.outcomes.notICP + ')', 'No-Show (' + d.outcomes.noShow + ')', 'Pending (' + d.outcomes.pending + ')'],
+      datasets: [{
+        data: [d.outcomes.closed, d.outcomes.notICP, d.outcomes.noShow, d.outcomes.pending],
+        backgroundColor: ['#28c840', '#ff5f57', '#febc2e', '#9ca3af'],
+        borderWidth: 2,
+        borderColor: '#ffffff'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '55%',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { padding: 16, usePointStyle: true, pointStyle: 'circle', font: { family: 'Inter', size: 12 } }
+        }
+      }
+    }
+  });
+}
+
+function createL90Charts() {
+  var labels = ["Mar '26", "Apr '26", "May '26", "Jun '26"];
+  var fontOpts = { family: 'Inter', size: 11 };
+  var gridOpts = { color: 'rgba(25,30,40,0.06)' };
+
+  // Pipeline Trend
+  var ctx1 = document.getElementById('chart-pipeline-trend');
+  if (ctx1) {
+    activeCharts['l90-pipeline'] = new Chart(ctx1, {
+      type: 'line',
       data: {
-        labels: ['Closed Assessment (26)', 'Not ICP Fit (25)', 'No Show (14)', 'Pending Update (22)'],
-        datasets: [{
-          data: [26, 25, 14, 22],
-          backgroundColor: ['#2483C4', '#ff5f57', '#9ca3af', '#d9dfe6'],
-          borderWidth: 0,
-          borderRadius: 4,
-          spacing: 2,
-        }]
+        labels: labels,
+        datasets: [
+          { label: 'Booked', data: [87,71,80,63], borderColor: '#00aae9', backgroundColor: 'rgba(0,170,233,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#00aae9' },
+          { label: 'Showed', data: [73,63,68,45], borderColor: '#2483C4', backgroundColor: 'rgba(36,131,196,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#2483C4' },
+          { label: 'Assessments', data: [26,26,29,25], borderColor: '#febc2e', backgroundColor: 'rgba(254,188,46,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#febc2e' },
+          { label: 'Deals', data: [11,8,10,7], borderColor: '#28c840', backgroundColor: 'rgba(40,200,64,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#28c840' }
+        ]
       },
       options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutout: '65%',
+        responsive: true, maintainAspectRatio: false,
         plugins: {
-          legend: {
-            position: 'bottom',
-            labels: {
-              padding: 16,
-              usePointStyle: true,
-              pointStyleWidth: 12,
-              font: { size: 12, family: 'Inter' }
-            }
-          }
+          legend: { labels: { font: fontOpts, usePointStyle: true, pointStyle: 'circle', padding: 16 } },
+          tooltip: { titleFont: fontOpts, bodyFont: fontOpts }
+        },
+        scales: {
+          x: { grid: gridOpts, ticks: { font: fontOpts } },
+          y: { grid: gridOpts, ticks: { font: fontOpts }, beginAtZero: true }
         }
       }
     });
-  </script>
+  }
 
+  // Revenue Trend
+  var ctx2 = document.getElementById('chart-revenue-trend');
+  if (ctx2) {
+    activeCharts['l90-revenue'] = new Chart(ctx2, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          { label: 'Revenue', data: [66200,57300,62800,51400], borderColor: '#28c840', backgroundColor: 'rgba(40,200,64,0.1)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#28c840', yAxisID: 'y' },
+          { label: 'Avg Deal', data: [6018,7163,6280,7343], borderColor: '#2483C4', backgroundColor: 'rgba(36,131,196,0.1)', fill: false, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#2483C4', borderDash: [5,3], yAxisID: 'y1' }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { labels: { font: fontOpts, usePointStyle: true, pointStyle: 'circle', padding: 16 } },
+          tooltip: { titleFont: fontOpts, bodyFont: fontOpts, callbacks: { label: function(ctx) { return ctx.dataset.label + ': $' + ctx.parsed.y.toLocaleString(); } } }
+        },
+        scales: {
+          x: { grid: gridOpts, ticks: { font: fontOpts } },
+          y: { type: 'linear', position: 'left', grid: gridOpts, ticks: { font: fontOpts, callback: function(v) { return '$' + (v/1000) + 'K'; } }, beginAtZero: false },
+          y1: { type: 'linear', position: 'right', grid: { drawOnChartArea: false }, ticks: { font: fontOpts, callback: function(v) { return '$' + v.toLocaleString(); } }, beginAtZero: false }
+        }
+      }
+    });
+  }
+
+  // Efficiency Metrics
+  var ctx3 = document.getElementById('chart-efficiency-trend');
+  if (ctx3) {
+    activeCharts['l90-efficiency'] = new Chart(ctx3, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          { label: 'Show Rate', data: [83.9,88.7,85.0,71.4], borderColor: '#2483C4', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#2483C4', fill: false },
+          { label: 'Showed-to-Assess', data: [35.6,41.3,42.6,55.6], borderColor: '#28c840', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#28c840', fill: false },
+          { label: 'No-Show Rate', data: [16.1,11.3,15.0,28.6], borderColor: '#ff5f57', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#ff5f57', fill: false, borderDash: [5,3] }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { labels: { font: fontOpts, usePointStyle: true, pointStyle: 'circle', padding: 16 } },
+          tooltip: { titleFont: fontOpts, bodyFont: fontOpts, callbacks: { label: function(ctx) { return ctx.dataset.label + ': ' + ctx.parsed.y + '%'; } } }
+        },
+        scales: {
+          x: { grid: gridOpts, ticks: { font: fontOpts } },
+          y: { grid: gridOpts, ticks: { font: fontOpts, callback: function(v) { return v + '%'; } }, min: 0, max: 100 }
+        }
+      }
+    });
+  }
+
+  // Cost Metrics
+  var ctx4 = document.getElementById('chart-cost-trend');
+  if (ctx4) {
+    activeCharts['l90-cost'] = new Chart(ctx4, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          { label: 'Total Investment', data: [23704.58,20180.61,20265.76,19851.37], borderColor: '#febc2e', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#febc2e', fill: false, yAxisID: 'y' },
+          { label: 'Blended CAC', data: [2155,2523,2027,2836], borderColor: '#ff5f57', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#ff5f57', fill: false, yAxisID: 'y1' },
+          { label: 'Cost/Booked', data: [272.47,284.23,253.32,315.10], borderColor: '#00aae9', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#00aae9', fill: false, borderDash: [5,3], yAxisID: 'y1' }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { labels: { font: fontOpts, usePointStyle: true, pointStyle: 'circle', padding: 16 } },
+          tooltip: { titleFont: fontOpts, bodyFont: fontOpts, callbacks: { label: function(ctx) { return ctx.dataset.label + ': $' + Math.round(ctx.parsed.y).toLocaleString(); } } }
+        },
+        scales: {
+          x: { grid: gridOpts, ticks: { font: fontOpts } },
+          y: { type: 'linear', position: 'left', grid: gridOpts, ticks: { font: fontOpts, callback: function(v) { return '$' + (v/1000).toFixed(1) + 'K'; } } },
+          y1: { type: 'linear', position: 'right', grid: { drawOnChartArea: false }, ticks: { font: fontOpts, callback: function(v) { return '$' + v.toLocaleString(); } } }
+        }
+      }
+    });
+  }
+
+  // Typeform Trend
+  var ctx5 = document.getElementById('chart-typeform-trend');
+  if (ctx5) {
+    activeCharts['l90-typeform'] = new Chart(ctx5, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          { label: 'Views', data: [414,418,373,726], borderColor: '#2483C4', backgroundColor: 'rgba(36,131,196,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#2483C4' },
+          { label: 'Starts', data: [150,138,119,249], borderColor: '#00aae9', backgroundColor: 'rgba(0,170,233,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#00aae9' },
+          { label: 'Submissions', data: [61,45,42,87], borderColor: '#28c840', backgroundColor: 'rgba(40,200,64,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#28c840' }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { labels: { font: fontOpts, usePointStyle: true, pointStyle: 'circle', padding: 16 } },
+          tooltip: { titleFont: fontOpts, bodyFont: fontOpts }
+        },
+        scales: {
+          x: { grid: gridOpts, ticks: { font: fontOpts } },
+          y: { grid: gridOpts, ticks: { font: fontOpts }, beginAtZero: true }
+        }
+      }
+    });
+  }
+}
+
+// ===== TAB SWITCHING =====
+function switchTab(tabId) {
+  // Destroy all existing charts
+  Object.keys(activeCharts).forEach(function(key) {
+    activeCharts[key].destroy();
+    delete activeCharts[key];
+  });
+
+  // Hide all tab content, deactivate pills
+  document.querySelectorAll('.tab-content').forEach(function(el) { el.classList.remove('active'); });
+  document.querySelectorAll('.tab-pill').forEach(function(el) { el.classList.remove('active'); });
+
+  // Activate selected tab
+  var tabEl = document.getElementById('tab-' + tabId);
+  var pill = document.querySelector('[data-tab="' + tabId + '"]');
+  if (pill) pill.classList.add('active');
+
+  // Render content if not yet rendered
+  if (!tabEl.dataset.rendered) {
+    if (tabId === 'l90') {
+      tabEl.innerHTML = renderL90Tab();
+    } else {
+      tabEl.innerHTML = renderMonthTab(tabId);
+    }
+    tabEl.dataset.rendered = '1';
+  }
+
+  tabEl.classList.add('active');
+
+  // Create charts for active tab
+  if (tabId === 'l90') {
+    createL90Charts();
+  } else {
+    createOutcomeChart(tabId);
+  }
+
+  // Update URL hash
+  history.replaceState(null, '', '#' + tabId);
+
+  // Scroll to top
+  window.scrollTo(0, 0);
+}
+
+// ===== INIT =====
+document.querySelectorAll('.tab-pill').forEach(function(pill) {
+  pill.addEventListener('click', function() {
+    switchTab(this.dataset.tab);
+  });
+});
+
+// Default tab from hash or 'jun'
+var initialTab = window.location.hash.replace('#', '') || 'jun';
+if (!['mar','apr','may','jun','l90'].includes(initialTab)) initialTab = 'jun';
+switchTab(initialTab);
+
+// Handle hash changes
+window.addEventListener('hashchange', function() {
+  var tab = window.location.hash.replace('#', '');
+  if (['mar','apr','may','jun','l90'].includes(tab)) {
+    switchTab(tab);
+  }
+});
+</script>
 </body>
 </html>
