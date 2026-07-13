@@ -404,6 +404,27 @@
     .rate-badge.warn { background: rgba(254, 188, 46, 0.12); color: #a37800; }
     .rate-badge.bad { background: rgba(255, 95, 87, 0.1); color: #cc3d36; }
 
+    .cac-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+    .cac-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 10px 16px;
+      border-bottom: 2px solid rgba(25, 30, 40, 0.06);
+    }
+    .cac-table th.right { text-align: right; }
+    .cac-table td {
+      padding: 10px 16px;
+      font-size: 13px;
+      border-bottom: 1px solid rgba(25, 30, 40, 0.04);
+      color: var(--text-primary);
+    }
+    .cac-table td.right { text-align: right; font-weight: 600; }
+    .cac-table tr:last-child td { border-bottom: none; }
+
     /* DEALS */
     .deal-item {
       display: flex;
@@ -855,7 +876,38 @@ const months = {
         ],
         footnote: "Includes calls with no UTM source, organic traffic, email, and entries without source attribution."
       }
-    ]
+    ],
+    bookedBySource: [
+      { source: "Meta", tagClass: "meta", booked: 42, showed: 36, share: 48.3 },
+      { source: "Unknown / Blank", tagClass: "other", booked: 12, showed: 11, share: 13.8 },
+      { source: "Ikoni Digital", tagClass: "cold", booked: 10, showed: 6, share: 11.5 },
+      { source: "Cold Outreach", tagClass: "cold", booked: 10, showed: 8, share: 11.5 },
+      { source: "Wolfscale", tagClass: "cold", booked: 6, showed: 6, share: 6.9 },
+      { source: "Organic", tagClass: "organic", booked: 3, showed: 3, share: 3.4 },
+      { source: "Google", tagClass: "google", booked: 2, showed: 2, share: 2.3 },
+      { source: "Email / Other", tagClass: "other", booked: 2, showed: 1, share: 2.3 }
+    ],
+    leadGenSummary: "26 booked / 20 showed",
+    noShowBySource: [
+      { source: "Meta", tagClass: "meta", booked: 42, noShows: 6, rate: "14%" },
+      { source: "Ikoni Digital", tagClass: "cold", booked: 10, noShows: 4, rate: "40%" },
+      { source: "Cold Outreach", tagClass: "cold", booked: 10, noShows: 2, rate: "20%" },
+      { source: "Unknown / Blank", tagClass: "other", booked: 12, noShows: 1, rate: "8%" },
+      { source: "Email / Other", tagClass: "other", booked: 2, noShows: 1, rate: "50%" },
+      { source: "Wolfscale", tagClass: "cold", booked: 6, noShows: 0, rate: "0%" },
+      { source: "Organic", tagClass: "organic", booked: 3, noShows: 0, rate: "0%" },
+      { source: "Google", tagClass: "google", booked: 2, noShows: 0, rate: "0%" }
+    ],
+    noShowSummary: "Lead Gen Partners: 6 of 26 (23.1%)",
+    cacByChannel: [
+      { channel: "Google Ads", tagClass: "google", deals: 1, spend: "$608", cac: "$608", cacColor: "var(--success)" },
+      { channel: "Hampton", tagClass: "hampton", deals: 1, spend: "$825", cac: "$825", cacColor: "var(--success)" },
+      { channel: "Ikoni Digital", tagClass: "cold", deals: 1, spend: "$1,400", cac: "$1,400", cacColor: "#d4960c" },
+      { channel: "Board of Advisors", tagClass: "hampton", deals: 1, spend: "$1,667", cac: "$1,667", cacColor: "#d4960c" },
+      { channel: "Cold Outreach", tagClass: "cold", deals: 1, spend: "$3,100", cac: "$3,100", cacColor: "var(--error)" },
+      { channel: "Meta Ads", tagClass: "meta", deals: 3, spend: "$10,885", cac: "$3,628", cacColor: "var(--error)" }
+    ],
+    cacSummary: { label: "Blended CAC (All 11 Deals)", value: "$2,155" }
   },
   apr: {
     label: "April 2026", period: "Full month of April 2026 (through 4/30)",
@@ -1012,7 +1064,39 @@ const months = {
         ],
         footnote: "2 deals from personal referrals (Sean Agnew, Rod Santomassimo). No direct cost."
       }
-    ]
+    ],
+    bookedBySource: [
+      { source: "Meta", tagClass: "meta", booked: 30, showed: 26, share: 42.3 },
+      { source: "Cold Outreach", tagClass: "cold", booked: 15, showed: 13, share: 21.1 },
+      { source: "Organic", tagClass: "organic", booked: 6, showed: 5, share: 8.5 },
+      { source: "Wolfscale", tagClass: "cold", booked: 6, showed: 5, share: 8.5 },
+      { source: "Unknown / Blank", tagClass: "other", booked: 4, showed: 4, share: 5.6 },
+      { source: "Ikoni Digital", tagClass: "cold", booked: 3, showed: 3, share: 4.2 },
+      { source: "NuOpp", tagClass: "cold", booked: 2, showed: 2, share: 2.8 },
+      { source: "Board of Advisors", tagClass: "hampton", booked: 2, showed: 2, share: 2.8 },
+      { source: "Google", tagClass: "google", booked: 1, showed: 1, share: 1.4 },
+      { source: "Email / Showcase", tagClass: "other", booked: 2, showed: 2, share: 2.8 }
+    ],
+    leadGenSummary: "26 booked / 23 showed",
+    noShowBySource: [
+      { source: "Meta", tagClass: "meta", booked: 30, noShows: 4, rate: "13.3%" },
+      { source: "Cold Outreach", tagClass: "cold", booked: 15, noShows: 2, rate: "13.3%" },
+      { source: "Wolfscale", tagClass: "cold", booked: 6, noShows: 1, rate: "16.7%" },
+      { source: "Organic", tagClass: "organic", booked: 6, noShows: 1, rate: "16.7%" },
+      { source: "Ikoni Digital", tagClass: "cold", booked: 3, noShows: 0, rate: "0%" },
+      { source: "NuOpp", tagClass: "cold", booked: 2, noShows: 0, rate: "0%" },
+      { source: "Board of Advisors", tagClass: "hampton", booked: 2, noShows: 0, rate: "0%" },
+      { source: "Google", tagClass: "google", booked: 1, noShows: 0, rate: "0%" },
+      { source: "Other (Unknown/Email/Showcase)", tagClass: "other", booked: 6, noShows: 0, rate: "0%" }
+    ],
+    noShowSummary: "Lead Gen Partners: 3 of 26 (11.5%)",
+    cacByChannel: [
+      { channel: "Hampton", tagClass: "hampton", deals: 1, spend: "$825", cac: "$825", cacColor: "var(--success)" },
+      { channel: "Ikoni Digital", tagClass: "cold", deals: 1, spend: "$1,300", cac: "$1,300", cacColor: "var(--success)" },
+      { channel: "Wolfscale", tagClass: "cold", deals: 1, spend: "$2,129", cac: "$2,129", cacColor: "#d4960c" },
+      { channel: "Meta Ads", tagClass: "meta", deals: 3, spend: "$10,656", cac: "$3,552", cacColor: "var(--error)" }
+    ],
+    cacSummary: { label: "Blended CAC (All 8 Deals)", value: "$2,523" }
   },
   may: {
     label: "May 2026", period: "Full month of May 2026 (through 5/31)",
@@ -1175,7 +1259,43 @@ const months = {
         ],
         footnote: "0 deals from personal referrals in May."
       }
-    ]
+    ],
+    bookedBySource: [
+      { source: "Meta", tagClass: "meta", booked: 40, showed: 34, share: 50.0 },
+      { source: "Cold Outreach", tagClass: "cold", booked: 8, showed: 7, share: 10.0 },
+      { source: "Unknown / Blank", tagClass: "other", booked: 6, showed: 5, share: 7.5 },
+      { source: "Organic", tagClass: "organic", booked: 5, showed: 4, share: 6.3 },
+      { source: "Wolfscale", tagClass: "cold", booked: 5, showed: 4, share: 6.3 },
+      { source: "Email / Showcase", tagClass: "other", booked: 4, showed: 4, share: 5.0 },
+      { source: "Ikoni Digital", tagClass: "cold", booked: 3, showed: 3, share: 3.8 },
+      { source: "Board of Advisors", tagClass: "hampton", booked: 3, showed: 3, share: 3.8 },
+      { source: "Google", tagClass: "google", booked: 3, showed: 2, share: 3.8 },
+      { source: "Hampton", tagClass: "hampton", booked: 2, showed: 2, share: 2.5 },
+      { source: "NuOpp", tagClass: "cold", booked: 1, showed: 1, share: 1.3 }
+    ],
+    leadGenSummary: "17 booked / 15 showed",
+    noShowBySource: [
+      { source: "Meta", tagClass: "meta", booked: 40, noShows: 6, rate: "15.0%" },
+      { source: "Cold Outreach", tagClass: "cold", booked: 8, noShows: 1, rate: "12.5%" },
+      { source: "Wolfscale", tagClass: "cold", booked: 5, noShows: 1, rate: "20.0%" },
+      { source: "Organic", tagClass: "organic", booked: 5, noShows: 1, rate: "20.0%" },
+      { source: "Unknown / Blank", tagClass: "other", booked: 6, noShows: 1, rate: "16.7%" },
+      { source: "Google", tagClass: "google", booked: 3, noShows: 1, rate: "33.3%" },
+      { source: "Ikoni Digital", tagClass: "cold", booked: 3, noShows: 0, rate: "0%" },
+      { source: "Board of Advisors", tagClass: "hampton", booked: 3, noShows: 0, rate: "0%" },
+      { source: "Hampton", tagClass: "hampton", booked: 2, noShows: 0, rate: "0%" },
+      { source: "NuOpp", tagClass: "cold", booked: 1, noShows: 0, rate: "0%" },
+      { source: "Email / Showcase", tagClass: "other", booked: 4, noShows: 1, rate: "25.0%" }
+    ],
+    noShowSummary: "Overall: 12 of 80 (15.0%)",
+    cacByChannel: [
+      { channel: "Hampton", tagClass: "hampton", deals: 2, spend: "$825", cac: "$412.50", cacColor: "var(--success)" },
+      { channel: "Ikoni Digital", tagClass: "cold", deals: 1, spend: "$1,300", cac: "$1,300", cacColor: "var(--success)" },
+      { channel: "Board of Advisors", tagClass: "hampton", deals: 1, spend: "$1,667", cac: "$1,667", cacColor: "#d4960c" },
+      { channel: "Meta Ads", tagClass: "meta", deals: 5, spend: "$10,871", cac: "$2,174", cacColor: "var(--warning)" },
+      { channel: "Wolfscale", tagClass: "cold", deals: 0, spend: "$1,995", cac: "N/A", cacColor: "var(--error)" }
+    ],
+    cacSummary: { label: "Blended CAC (All 10 Deals)", value: "$2,027" }
   },
   jun: {
     label: "June 2026", period: "Full month of June 2026 (through 6/30)",
@@ -1338,7 +1458,32 @@ const months = {
         ],
         footnote: "2 assessments from referrals, no deals closed."
       }
-    ]
+    ],
+    bookedBySource: [
+      { source: "Meta", tagClass: "meta", booked: 21, showed: "-", share: 33.3 },
+      { source: "Cold Outreach", tagClass: "cold", booked: 15, showed: "-", share: 23.8 },
+      { source: "Unattributed", tagClass: "other", booked: 11, showed: "-", share: 17.5 },
+      { source: "Wolfscale", tagClass: "cold", booked: 7, showed: "-", share: 11.1 },
+      { source: "Google", tagClass: "google", booked: 3, showed: "-", share: 4.8 },
+      { source: "Organic", tagClass: "organic", booked: 3, showed: "-", share: 4.8 },
+      { source: "Ikoni Digital", tagClass: "cold", booked: 1, showed: "-", share: 1.6 },
+      { source: "UM Footer", tagClass: "other", booked: 1, showed: "-", share: 1.6 },
+      { source: "Showcase", tagClass: "other", booked: 1, showed: "-", share: 1.6 }
+    ],
+    leadGenSummary: "23 booked (COS + Wolfscale + Ikoni + NuOpp)",
+    noShowBySource: [
+      { source: "All Sources", tagClass: "other", booked: 63, noShows: 18, rate: "28.6%" }
+    ],
+    noShowSummary: "Overall: 18 of 63 (28.6%)",
+    noShowNote: "Per-source showed data pending final reconciliation.",
+    cacByChannel: [
+      { channel: "Board of Advisors", tagClass: "hampton", deals: 2, spend: "$1,667", cac: "$833.50", cacColor: "var(--success)" },
+      { channel: "Cold Outreach", tagClass: "cold", deals: 1, spend: "$3,000", cac: "$3,000", cacColor: "var(--error)" },
+      { channel: "Meta Ads", tagClass: "meta", deals: 1, spend: "$10,561", cac: "$10,561", cacColor: "var(--error)" },
+      { channel: "Wolfscale", tagClass: "cold", deals: 0, spend: "$2,585", cac: "N/A", cacColor: "var(--error)" },
+      { channel: "Ikoni Digital", tagClass: "cold", deals: 0, spend: "$600", cac: "N/A", cacColor: "var(--error)" }
+    ],
+    cacSummary: { label: "Blended CAC (All 7 Deals)", value: "$2,836" }
   }
 };
 
@@ -1567,6 +1712,39 @@ function renderMonthTab(key) {
   }
   html += '</div>';
 
+  // CAC BY CHANNEL
+  if (d.cacByChannel) {
+    html += '<div class="section">';
+    html += '<div class="section-header"><div class="section-icon purple">&#128184;</div><div><div class="section-title">Cost to Acquire Customer (CAC)</div><div class="section-subtitle">By paid channel - organic/referral deals excluded</div></div></div>';
+    html += '<table class="cac-table"><thead><tr><th>Channel</th><th>Deals</th><th class="right">Spend</th><th class="right">CAC</th></tr></thead><tbody>';
+    d.cacByChannel.forEach(function(ch) {
+      html += '<tr><td><span class="source-tag ' + ch.tagClass + '">' + ch.channel + '</span></td>';
+      html += '<td>' + ch.deals + '</td>';
+      html += '<td class="right">' + ch.spend + '</td>';
+      html += '<td class="right" style="color:' + ch.cacColor + '">' + ch.cac + '</td></tr>';
+    });
+    html += '</tbody></table>';
+    html += '<div class="summary-row"><span>' + d.cacSummary.label + '</span><strong>' + d.cacSummary.value + '</strong></div>';
+    html += '</div>';
+  }
+
+  // BOOKED CALLS BY SOURCE
+  if (d.bookedBySource) {
+    var monthShort = d.label.split(' ')[0];
+    html += '<div class="section">';
+    html += '<div class="section-header"><div class="section-icon blue">&#128222;</div><div><div class="section-title">Booked Calls by Source</div><div class="section-subtitle">' + d.booked + ' calls booked, ' + d.showed + ' showed (' + pct(d.showRate) + ' show rate)</div></div></div>';
+    html += '<table class="source-table"><thead><tr><th>Source</th><th>Booked</th><th>Showed</th><th>Share</th></tr></thead><tbody>';
+    d.bookedBySource.forEach(function(s) {
+      html += '<tr><td><span class="source-tag ' + s.tagClass + '">' + s.source + '</span></td>';
+      html += '<td><strong>' + s.booked + '</strong></td>';
+      html += '<td>' + s.showed + '</td>';
+      html += '<td><div style="display:flex;align-items:center;gap:8px;"><div class="bar-container"><div class="bar-fill ' + s.tagClass + '" style="width:' + s.share + '%"></div></div>' + s.share.toFixed(1) + '%</div></td></tr>';
+    });
+    html += '</tbody></table>';
+    html += '<div class="summary-row"><span>Lead Gen Partners (Combined)</span><strong>' + d.leadGenSummary + '</strong></div>';
+    html += '</div>';
+  }
+
   // ASSESSMENTS BY SOURCE + CALL OUTCOMES (two col)
   html += '<div class="two-col">';
 
@@ -1606,6 +1784,28 @@ function renderMonthTab(key) {
   });
   html += '<div class="summary-row"><span>Total: ' + d.dealCount + ' deals</span><strong>' + fmtD(d.revenue) + '/mo | Avg ' + fmtD(d.avgDeal) + '</strong></div>';
   html += '</div>';
+
+  // NO-SHOW BREAKDOWN BY SOURCE
+  if (d.noShowBySource) {
+    var totalNoShows = d.outcomes.noShow;
+    html += '<div class="section">';
+    html += '<div class="section-header"><div class="section-icon red">&#128683;</div><div><div class="section-title">No-Show Breakdown by Source</div><div class="section-subtitle">' + totalNoShows + ' no-shows across ' + d.booked + ' booked calls (' + pct(d.noShowRate) + ' overall)</div></div></div>';
+    html += '<table class="source-table"><thead><tr><th>Source</th><th>Booked</th><th>No-Shows</th><th class="right">No-Show Rate</th></tr></thead><tbody>';
+    d.noShowBySource.forEach(function(ns) {
+      var rateNum = parseFloat(ns.rate);
+      var badgeCls = rateNum === 0 ? 'good' : rateNum <= 15 ? 'good' : rateNum <= 25 ? 'warn' : 'bad';
+      html += '<tr><td><span class="source-tag ' + ns.tagClass + '">' + ns.source + '</span></td>';
+      html += '<td>' + ns.booked + '</td>';
+      html += '<td><strong>' + ns.noShows + '</strong></td>';
+      html += '<td class="right"><span class="rate-badge ' + badgeCls + '">' + ns.rate + '</span></td></tr>';
+    });
+    html += '</tbody></table>';
+    html += '<div class="summary-row"><span>' + d.noShowSummary.split(':')[0] + '</span><strong>' + d.noShowSummary.split(': ')[1] + '</strong></div>';
+    if (d.noShowNote) {
+      html += '<div style="margin-top: 8px; padding: 8px 14px; background: var(--bg-light); border-radius: 8px; font-size: 12px; color: var(--text-secondary);">' + d.noShowNote + '</div>';
+    }
+    html += '</div>';
+  }
 
   // TYPEFORM FUNNEL
   var tf = d.typeform;
