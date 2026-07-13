@@ -1320,11 +1320,11 @@ const months = {
     isEstimate: true,
     investDetails: [
       {
-        name: "Meta Ads", tagClass: "meta", booked: 21, showed: "-",
+        name: "Meta Ads", tagClass: "meta", booked: 21, showed: 17,
         costPerBooked: "$502.92", total: 10561.37, momPct: "-2.8%", momClass: "up",
         details: [
           { label: "Ad Spend (June)", value: "$10,561.37" },
-          { label: "Booked / Showed", value: "21 / -" },
+          { label: "Booked / Showed", value: "21 / 17" },
           { label: "June Assessments", value: "7" },
           { label: "June Deals", value: "1" },
           { label: "CAC", value: "$10,561" },
@@ -1334,13 +1334,13 @@ const months = {
         footnote: "1 deal closed (Surrogacy Is - $6,900)."
       },
       {
-        name: "Cold Outreach (COS)", tagClass: "cold", booked: 15, showed: "-",
+        name: "Cold Outreach (COS)", tagClass: "cold", booked: 15, showed: 5,
         costPerBooked: "$200.00", total: 3000.00, momPct: "0.0%", momClass: "flat",
         details: [
           { label: "Monthly Retainer", value: "$1,500" },
           { label: "Cost Per Call", value: "$300" },
           { label: "June Total (est)", value: "$3,000" },
-          { label: "Booked / Showed", value: "15 / -" },
+          { label: "Booked / Showed", value: "15 / 5" },
           { label: "June Assessments", value: "4" },
           { label: "June Deals", value: "1" },
           { label: "CAC", value: "$3,000" },
@@ -1350,7 +1350,7 @@ const months = {
         footnote: "Estimated: Retainer ($1,500/mo) + $300/call. 1 deal closed (Kinzie Foods - $4,900). Final invoice pending."
       },
       {
-        name: "Wolfscale", tagClass: "cold", booked: 7, showed: "-",
+        name: "Wolfscale", tagClass: "cold", booked: 7, showed: 6,
         costPerBooked: "$369.29", total: 2585.00, momPct: "+29.6%", momClass: "down",
         details: [
           { label: "Monthly Retainer", value: "$815.00" },
@@ -1366,14 +1366,14 @@ const months = {
         footnote: "Estimated: Base ($815 + $134.40) + 7 calls ($295/call). No assessments or deals from Wolfscale in June. Final invoice pending."
       },
       {
-        name: "Ikoni Digital", tagClass: "cold", booked: 1, showed: "-",
+        name: "Ikoni Digital", tagClass: "cold", booked: 1, showed: 1,
         costPerBooked: "$600.00", total: 600.00, momPct: "-53.8%", momClass: "up",
         details: [
           { label: "Monthly Retainer", value: "$250.00" },
           { label: "Cost Per Billable Call", value: "$350.00" },
           { label: "Billable Calls (est)", value: "1" },
           { label: "June Total (est)", value: "$600" },
-          { label: "Booked / Showed", value: "1 / -" },
+          { label: "Booked / Showed", value: "1 / 1" },
           { label: "June Assessments", value: "2" },
           { label: "June Deals", value: "0" },
           { label: "May Total", value: "$1,300", style: "color: var(--text-muted)" },
@@ -1416,18 +1416,18 @@ const months = {
         footnote: "Membership providing warm introductions. 2 deals closed from BA connections (Meet Caddy, Meditech Marketing)."
       },
       {
-        name: "Google Ads", tagClass: "google", booked: 3, showed: "-",
+        name: "Google Ads", tagClass: "google", booked: 3, showed: 2,
         costPerBooked: "$204.33", total: 613.00, momPct: null, momClass: null,
         details: [
           { label: "Ad Spend (June)", value: "$613.00" },
-          { label: "Booked / Showed", value: "3 / -" },
+          { label: "Booked / Showed", value: "3 / 2" },
           { label: "June Assessments", value: "0" },
           { label: "June Deals", value: "0" }
         ],
         footnote: null
       },
       {
-        name: "Organic / Other", tagClass: "organic", booked: 16, showed: "-",
+        name: "Organic / Other", tagClass: "organic", booked: 16, showed: 14,
         costPerBooked: "$0.00", total: 0.00, momPct: null, momClass: null,
         details: [
           { label: "Unattributed", value: "11" },
@@ -1460,22 +1460,29 @@ const months = {
       }
     ],
     bookedBySource: [
-      { source: "Meta", tagClass: "meta", booked: 21, showed: "-", share: 33.3 },
-      { source: "Cold Outreach", tagClass: "cold", booked: 15, showed: "-", share: 23.8 },
-      { source: "Unattributed", tagClass: "other", booked: 11, showed: "-", share: 17.5 },
-      { source: "Wolfscale", tagClass: "cold", booked: 7, showed: "-", share: 11.1 },
-      { source: "Google", tagClass: "google", booked: 3, showed: "-", share: 4.8 },
-      { source: "Organic", tagClass: "organic", booked: 3, showed: "-", share: 4.8 },
-      { source: "Ikoni Digital", tagClass: "cold", booked: 1, showed: "-", share: 1.6 },
-      { source: "UM Footer", tagClass: "other", booked: 1, showed: "-", share: 1.6 },
-      { source: "Showcase", tagClass: "other", booked: 1, showed: "-", share: 1.6 }
+      { source: "Meta", tagClass: "meta", booked: 21, showed: 17, share: 33.3 },
+      { source: "Cold Outreach", tagClass: "cold", booked: 15, showed: 5, share: 23.8 },
+      { source: "Unattributed", tagClass: "other", booked: 11, showed: 10, share: 17.5 },
+      { source: "Wolfscale", tagClass: "cold", booked: 7, showed: 6, share: 11.1 },
+      { source: "Google", tagClass: "google", booked: 3, showed: 2, share: 4.8 },
+      { source: "Organic", tagClass: "organic", booked: 3, showed: 2, share: 4.8 },
+      { source: "Ikoni Digital", tagClass: "cold", booked: 1, showed: 1, share: 1.6 },
+      { source: "UM Footer", tagClass: "other", booked: 1, showed: 1, share: 1.6 },
+      { source: "Showcase", tagClass: "other", booked: 1, showed: 1, share: 1.6 }
     ],
     leadGenSummary: "23 booked (COS + Wolfscale + Ikoni + NuOpp)",
     noShowBySource: [
-      { source: "All Sources", tagClass: "other", booked: 63, noShows: 18, rate: "28.6%" }
+      { source: "Cold Outreach", tagClass: "cold", booked: 15, noShows: 10, rate: "66.7%" },
+      { source: "Meta", tagClass: "meta", booked: 21, noShows: 4, rate: "19.0%" },
+      { source: "Unattributed", tagClass: "other", booked: 11, noShows: 1, rate: "9.1%" },
+      { source: "Wolfscale", tagClass: "cold", booked: 7, noShows: 1, rate: "14.3%" },
+      { source: "Google", tagClass: "google", booked: 3, noShows: 1, rate: "33.3%" },
+      { source: "Organic", tagClass: "organic", booked: 3, noShows: 1, rate: "33.3%" },
+      { source: "Ikoni Digital", tagClass: "cold", booked: 1, noShows: 0, rate: "0%" },
+      { source: "UM Footer", tagClass: "other", booked: 1, noShows: 0, rate: "0%" },
+      { source: "Showcase", tagClass: "other", booked: 1, noShows: 0, rate: "0%" }
     ],
     noShowSummary: "Overall: 18 of 63 (28.6%)",
-    noShowNote: "Per-source showed data pending final reconciliation.",
     cacByChannel: [
       { channel: "Board of Advisors", tagClass: "hampton", deals: 2, spend: "$1,667", cac: "$833.50", cacColor: "var(--success)" },
       { channel: "Cold Outreach", tagClass: "cold", deals: 1, spend: "$3,000", cac: "$3,000", cacColor: "var(--error)" },
