@@ -47,30 +47,37 @@
       align-items: center;
       justify-content: space-between;
     }
-    .tab-pills {
-      display: flex;
-      gap: 6px;
-    }
-    .tab-pill {
-      padding: 7px 18px;
-      border-radius: 20px;
-      font-size: 13px;
+    .tab-select {
+      appearance: none;
+      -webkit-appearance: none;
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 9px 36px 9px 16px;
+      font-size: 14px;
       font-weight: 600;
-      color: var(--text-muted);
-      background: transparent;
-      border: 1px solid transparent;
+      font-family: inherit;
       cursor: pointer;
       transition: all 0.2s ease;
-      font-family: inherit;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      min-width: 160px;
     }
-    .tab-pill:hover {
-      color: var(--white);
-      background: rgba(255,255,255,0.06);
+    .tab-select:hover {
+      background-color: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.25);
     }
-    .tab-pill.active {
-      background: var(--brand-primary);
-      color: var(--white);
+    .tab-select:focus {
+      outline: none;
       border-color: var(--brand-primary);
+      box-shadow: 0 0 0 2px rgba(36,131,196,0.3);
+    }
+    .tab-select option {
+      background: var(--navy-dark);
+      color: var(--white);
+      padding: 8px;
     }
     .tab-bar-label {
       font-size: 11px;
@@ -81,7 +88,7 @@
     @media (max-width: 600px) {
       .tab-bar { flex-direction: column; gap: 6px; }
       .tab-bar-label { display: none; }
-      .tab-pill { padding: 6px 12px; font-size: 12px; }
+      .tab-select { width: 100%; min-width: unset; }
     }
 
     /* ===== TAB CONTENT ===== */
@@ -710,6 +717,7 @@
     /* PRINT */
     @media print {
       .tab-bar { display: none !important; }
+      .tab-select { display: none !important; }
       .tab-content { display: block !important; page-break-after: always; }
       .hero { padding-top: 24px; }
       body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -720,15 +728,15 @@
 
 <!-- ===== TAB BAR ===== -->
 <div class="tab-bar">
-  <div class="tab-pills">
-    <button class="tab-pill" data-tab="mar">Mar '26</button>
-    <button class="tab-pill" data-tab="apr">Apr '26</button>
-    <button class="tab-pill" data-tab="may">May '26</button>
-    <button class="tab-pill" data-tab="jun">Jun '26</button>
-    <button class="tab-pill" data-tab="jul">Jul '26</button>
-    <button class="tab-pill" data-tab="l90">L90</button>
-    <button class="tab-pill" data-tab="ytd">YTD</button>
-  </div>
+  <select id="tab-select" class="tab-select">
+    <option value="jul">July 2026</option>
+    <option value="jun">June 2026</option>
+    <option value="may">May 2026</option>
+    <option value="apr">April 2026</option>
+    <option value="mar">March 2026</option>
+    <option value="l90">Last 90 Days (L90)</option>
+    <option value="ytd">Year-to-Date</option>
+  </select>
   <div class="tab-bar-label">Unicorn Marketers Marketing Scorecards</div>
 </div>
 
@@ -2490,26 +2498,53 @@ function renderYTDTab() {
     ]
   };
 
+  // Build deals-by-source lookup for dropdowns
+  var dealsBySource = {};
+  ytd.allDeals.forEach(function(deal) {
+    if (!dealsBySource[deal.source]) dealsBySource[deal.source] = [];
+    dealsBySource[deal.source].push(deal);
+  });
+
+  var meta = ytd.bySource[0]; // Meta
+  var gDeals = ytd.bySource.find(function(s){return s.source==="Google"});
+
   var html = '';
 
-  // HERO
-  html += '<div class="hero l90-hero">';
+  // HERO - consolidated 4 cards
+  html += '<div class="hero">';
   html += '<div class="hero-grid"></div>';
   html += '<div class="hero-content">';
   html += '<div class="badge">YEAR-TO-DATE</div>';
   html += '<h1>2026 Year-to-Date <span>Performance</span></h1>';
   html += '<p class="hero-subtitle">January through July 2026</p>';
-  html += '<div class="hero-stats">';
-  html += '<div class="hero-stat"><div class="hero-stat-value green">' + ytd.totalDeals + '</div><div class="hero-stat-label">Deals Closed</div></div>';
-  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--success);font-size:28px">' + fmtD(ytd.totalRevenue) + '/mo</div><div class="hero-stat-label">New Monthly Revenue</div></div>';
-  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--brand-primary-light);font-size:28px">' + fmtD(ytd.avgDeal) + '</div><div class="hero-stat-label">Avg Deal Size</div></div>';
+  html += '<div class="hero-stats" style="grid-template-columns:repeat(4,1fr)">';
+
+  // Card 1: Deals + Revenue combined
+  html += '<div class="hero-stat">';
+  html += '<div class="hero-stat-value green">' + ytd.totalDeals + ' Deals</div>';
+  html += '<div class="hero-stat-label">' + fmtD(ytd.totalRevenue) + ' in Month 1 Contract Revenue</div>';
   html += '</div>';
 
-  // Second row - spend
-  html += '<div class="hero-stats" style="margin-top:16px">';
-  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--cyan-accent);font-size:28px">' + fmtDec(ytd.metaSpend) + '</div><div class="hero-stat-label">Meta Spend YTD</div></div>';
-  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--warning);font-size:28px">' + fmtDec(ytd.googleSpend) + '</div><div class="hero-stat-label">Google Spend YTD</div></div>';
-  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--success);font-size:28px">' + ytd.bySource[0].deals + '</div><div class="hero-stat-label">Meta Deals (' + fmtD(ytd.bySource[0].avgDeal) + ' avg)</div></div>';
+  // Card 2: Avg Deal Size
+  html += '<div class="hero-stat">';
+  html += '<div class="hero-stat-value" style="color:var(--brand-primary-light)">' + fmtD(ytd.avgDeal) + '</div>';
+  html += '<div class="hero-stat-label">Avg Deal Size</div>';
+  html += '</div>';
+
+  // Card 3: Meta consolidated
+  html += '<div class="hero-stat">';
+  html += '<div class="hero-stat-value" style="color:var(--cyan-accent);font-size:26px">' + fmtDec(ytd.metaSpend) + '</div>';
+  html += '<div class="hero-stat-label">Meta Spend YTD</div>';
+  html += '<div style="font-size:12px;color:var(--text-secondary);margin-top:4px">' + meta.deals + ' deals closed | ' + fmtD(meta.avgDeal) + ' avg</div>';
+  html += '</div>';
+
+  // Card 4: Google consolidated
+  html += '<div class="hero-stat">';
+  html += '<div class="hero-stat-value" style="color:var(--warning);font-size:26px">' + fmtDec(ytd.googleSpend) + '</div>';
+  html += '<div class="hero-stat-label">Google Spend YTD</div>';
+  html += '<div style="font-size:12px;color:var(--text-secondary);margin-top:4px">' + gDeals.deals + ' deals closed | ' + fmtD(gDeals.avgDeal) + ' avg</div>';
+  html += '</div>';
+
   html += '</div>';
   html += '</div></div>';
 
@@ -2517,23 +2552,31 @@ function renderYTDTab() {
   html += '<div class="main">';
   html += '<div class="note-banner"><strong>Year-to-Date:</strong> Covers January through July 2026. Cost per meeting and CAC metrics will be added after data validation and tracker cleanup.</div>';
 
-  // DEALS BY SOURCE TABLE
+  // DEALS BY SOURCE TABLE with dropdowns
   html += '<div class="section">';
   html += '<div class="section-header"><div class="section-icon green">&#128176;</div><div><div class="section-title">Deals and Revenue by Source</div><div class="section-subtitle">66 deals closed YTD across 11 sources</div></div></div>';
   html += '<table class="source-table"><thead><tr><th>Source</th><th class="right">Deals</th><th class="right">Revenue</th><th class="right">Avg Deal</th><th></th></tr></thead><tbody>';
   ytd.bySource.forEach(function(s) {
     var barW = Math.round(s.revenue / 140400 * 100);
     var tagCls = sourceTagClass(s.source);
-    html += '<tr><td><span class="source-tag ' + tagCls + '">' + s.source + '</span></td>';
+    var srcDeals = dealsBySource[s.source] || [];
+    // Clickable row
+    html += '<tr class="invest-row" onclick="toggleDetail(this)" style="cursor:pointer"><td><span class="expand-icon">&#9654;</span> <span class="source-tag ' + tagCls + '">' + s.source + '</span></td>';
     html += '<td class="right"><strong>' + s.deals + '</strong></td>';
     html += '<td class="right" style="color:var(--success);font-weight:700">' + fmtD(s.revenue) + '</td>';
     html += '<td class="right">' + fmtD(s.avgDeal) + '</td>';
     html += '<td><div class="bar-container"><div class="bar-fill ' + tagCls + '" style="width:' + barW + '%"></div></div></td></tr>';
+    // Detail row with deal names
+    html += '<tr class="invest-detail"><td colspan="5"><div style="display:flex;flex-wrap:wrap;gap:6px;padding:4px 0">';
+    srcDeals.forEach(function(d) {
+      html += '<span style="padding:4px 10px;background:var(--bg-light);border-radius:6px;font-size:12px;color:var(--text-secondary)">' + d.name + ' <span style="color:var(--text-muted)">(' + fmtD(d.amount) + ', ' + d.month + ')</span></span>';
+    });
+    html += '</div></td></tr>';
   });
   html += '</tbody></table>';
   html += '<div class="summary-row" style="flex-wrap:wrap;gap:12px">';
   html += '<div><span>Total Deals</span><br><strong style="font-size:20px">' + ytd.totalDeals + '</strong></div>';
-  html += '<div style="text-align:center"><span>Total Monthly Revenue</span><br><strong style="font-size:20px">' + fmtD(ytd.totalRevenue) + '/mo</strong></div>';
+  html += '<div style="text-align:center"><span>Month 1 Contract Revenue</span><br><strong style="font-size:20px">' + fmtD(ytd.totalRevenue) + '</strong></div>';
   html += '<div style="text-align:right"><span>Overall Avg Deal Size</span><br><strong style="font-size:20px">' + fmtD(ytd.avgDeal) + '</strong></div>';
   html += '</div></div>';
 
@@ -2548,47 +2591,6 @@ function renderYTDTab() {
   html += '<div class="section-header"><div class="section-icon purple">&#127942;</div><div><div class="section-title">Revenue by Source</div><div class="section-subtitle">Share of YTD revenue</div></div></div>';
   html += '<div class="chart-container-tall"><canvas id="chart-ytd-source-pie"></canvas></div>';
   html += '</div>';
-  html += '</div>';
-
-  // AVG DEAL SIZE BY SOURCE CHART
-  html += '<div class="section">';
-  html += '<div class="section-header"><div class="section-icon gold">&#128178;</div><div><div class="section-title">Average Deal Size by Source</div><div class="section-subtitle">YTD comparison across all channels</div></div></div>';
-  html += '<div class="chart-container-tall"><canvas id="chart-ytd-avg-deal"></canvas></div>';
-  html += '</div>';
-
-  // AD SPEND SUMMARY
-  html += '<div class="two-col">';
-  html += '<div class="section">';
-  html += '<div class="section-header"><div class="section-icon cyan-bg">&#128176;</div><div><div class="section-title">Meta Ads YTD</div><div class="section-subtitle">Paid social performance</div></div></div>';
-  html += '<div class="metric-grid" style="grid-template-columns:1fr 1fr">';
-  html += '<div class="metric-card"><div class="metric-card-value" style="color:var(--cyan-accent)">' + fmtDec(ytd.metaSpend) + '</div><div class="metric-card-label">Total Spend</div></div>';
-  html += '<div class="metric-card"><div class="metric-card-value green">' + ytd.bySource[0].deals + '</div><div class="metric-card-label">Deals Closed</div></div>';
-  html += '<div class="metric-card"><div class="metric-card-value" style="color:var(--brand-primary-light)">' + fmtD(ytd.bySource[0].avgDeal) + '</div><div class="metric-card-label">Avg Deal Size</div></div>';
-  html += '<div class="metric-card"><div class="metric-card-value" style="color:var(--warning)">' + fmtD(Math.round(ytd.metaSpend / ytd.bySource[0].deals)) + '</div><div class="metric-card-label">CAC (Spend Only)</div></div>';
-  html += '</div></div>';
-
-  html += '<div class="section">';
-  html += '<div class="section-header"><div class="section-icon google">&#128176;</div><div><div class="section-title">Google Ads YTD</div><div class="section-subtitle">Paid search performance</div></div></div>';
-  html += '<div class="metric-grid" style="grid-template-columns:1fr 1fr">';
-  html += '<div class="metric-card"><div class="metric-card-value" style="color:var(--warning)">' + fmtDec(ytd.googleSpend) + '</div><div class="metric-card-label">Total Spend</div></div>';
-  var gDeals = ytd.bySource.find(function(s){return s.source==="Google"});
-  html += '<div class="metric-card"><div class="metric-card-value green">' + gDeals.deals + '</div><div class="metric-card-label">Deals Closed</div></div>';
-  html += '<div class="metric-card"><div class="metric-card-value" style="color:var(--brand-primary-light)">' + fmtD(gDeals.avgDeal) + '</div><div class="metric-card-label">Avg Deal Size</div></div>';
-  html += '<div class="metric-card"><div class="metric-card-value" style="color:var(--success)">' + fmtD(Math.round(ytd.googleSpend / gDeals.deals)) + '</div><div class="metric-card-label">CAC (Spend Only)</div></div>';
-  html += '</div></div>';
-  html += '</div>';
-
-  // ALL DEALS LIST
-  html += '<div class="section">';
-  html += '<div class="section-header"><div class="section-icon green">&#9989;</div><div><div class="section-title">All Deals Closed YTD</div><div class="section-subtitle">' + ytd.totalDeals + ' deals from January through July 2026</div></div></div>';
-  ytd.allDeals.forEach(function(deal, i) {
-    var tagCls = sourceTagClass(deal.source);
-    html += '<div class="deal-item"><div class="deal-number">' + (i+1) + '</div>';
-    html += '<div class="deal-info"><div class="deal-name">' + deal.name + '</div>';
-    html += '<div class="deal-source"><span class="source-tag ' + tagCls + '">' + deal.source + '</span> <span style="font-size:11px;color:var(--text-muted)">' + deal.month + ' \'26</span></div></div>';
-    html += '<div class="deal-amount">' + fmtD(deal.amount) + '/mo</div></div>';
-  });
-  html += '<div class="summary-row"><span>Total: ' + ytd.totalDeals + ' deals</span><strong>' + fmtD(ytd.totalRevenue) + '/mo | Avg ' + fmtD(ytd.avgDeal) + '</strong></div>';
   html += '</div>';
 
   // COMING SOON
@@ -2652,34 +2654,6 @@ function createYTDCharts() {
     });
   }
 
-  // Avg deal by source bar chart
-  var ctx3 = document.getElementById('chart-ytd-avg-deal');
-  if (ctx3) {
-    activeCharts['ytd-avg-deal'] = new Chart(ctx3, {
-      type: 'bar',
-      data: {
-        labels: ['No UTM', 'Personal', 'Hampton', 'Referral', 'Cold Outreach', 'Meta', 'Ikoni', 'Organic', 'BOA', 'Google', 'Wolfscale'],
-        datasets: [{
-          label: 'Avg Deal Size',
-          data: [8300, 8300, 7020, 6600, 6550, 6382, 6233, 6225, 5675, 5600, 5433],
-          backgroundColor: ['#9ca3af', '#f472b6', '#6366f1', '#febc2e', '#ff5f57', '#2483C4', '#14b8a6', '#28c840', '#8b5cf6', '#f59e0b', '#06b6d4'],
-          borderRadius: 4
-        }]
-      },
-      options: {
-        indexAxis: 'y',
-        responsive: true, maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: { callbacks: { label: function(ctx) { return '$' + ctx.parsed.x.toLocaleString(); } } }
-        },
-        scales: {
-          x: { grid: gridOpts, ticks: { font: fontOpts, callback: function(v) { return '$' + v.toLocaleString(); } }, beginAtZero: true },
-          y: { grid: { display: false }, ticks: { font: fontOpts } }
-        }
-      }
-    });
-  }
 }
 
 // ===== CHART CREATION FUNCTIONS =====
@@ -2865,14 +2839,13 @@ function switchTab(tabId) {
     delete activeCharts[key];
   });
 
-  // Hide all tab content, deactivate pills
+  // Hide all tab content
   document.querySelectorAll('.tab-content').forEach(function(el) { el.classList.remove('active'); });
-  document.querySelectorAll('.tab-pill').forEach(function(el) { el.classList.remove('active'); });
 
-  // Activate selected tab
+  // Sync dropdown
   var tabEl = document.getElementById('tab-' + tabId);
-  var pill = document.querySelector('[data-tab="' + tabId + '"]');
-  if (pill) pill.classList.add('active');
+  var sel = document.getElementById('tab-select');
+  if (sel) sel.value = tabId;
 
   // Render content if not yet rendered
   if (!tabEl.dataset.rendered) {
@@ -2905,10 +2878,8 @@ function switchTab(tabId) {
 }
 
 // ===== INIT =====
-document.querySelectorAll('.tab-pill').forEach(function(pill) {
-  pill.addEventListener('click', function() {
-    switchTab(this.dataset.tab);
-  });
+document.getElementById('tab-select').addEventListener('change', function() {
+  switchTab(this.value);
 });
 
 // Default tab from hash or 'jun'
