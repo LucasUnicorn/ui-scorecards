@@ -744,7 +744,7 @@ const months = {
   mar: {
     label: "March 2026", period: "Full month of March 2026 (through 3/31)",
     booked: 87, showed: 73, showRate: 83.9, assessments: 26,
-    showedToAssess: 35.6, dealCount: 11, revenue: 66200, avgDeal: 6018,
+    showedToAssess: 35.6, dealCount: 11, revenue: 66200, avgDeal: 6018, assessCloseRate: 42.3,
     metaSpend: 10885.18, googleSpend: 608, cosTotal: 3100, wolfTotal: 2719.40,
     ikoniTotal: 1400, nuoppTotal: 2500, hamptonTotal: 825, baTotal: 1667,
     totalInvest: 27704.58, costPerBooked: 318.44, blendedCAC: 2519,
@@ -924,7 +924,7 @@ const months = {
   apr: {
     label: "April 2026", period: "Full month of April 2026 (through 4/30)",
     booked: 71, showed: 63, showRate: 88.7, assessments: 26,
-    showedToAssess: 41.3, dealCount: 8, revenue: 57300, avgDeal: 7163,
+    showedToAssess: 41.3, dealCount: 8, revenue: 57300, avgDeal: 7163, assessCloseRate: 30.8,
     metaSpend: 10656.21, googleSpend: 603, cosTotal: 3000, wolfTotal: 2129.40,
     ikoniTotal: 1300, nuoppTotal: 0, hamptonTotal: 825, baTotal: 1667,
     totalInvest: 24180.61, costPerBooked: 340.57, blendedCAC: 3023,
@@ -1125,7 +1125,7 @@ const months = {
   may: {
     label: "May 2026", period: "Full month of May 2026 (through 5/31)",
     booked: 80, showed: 68, showRate: 85.0, assessments: 29,
-    showedToAssess: 42.6, dealCount: 10, revenue: 62800, avgDeal: 6280,
+    showedToAssess: 42.6, dealCount: 10, revenue: 62800, avgDeal: 6280, assessCloseRate: 34.5,
     metaSpend: 10870.76, googleSpend: 608, cosTotal: 3000, wolfTotal: 1995,
     ikoniTotal: 1300, nuoppTotal: 0, hamptonTotal: 825, baTotal: 1667,
     totalInvest: 24265.76, costPerBooked: 303.32, blendedCAC: 2427,
@@ -1336,7 +1336,7 @@ const months = {
   jun: {
     label: "June 2026", period: "Full month of June 2026 (through 6/30)",
     booked: 63, showed: 45, showRate: 71.4, assessments: 25,
-    showedToAssess: 55.6, dealCount: 7, revenue: 51400, avgDeal: 7343,
+    showedToAssess: 55.6, dealCount: 7, revenue: 51400, avgDeal: 7343, assessCloseRate: 28.0,
     metaSpend: 10561.37, googleSpend: 613, cosTotal: 3000, wolfTotal: 2585,
     ikoniTotal: 600, nuoppTotal: 0, hamptonTotal: 825, baTotal: 1667,
     totalInvest: 23851.37, costPerBooked: 378.59, blendedCAC: 3407,
@@ -1543,13 +1543,13 @@ const months = {
   jul: {
     label: "July 2026", period: "Full month of July 2026 (through 7/31)",
     booked: 56, showed: 36, showRate: 64.3, assessments: 27,
-    showedToAssess: 75.0, dealCount: 11, revenue: 64500, avgDeal: 5864,
-    metaSpend: 11362.49, googleSpend: 539, cosTotal: 2100, wolfTotal: 3014.40,
+    showedToAssess: 75.0, dealCount: 11, revenue: 64500, avgDeal: 5864, assessCloseRate: 40.7,
+    metaSpend: 11362.49, googleSpend: 539, cosTotal: 2100, wolfTotal: 1995.00,
     ikoniTotal: 1300, hamptonTotal: 825, baTotal: 1667,
     prTotal: 4000,
-    totalInvest: 24807.89, costPerBooked: 443.00, blendedCAC: 2255,
+    totalInvest: 23788.49, costPerBooked: 424.79, blendedCAC: 2163,
     typeform: { views: 365, starts: 114, subs: 39, completion: 34.2, overall: 10.7 },
-    assessBySource: { "Meta": 9, "Wolfscale": 4, "Google": 3, "Ikoni Digital": 3, "Cold Outreach": 2, "Hampton": 2, "Board of Advisors": 1, "Organic/Referral": 1, "Referral": 1, "Personal Connection": 1 },
+    assessBySource: { "Meta": 9, "Wolfscale": 4, "Google": 3, "Ikoni Digital": 3, "Cold Outreach": 2, "Hampton": 2, "Referral": 2, "Board of Advisors": 1, "Personal Connection": 1 },
     assessmentNames: {
       "Meta": ["InstaRX", "Drink Lodo", "CKYN Shop", "MeasurePM", "Zapz", "Myst Yacht Charters", "Social House", "iWALK", "Mauka Warriors Luau"],
       "Wolfscale": ["Lakeland University", "Chesterton", "Burton", "Forta Health"],
@@ -1557,9 +1557,8 @@ const months = {
       "Ikoni Digital": ["Harvest Hosts", "Fleet Feet", "Polaron Solar"],
       "Cold Outreach": ["Aqua Vault", "Bunny Studio"],
       "Hampton": ["Olatti", "Wise Whisper Agency"],
+      "Referral": ["BizCap", "Festoon House"],
       "Board of Advisors": ["Stock Alternatives"],
-      "Organic/Referral": ["Festoon House"],
-      "Referral": ["BizCap"],
       "Personal Connection": ["Coaches"]
     },
     dealsList: [
@@ -1573,11 +1572,11 @@ const months = {
       { name: "Hiring and Empowering", source: "Meta", amount: 4900 },
       { name: "CKYN Shop", source: "Meta", amount: 4900 },
       { name: "PlusLife Health", source: "Organic", amount: 4900 },
-      { name: "Festoon House", source: "Organic/Referral", amount: 4900 }
+      { name: "Festoon House", source: "Referral", amount: 4900 }
     ],
     outcomes: { closed: 27, notICP: 7, noShow: 20, pending: 2 },
     noShowRate: 35.7,
-    isEstimate: true,
+    isEstimate: false,
     investDetails: [
       {
         name: "Meta Ads", tagClass: "meta", booked: 21, showed: 13,
@@ -1594,53 +1593,50 @@ const months = {
         footnote: "7 deals closed from Meta leads. Best channel performance in L90. CAC dropped from $10,561 (June) to $1,623."
       },
       {
-        name: "Cold Outreach (COS)", tagClass: "cold", booked: 2, showed: 2,
-        costPerBooked: "$1,050.00", total: 2100.00, momPct: "-30.0%", momClass: "up",
+        name: "Cold Outreach (COS)", tagClass: "cold", booked: 7, showed: 4,
+        costPerBooked: "$300.00", total: 2100.00, momPct: "-30.0%", momClass: "up",
         details: [
-          { label: "Monthly Retainer", value: "$1,500" },
-          { label: "Cost Per Call", value: "$300" },
-          { label: "Billable Calls", value: "2" },
-          { label: "July Total (est)", value: "$2,100" },
-          { label: "New July Leads", value: "2 booked / 2 showed" },
+          { label: "Base Retainer", value: "$1,500 (includes 2 meetings)" },
+          { label: "Additional Meetings", value: "2 at $300/call" },
+          { label: "July Total (finalized)", value: "$2,100" },
+          { label: "Billable Meetings", value: "4" },
+          { label: "New July Leads", value: "7 booked / 4 showed" },
           { label: "July Assessments", value: "2" },
           { label: "July Deals", value: "0" },
           { label: "June Total", value: "$3,000", style: "color: var(--text-muted)" },
           { label: "MoM Change", value: "-30.0%", style: "color: var(--success)" }
         ],
-        footnote: "Estimated: Retainer ($1,500/mo) + 2 billable calls ($300/call). Booked/showed reflects new July leads only. No deals closed."
+        footnote: "Finalized with Lisa. $1,500 base includes 2 meetings + 2 additional at $300/call. 7 new leads, 4 billable meetings. No deals closed."
       },
       {
-        name: "Wolfscale", tagClass: "cold", booked: 7, showed: 6,
-        costPerBooked: "$430.63", total: 3014.40, momPct: "+16.6%", momClass: "down",
+        name: "Wolfscale", tagClass: "cold", booked: 11, showed: 6,
+        costPerBooked: "$181.36", total: 1995.00, momPct: "-22.8%", momClass: "up",
         details: [
-          { label: "Monthly Retainer", value: "$815.00" },
-          { label: "Software Cost", value: "$134.40/mo" },
-          { label: "Cost Per Call", value: "$295/call" },
-          { label: "Billable Calls", value: "7" },
-          { label: "July Total (est)", value: "$3,014.40" },
-          { label: "New July Leads", value: "7 booked / 6 showed" },
+          { label: "July Total (finalized)", value: "$1,995.00" },
+          { label: "Billable Meetings", value: "6" },
+          { label: "New July Leads", value: "11 booked / 6 showed" },
           { label: "July Assessments", value: "4" },
           { label: "July Deals", value: "0" },
           { label: "June Total", value: "$2,585.00", style: "color: var(--text-muted)" },
-          { label: "MoM Change", value: "+16.6%", style: "color: var(--error)" }
+          { label: "MoM Change", value: "-22.8%", style: "color: var(--success)" }
         ],
-        footnote: "Estimated: Base ($815 + $134.40) + 7 billable calls ($295/call). Booked/showed reflects new July leads only. 4 assessments but no deals closed."
+        footnote: "Finalized with Lisa. 11 new leads generated, 6 billable meetings. 4 assessments but no deals closed."
       },
       {
-        name: "Ikoni Digital", tagClass: "cold", booked: 3, showed: 3,
-        costPerBooked: "$433.33", total: 1300.00, momPct: "+116.7%", momClass: "down",
+        name: "Ikoni Digital", tagClass: "cold", booked: 5, showed: 3,
+        costPerBooked: "$260.00", total: 1300.00, momPct: "+116.7%", momClass: "down",
         details: [
           { label: "Monthly Retainer", value: "$250.00" },
           { label: "Cost Per Billable Call", value: "$350.00" },
-          { label: "Billable Calls", value: "3" },
-          { label: "July Total (est)", value: "$1,300" },
-          { label: "New July Leads", value: "3 booked / 3 showed" },
+          { label: "July Total (finalized)", value: "$1,300" },
+          { label: "Billable Meetings", value: "3" },
+          { label: "New July Leads", value: "5 booked / 3 showed" },
           { label: "July Assessments", value: "3" },
           { label: "July Deals", value: "0" },
           { label: "June Total", value: "$600", style: "color: var(--text-muted)" },
           { label: "MoM Change", value: "+116.7%", style: "color: var(--error)" }
         ],
-        footnote: "Estimated: Retainer ($250/mo) + 3 billable calls ($350/call). Booked/showed reflects new July leads only. 3 assessments but no deals closed."
+        footnote: "Finalized with Lisa. Retainer ($250) + 3 billable calls ($350/call). 5 new leads, 3 billable meetings. 3 assessments but no deals closed."
       },
       {
         name: "Next Level Leads", tagClass: "cold", booked: 1, showed: 1,
@@ -1708,10 +1704,10 @@ const months = {
         details: [
           { label: "Organic", value: "2" },
           { label: "Unattributed", value: "2" },
-          { label: "July Assessments", value: "1 (Organic/Referral)" },
-          { label: "July Deals", value: "2 (PlusLife Health, Festoon House)" }
+          { label: "July Assessments", value: "0" },
+          { label: "July Deals", value: "1 (PlusLife Health)" }
         ],
-        footnote: "Includes organic traffic and entries without source attribution. 2 deals from organic sources."
+        footnote: "Includes organic traffic and entries without source attribution. 1 deal from organic sources."
       },
       {
         name: "Personal Connection", tagClass: "referral", booked: 1, showed: 1,
@@ -1726,11 +1722,11 @@ const months = {
         name: "Referral", tagClass: "referral", booked: "-", showed: "-",
         costPerBooked: "$0.00", total: 0.00, momPct: null, momClass: null,
         details: [
-          { label: "July Assessments", value: "1" },
-          { label: "July Deals", value: "1" },
+          { label: "July Assessments", value: "2" },
+          { label: "July Deals", value: "2" },
           { label: "CAC", value: "$0" }
         ],
-        footnote: "1 deal from referral (The Perfect Workout - $9,500 Unicorn AI Toolkit SaaS deposit). No direct cost."
+        footnote: "2 deals from referral (The Perfect Workout - $9,500 deposit, Festoon House - $4,900/mo). No direct cost."
       }
     ],
     bookedBySource: [
@@ -1765,10 +1761,10 @@ const months = {
       { channel: "Board of Advisors", tagClass: "hampton", deals: 0, spend: "$1,667", cac: "N/A", cacColor: "var(--error)" },
       { channel: "Hampton", tagClass: "hampton", deals: 0, spend: "$825", cac: "N/A", cacColor: "var(--error)" },
       { channel: "Cold Outreach", tagClass: "cold", deals: 0, spend: "$2,100", cac: "N/A", cacColor: "var(--error)" },
-      { channel: "Wolfscale", tagClass: "cold", deals: 0, spend: "$3,014", cac: "N/A", cacColor: "var(--error)" },
+      { channel: "Wolfscale", tagClass: "cold", deals: 0, spend: "$1,995", cac: "N/A", cacColor: "var(--error)" },
       { channel: "Ikoni Digital", tagClass: "cold", deals: 0, spend: "$1,300", cac: "N/A", cacColor: "var(--error)" }
     ],
-    cacSummary: { label: "Blended CAC (All 11 Deals)", value: "$2,255" }
+    cacSummary: { label: "Blended CAC (All 11 Deals)", value: "$2,163" }
   }
 };
 
@@ -1914,6 +1910,16 @@ function renderMonthTab(key) {
   if (hasMoM) html += heroMomBadge(d.dealCount, prev.dealCount, false);
   if (avg) html += l90Badge(d.dealCount, avg.dealCount, false);
   html += '</div>';
+
+  // Assessment Close Rate
+  if (d.assessCloseRate !== undefined) {
+    var acrColor = d.assessCloseRate >= 35 ? 'var(--success)' : d.assessCloseRate >= 25 ? 'var(--warning)' : 'var(--error)';
+    html += '<div class="hero-stat"><div class="hero-stat-value" style="color:' + acrColor + '">' + pct(d.assessCloseRate) + '</div>';
+    html += '<div class="hero-stat-label">Assessment Close Rate</div>';
+    if (hasMoM && prev.assessCloseRate !== undefined) html += heroMomBadge(d.assessCloseRate, prev.assessCloseRate, true);
+    if (avg) html += l90Badge(d.assessCloseRate, 34.6, true);
+    html += '</div>';
+  }
 
   // Revenue
   html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--success);font-size:28px">' + fmtD(d.revenue) + '</div>';
@@ -2168,7 +2174,7 @@ function renderL90Tab() {
     booked: 199, showed: 149, showRate: 74.9,
     assessments: 81, showedToAssess: 54.4,
     dealCount: 28, revenue: 178700, avgDeal: 6382,
-    totalInvest: 72925.02, costPerBooked: 366.46, blendedCAC: 2604,
+    totalInvest: 71905.62, costPerBooked: 361.34, blendedCAC: 2568,
     assessCloseRate: 34.6,
     typeform: { views: 1042, starts: 339, subs: 115, overall: 11.0 }
   };
@@ -2249,14 +2255,14 @@ function renderL90Tab() {
   html += '<div class="section-header"><div class="section-icon purple">&#127942;</div><div><div class="section-title">Top Assessment Sources</div><div class="section-subtitle">L90 (May - Jul 2026)</div></div></div>';
   var assessSources = [
     { name: "Meta", count: 26 },
-    { name: "Organic/N/A", count: 12 },
+    { name: "Organic/N/A", count: 11 },
     { name: "Cold Outreach", count: 10 },
     { name: "Ikoni Digital", count: 8 },
     { name: "Wolfscale", count: 7 },
     { name: "Hampton", count: 5 },
+    { name: "Referral", count: 4 },
     { name: "Google", count: 3 },
     { name: "Personal Relationship", count: 3 },
-    { name: "Referral", count: 3 },
     { name: "Board of Advisors", count: 3 },
     { name: "UI Website", count: 1 }
   ];
@@ -2274,11 +2280,11 @@ function renderL90Tab() {
   html += '<div class="section-header"><div class="section-icon green">&#128176;</div><div><div class="section-title">Top Revenue Sources</div><div class="section-subtitle">L90 deals (May - Jul 2026)</div></div></div>';
   var revSources = [
     { name: "Meta", revenue: 78400, deals: 13 },
-    { name: "Organic", revenue: 28500, deals: 5 },
+    { name: "Organic", revenue: 23600, deals: 4 },
     { name: "Board of Advisors", revenue: 16800, deals: 3 },
     { name: "Personal Relationship", revenue: 15000, deals: 1 },
+    { name: "Referral", revenue: 14400, deals: 2 },
     { name: "Hampton", revenue: 12800, deals: 2 },
-    { name: "Referral", revenue: 9500, deals: 1 },
     { name: "Ikoni Digital", revenue: 7900, deals: 1 },
     { name: "Google", revenue: 4900, deals: 1 },
     { name: "Cold Outreach", revenue: 4900, deals: 1 }
@@ -2306,7 +2312,7 @@ function renderL90Tab() {
     { metric: "Deals Closed", values: [10,7,11], unit: '', direction: 'up', severity: 'up-good', note: 'July best in L90. Strong close rate.' },
     { metric: "Revenue", values: [62800,51400,64500], unit: '$', direction: 'up', severity: 'up-good', note: 'July best in L90. Strong recovery.' },
     { metric: "Avg Deal Size", values: [6280,7343,5864], unit: '$', direction: 'down', severity: 'down-bad', note: 'Lower avg includes SaaS deposit.' },
-    { metric: "Blended CAC", values: [2427,3407,2255], unit: '$', direction: 'down', severity: 'up-good', note: 'July best in L90. Strong close rate drove down CAC.' },
+    { metric: "Blended CAC", values: [2427,3407,2163], unit: '$', direction: 'down', severity: 'up-good', note: 'July best in L90. Strong close rate drove down CAC.' },
     { metric: "Typeform Views", values: [373,304,365], unit: '', direction: 'up', severity: 'up-good', note: 'Recovery in July. +20% from June.' },
     { metric: "Typeform Subs", values: [42,34,39], unit: '', direction: 'up', severity: 'up-good', note: 'Recovery in July. +15% from June.' }
   ];
@@ -2340,9 +2346,9 @@ function renderL90Tab() {
     { label: 'Deals Closed', vals: [10,7,11], avg: 9.3, fmt: 'n' },
     { label: 'Revenue', vals: [62800,51400,64500], avg: 59567, fmt: '$' },
     { label: 'Avg Deal', vals: [6280,7343,5864], avg: 6496, fmt: '$' },
-    { label: 'Total Investment', vals: [24265.76,23851.37,24807.89], avg: 24308.34, fmt: '$' },
-    { label: 'Cost/Booked', vals: [303.32,378.59,443.00], avg: 374.97, fmt: '$' },
-    { label: 'Blended CAC', vals: [2427,3407,2255], avg: 2696, fmt: '$' },
+    { label: 'Total Investment', vals: [24265.76,23851.37,23788.49], avg: 23968.54, fmt: '$' },
+    { label: 'Cost/Booked', vals: [303.32,378.59,424.79], avg: 368.90, fmt: '$' },
+    { label: 'Blended CAC', vals: [2427,3407,2163], avg: 2666, fmt: '$' },
     { label: 'No-Show Rate', vals: [15.0,28.6,35.7], avg: 26.4, fmt: '%' },
     { label: 'Typeform Views', vals: [373,304,365], avg: 347.3, fmt: 'n' },
     { label: 'Typeform Subs', vals: [42,34,39], avg: 38.3, fmt: 'n' },
@@ -2506,9 +2512,9 @@ function createL90Charts() {
       data: {
         labels: labels,
         datasets: [
-          { label: 'Total Investment', data: [24265.76,23851.37,24807.89], borderColor: '#febc2e', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#febc2e', fill: false, yAxisID: 'y' },
-          { label: 'Blended CAC', data: [2427,3407,2255], borderColor: '#ff5f57', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#ff5f57', fill: false, yAxisID: 'y1' },
-          { label: 'Cost/Booked', data: [303.32,378.59,443.00], borderColor: '#00aae9', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#00aae9', fill: false, borderDash: [5,3], yAxisID: 'y1' }
+          { label: 'Total Investment', data: [24265.76,23851.37,23788.49], borderColor: '#febc2e', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#febc2e', fill: false, yAxisID: 'y' },
+          { label: 'Blended CAC', data: [2427,3407,2163], borderColor: '#ff5f57', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#ff5f57', fill: false, yAxisID: 'y1' },
+          { label: 'Cost/Booked', data: [303.32,378.59,424.79], borderColor: '#00aae9', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#00aae9', fill: false, borderDash: [5,3], yAxisID: 'y1' }
         ]
       },
       options: {
