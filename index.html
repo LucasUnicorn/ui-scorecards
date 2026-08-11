@@ -2533,16 +2533,14 @@ function renderYTDTab() {
 
   // Card 3: Meta consolidated
   html += '<div class="hero-stat">';
-  html += '<div class="hero-stat-value" style="color:var(--cyan-accent);font-size:26px">' + fmtDec(ytd.metaSpend) + '</div>';
-  html += '<div class="hero-stat-label">Meta Spend YTD</div>';
-  html += '<div style="font-size:12px;color:var(--text-secondary);margin-top:4px">' + meta.deals + ' deals closed | ' + fmtD(meta.avgDeal) + ' avg</div>';
+  html += '<div class="hero-stat-value" style="color:var(--cyan-accent)">' + fmtDec(ytd.metaSpend) + ' Meta</div>';
+  html += '<div class="hero-stat-label">' + meta.deals + ' Deals Closed | ' + fmtD(meta.avgDeal) + ' Avg</div>';
   html += '</div>';
 
   // Card 4: Google consolidated
   html += '<div class="hero-stat">';
-  html += '<div class="hero-stat-value" style="color:var(--warning);font-size:26px">' + fmtDec(ytd.googleSpend) + '</div>';
-  html += '<div class="hero-stat-label">Google Spend YTD</div>';
-  html += '<div style="font-size:12px;color:var(--text-secondary);margin-top:4px">' + gDeals.deals + ' deals closed | ' + fmtD(gDeals.avgDeal) + ' avg</div>';
+  html += '<div class="hero-stat-value" style="color:var(--warning)">' + fmtDec(ytd.googleSpend) + ' Google</div>';
+  html += '<div class="hero-stat-label">' + gDeals.deals + ' Deals Closed | ' + fmtD(gDeals.avgDeal) + ' Avg</div>';
   html += '</div>';
 
   html += '</div>';
