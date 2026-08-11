@@ -727,6 +727,7 @@
     <button class="tab-pill" data-tab="jun">Jun '26</button>
     <button class="tab-pill" data-tab="jul">Jul '26</button>
     <button class="tab-pill" data-tab="l90">L90</button>
+    <button class="tab-pill" data-tab="ytd">YTD</button>
   </div>
   <div class="tab-bar-label">Unicorn Marketers Marketing Scorecards</div>
 </div>
@@ -738,8 +739,9 @@
 <div id="tab-jun" class="tab-content"></div>
 <div id="tab-jul" class="tab-content"></div>
 <div id="tab-l90" class="tab-content"></div>
+<div id="tab-ytd" class="tab-content"></div>
 
-<div class="footer">Unicorn Marketers - Marketing Scorecards - Mar-Jul 2026</div>
+<div class="footer">Unicorn Marketers - Marketing Scorecards - Jan-Jul 2026</div>
 
 <script>
 // ===== DATA =====
@@ -2388,6 +2390,298 @@ function renderL90Tab() {
   return html;
 }
 
+// ===== RENDER YTD TAB =====
+function renderYTDTab() {
+  var ytd = {
+    metaSpend: 72848.05,
+    googleSpend: 4380,
+    totalDeals: 66,
+    totalRevenue: 432000,
+    avgDeal: 6545,
+    bySource: [
+      { source: "Meta", deals: 22, revenue: 140400, avgDeal: 6382 },
+      { source: "Organic", deals: 8, revenue: 49800, avgDeal: 6225 },
+      { source: "No UTM", deals: 5, revenue: 41500, avgDeal: 8300 },
+      { source: "Referral", deals: 6, revenue: 39600, avgDeal: 6600 },
+      { source: "Hampton", deals: 5, revenue: 35100, avgDeal: 7020 },
+      { source: "Cold Outreach", deals: 4, revenue: 26200, avgDeal: 6550 },
+      { source: "Personal Relationship", deals: 3, revenue: 24900, avgDeal: 8300 },
+      { source: "Board of Advisors", deals: 4, revenue: 22700, avgDeal: 5675 },
+      { source: "Ikoni Digital", deals: 3, revenue: 18700, avgDeal: 6233 },
+      { source: "Google", deals: 3, revenue: 16800, avgDeal: 5600 },
+      { source: "Wolfscale", deals: 3, revenue: 16300, avgDeal: 5433 }
+    ],
+    allDeals: [
+      { name: "Eleris", source: "Meta", amount: 15000, month: "Apr" },
+      { name: "LPT", source: "Personal Relationship", amount: 15000, month: "Jun" },
+      { name: "LoriBeds", source: "No UTM", amount: 12900, month: "Jan" },
+      { name: "The Perfect Workout", source: "Referral", amount: 9500, month: "Jul" },
+      { name: "The Earthling Co", source: "Organic", amount: 9500, month: "Feb" },
+      { name: "Beyond Driven Enterprises", source: "Referral", amount: 9500, month: "Mar" },
+      { name: "Varsity Tutor", source: "No UTM", amount: 8900, month: "Feb" },
+      { name: "Nomad Lane", source: "Hampton", amount: 8500, month: "Apr" },
+      { name: "Ridley Academy", source: "Meta", amount: 8000, month: "May" },
+      { name: "Woolly Clothing Co", source: "Cold Outreach", amount: 7900, month: "Jan" },
+      { name: "Spacemilk", source: "Cold Outreach", amount: 7900, month: "Jan" },
+      { name: "Toolbox Widget", source: "No UTM", amount: 7900, month: "Feb" },
+      { name: "JumpSport", source: "Ikoni Digital", amount: 7900, month: "May" },
+      { name: "Speede", source: "Hampton", amount: 7900, month: "May" },
+      { name: "Vogelzang Law", source: "No UTM", amount: 6900, month: "Jan" },
+      { name: "InstaRX", source: "Meta", amount: 6900, month: "Jul" },
+      { name: "Surrogacy Is", source: "Meta", amount: 6900, month: "Jun" },
+      { name: "Healthy Gut", source: "Organic", amount: 6900, month: "Jun" },
+      { name: "The Personal Beauty Company (MXT)", source: "Google", amount: 6900, month: "Feb" },
+      { name: "Fulfil", source: "Hampton", amount: 6900, month: "Feb" },
+      { name: "Franchise Brokers Assoc.", source: "Hampton", amount: 6900, month: "Mar" },
+      { name: "Priority Plus Financial", source: "Meta", amount: 6900, month: "May" },
+      { name: "Third Home", source: "Wolfscale", amount: 6500, month: "Apr" },
+      { name: "Revenued", source: "Meta", amount: 6500, month: "May" },
+      { name: "Shift", source: "Meta", amount: 6500, month: "Apr" },
+      { name: "Nextiva (Feb)", source: "Meta", amount: 6000, month: "Feb" },
+      { name: "Nextiva (Apr)", source: "Meta", amount: 6000, month: "Apr" },
+      { name: "Nalena", source: "Meta", amount: 5900, month: "Jan" },
+      { name: "Legal Tags", source: "Meta", amount: 5900, month: "Jan" },
+      { name: "XLT Media Solutions", source: "Meta", amount: 5900, month: "Mar" },
+      { name: "Dr Z Functional Medicine", source: "Meta", amount: 5900, month: "Mar" },
+      { name: "Massimo", source: "Personal Relationship", amount: 5900, month: "Apr" },
+      { name: "Tranzon", source: "Ikoni Digital", amount: 5900, month: "Mar" },
+      { name: "Service Plus", source: "Board of Advisors", amount: 5900, month: "Mar" },
+      { name: "Natural Armor", source: "Referral", amount: 5900, month: "Mar" },
+      { name: "My Zoo Box", source: "Organic", amount: 5900, month: "May" },
+      { name: "Meet Caddy", source: "Board of Advisors", amount: 5900, month: "Jun" },
+      { name: "Meditech Marketing", source: "Board of Advisors", amount: 5900, month: "Jun" },
+      { name: "Growth Shop", source: "Organic", amount: 5900, month: "Jun" },
+      { name: "Tune into Reading", source: "Organic", amount: 5900, month: "Feb" },
+      { name: "Salients", source: "Organic", amount: 5900, month: "Feb" },
+      { name: "Boosted Brains", source: "Meta", amount: 5900, month: "Jul" },
+      { name: "Medicinal Foods", source: "Meta", amount: 5900, month: "Jul" },
+      { name: "Zapz", source: "Meta", amount: 5900, month: "Jul" },
+      { name: "Myst Yacht Charters", source: "Meta", amount: 5900, month: "Jul" },
+      { name: "VEA Health", source: "Cold Outreach", amount: 5500, month: "Mar" },
+      { name: "Palo Media Group", source: "Google", amount: 5000, month: "Mar" },
+      { name: "Merin Hospitality", source: "Board of Advisors", amount: 5000, month: "May" },
+      { name: "NewMind Technologies", source: "Wolfscale", amount: 4900, month: "Jan" },
+      { name: "Winsights.life", source: "Wolfscale", amount: 4900, month: "Jan" },
+      { name: "Hard Chews", source: "Organic", amount: 4900, month: "Feb" },
+      { name: "Blue Medi Spa", source: "Referral", amount: 4900, month: "Feb" },
+      { name: "Omakai Sushi", source: "No UTM", amount: 4900, month: "Feb" },
+      { name: "Cow Guys", source: "Referral", amount: 4900, month: "Mar" },
+      { name: "Cardinal HVAC", source: "Meta", amount: 4900, month: "Mar" },
+      { name: "CRE Income Fund", source: "Ikoni Digital", amount: 4900, month: "Apr" },
+      { name: "Product Air", source: "Meta", amount: 4900, month: "May" },
+      { name: "Fem-Force", source: "Meta", amount: 4900, month: "May" },
+      { name: "Rollout AI", source: "Hampton", amount: 4900, month: "May" },
+      { name: "Kinzie Foods", source: "Cold Outreach", amount: 4900, month: "Jun" },
+      { name: "SimpliFaster", source: "Google", amount: 4900, month: "Jul" },
+      { name: "Hiring and Empowering", source: "Meta", amount: 4900, month: "Jul" },
+      { name: "CKYN Shop", source: "Meta", amount: 4900, month: "Jul" },
+      { name: "PlusLife Health", source: "Organic", amount: 4900, month: "Jul" },
+      { name: "Festoon House", source: "Referral", amount: 4900, month: "Jul" },
+      { name: "Stacked Media", source: "Personal Relationship", amount: 4000, month: "Apr" }
+    ],
+    monthlyDeals: [
+      { month: "Jan", deals: 8, revenue: 57200 },
+      { month: "Feb", deals: 11, revenue: 79500 },
+      { month: "Mar", deals: 11, revenue: 66200 },
+      { month: "Apr", deals: 8, revenue: 57300 },
+      { month: "May", deals: 10, revenue: 62800 },
+      { month: "Jun", deals: 7, revenue: 51400 },
+      { month: "Jul", deals: 11, revenue: 64500 }
+    ]
+  };
+
+  var html = '';
+
+  // HERO
+  html += '<div class="hero l90-hero">';
+  html += '<div class="hero-grid"></div>';
+  html += '<div class="hero-content">';
+  html += '<div class="badge">YEAR-TO-DATE</div>';
+  html += '<h1>2026 Year-to-Date <span>Performance</span></h1>';
+  html += '<p class="hero-subtitle">January through July 2026</p>';
+  html += '<div class="hero-stats">';
+  html += '<div class="hero-stat"><div class="hero-stat-value green">' + ytd.totalDeals + '</div><div class="hero-stat-label">Deals Closed</div></div>';
+  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--success);font-size:28px">' + fmtD(ytd.totalRevenue) + '/mo</div><div class="hero-stat-label">New Monthly Revenue</div></div>';
+  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--brand-primary-light);font-size:28px">' + fmtD(ytd.avgDeal) + '</div><div class="hero-stat-label">Avg Deal Size</div></div>';
+  html += '</div>';
+
+  // Second row - spend
+  html += '<div class="hero-stats" style="margin-top:16px">';
+  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--cyan-accent);font-size:28px">' + fmtDec(ytd.metaSpend) + '</div><div class="hero-stat-label">Meta Spend YTD</div></div>';
+  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--warning);font-size:28px">' + fmtDec(ytd.googleSpend) + '</div><div class="hero-stat-label">Google Spend YTD</div></div>';
+  html += '<div class="hero-stat"><div class="hero-stat-value" style="color:var(--success);font-size:28px">' + ytd.bySource[0].deals + '</div><div class="hero-stat-label">Meta Deals (' + fmtD(ytd.bySource[0].avgDeal) + ' avg)</div></div>';
+  html += '</div>';
+  html += '</div></div>';
+
+  // MAIN
+  html += '<div class="main">';
+  html += '<div class="note-banner"><strong>Year-to-Date:</strong> Covers January through July 2026. Cost per meeting and CAC metrics will be added after data validation and tracker cleanup.</div>';
+
+  // DEALS BY SOURCE TABLE
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon green">&#128176;</div><div><div class="section-title">Deals and Revenue by Source</div><div class="section-subtitle">66 deals closed YTD across 11 sources</div></div></div>';
+  html += '<table class="source-table"><thead><tr><th>Source</th><th class="right">Deals</th><th class="right">Revenue</th><th class="right">Avg Deal</th><th></th></tr></thead><tbody>';
+  ytd.bySource.forEach(function(s) {
+    var barW = Math.round(s.revenue / 140400 * 100);
+    var tagCls = sourceTagClass(s.source);
+    html += '<tr><td><span class="source-tag ' + tagCls + '">' + s.source + '</span></td>';
+    html += '<td class="right"><strong>' + s.deals + '</strong></td>';
+    html += '<td class="right" style="color:var(--success);font-weight:700">' + fmtD(s.revenue) + '</td>';
+    html += '<td class="right">' + fmtD(s.avgDeal) + '</td>';
+    html += '<td><div class="bar-container"><div class="bar-fill ' + tagCls + '" style="width:' + barW + '%"></div></div></td></tr>';
+  });
+  html += '</tbody></table>';
+  html += '<div class="summary-row" style="flex-wrap:wrap;gap:12px">';
+  html += '<div><span>Total Deals</span><br><strong style="font-size:20px">' + ytd.totalDeals + '</strong></div>';
+  html += '<div style="text-align:center"><span>Total Monthly Revenue</span><br><strong style="font-size:20px">' + fmtD(ytd.totalRevenue) + '/mo</strong></div>';
+  html += '<div style="text-align:right"><span>Overall Avg Deal Size</span><br><strong style="font-size:20px">' + fmtD(ytd.avgDeal) + '</strong></div>';
+  html += '</div></div>';
+
+  // CHARTS: Monthly deals trend + Revenue by source (doughnut)
+  html += '<div class="two-col">';
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon blue">&#128200;</div><div><div class="section-title">Monthly Deals and Revenue</div><div class="section-subtitle">Jan - Jul 2026</div></div></div>';
+  html += '<div class="chart-container-tall"><canvas id="chart-ytd-monthly"></canvas></div>';
+  html += '</div>';
+
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon purple">&#127942;</div><div><div class="section-title">Revenue by Source</div><div class="section-subtitle">Share of YTD revenue</div></div></div>';
+  html += '<div class="chart-container-tall"><canvas id="chart-ytd-source-pie"></canvas></div>';
+  html += '</div>';
+  html += '</div>';
+
+  // AVG DEAL SIZE BY SOURCE CHART
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon gold">&#128178;</div><div><div class="section-title">Average Deal Size by Source</div><div class="section-subtitle">YTD comparison across all channels</div></div></div>';
+  html += '<div class="chart-container-tall"><canvas id="chart-ytd-avg-deal"></canvas></div>';
+  html += '</div>';
+
+  // AD SPEND SUMMARY
+  html += '<div class="two-col">';
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon cyan-bg">&#128176;</div><div><div class="section-title">Meta Ads YTD</div><div class="section-subtitle">Paid social performance</div></div></div>';
+  html += '<div class="metric-grid" style="grid-template-columns:1fr 1fr">';
+  html += '<div class="metric-card"><div class="metric-card-value" style="color:var(--cyan-accent)">' + fmtDec(ytd.metaSpend) + '</div><div class="metric-card-label">Total Spend</div></div>';
+  html += '<div class="metric-card"><div class="metric-card-value green">' + ytd.bySource[0].deals + '</div><div class="metric-card-label">Deals Closed</div></div>';
+  html += '<div class="metric-card"><div class="metric-card-value" style="color:var(--brand-primary-light)">' + fmtD(ytd.bySource[0].avgDeal) + '</div><div class="metric-card-label">Avg Deal Size</div></div>';
+  html += '<div class="metric-card"><div class="metric-card-value" style="color:var(--warning)">' + fmtD(Math.round(ytd.metaSpend / ytd.bySource[0].deals)) + '</div><div class="metric-card-label">CAC (Spend Only)</div></div>';
+  html += '</div></div>';
+
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon google">&#128176;</div><div><div class="section-title">Google Ads YTD</div><div class="section-subtitle">Paid search performance</div></div></div>';
+  html += '<div class="metric-grid" style="grid-template-columns:1fr 1fr">';
+  html += '<div class="metric-card"><div class="metric-card-value" style="color:var(--warning)">' + fmtDec(ytd.googleSpend) + '</div><div class="metric-card-label">Total Spend</div></div>';
+  var gDeals = ytd.bySource.find(function(s){return s.source==="Google"});
+  html += '<div class="metric-card"><div class="metric-card-value green">' + gDeals.deals + '</div><div class="metric-card-label">Deals Closed</div></div>';
+  html += '<div class="metric-card"><div class="metric-card-value" style="color:var(--brand-primary-light)">' + fmtD(gDeals.avgDeal) + '</div><div class="metric-card-label">Avg Deal Size</div></div>';
+  html += '<div class="metric-card"><div class="metric-card-value" style="color:var(--success)">' + fmtD(Math.round(ytd.googleSpend / gDeals.deals)) + '</div><div class="metric-card-label">CAC (Spend Only)</div></div>';
+  html += '</div></div>';
+  html += '</div>';
+
+  // ALL DEALS LIST
+  html += '<div class="section">';
+  html += '<div class="section-header"><div class="section-icon green">&#9989;</div><div><div class="section-title">All Deals Closed YTD</div><div class="section-subtitle">' + ytd.totalDeals + ' deals from January through July 2026</div></div></div>';
+  ytd.allDeals.forEach(function(deal, i) {
+    var tagCls = sourceTagClass(deal.source);
+    html += '<div class="deal-item"><div class="deal-number">' + (i+1) + '</div>';
+    html += '<div class="deal-info"><div class="deal-name">' + deal.name + '</div>';
+    html += '<div class="deal-source"><span class="source-tag ' + tagCls + '">' + deal.source + '</span> <span style="font-size:11px;color:var(--text-muted)">' + deal.month + ' \'26</span></div></div>';
+    html += '<div class="deal-amount">' + fmtD(deal.amount) + '/mo</div></div>';
+  });
+  html += '<div class="summary-row"><span>Total: ' + ytd.totalDeals + ' deals</span><strong>' + fmtD(ytd.totalRevenue) + '/mo | Avg ' + fmtD(ytd.avgDeal) + '</strong></div>';
+  html += '</div>';
+
+  // COMING SOON
+  html += '<div style="margin-top:12px;padding:16px 20px;background:var(--bg-light);border-radius:12px;border:1px dashed var(--card-border);color:var(--text-secondary);font-size:13px">';
+  html += '<strong>Coming soon:</strong> Cost per meeting by source, CAC by source, YTD booked/showed/show rate, assessment close rate. Pending data validation and tracker cleanup.';
+  html += '</div>';
+
+  html += '</div>'; // end main
+  return html;
+}
+
+function createYTDCharts() {
+  var fontOpts = { family: 'Inter', size: 11 };
+  var gridOpts = { color: 'rgba(25,30,40,0.06)' };
+  var labels = ["Jan '26","Feb '26","Mar '26","Apr '26","May '26","Jun '26","Jul '26"];
+
+  // Monthly deals + revenue
+  var ctx1 = document.getElementById('chart-ytd-monthly');
+  if (ctx1) {
+    activeCharts['ytd-monthly'] = new Chart(ctx1, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [
+          { label: 'Deals', data: [8,11,11,8,10,7,11], backgroundColor: 'rgba(40,200,64,0.7)', borderColor: '#28c840', borderWidth: 1, yAxisID: 'y', borderRadius: 4 },
+          { label: 'Revenue', data: [57200,79500,66200,57300,62800,51400,64500], type: 'line', borderColor: '#2483C4', backgroundColor: 'rgba(36,131,196,0.1)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#2483C4', yAxisID: 'y1' }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { labels: { font: fontOpts, usePointStyle: true, pointStyle: 'circle', padding: 16 } } },
+        scales: {
+          x: { grid: gridOpts, ticks: { font: fontOpts } },
+          y: { type: 'linear', position: 'left', grid: gridOpts, ticks: { font: fontOpts }, beginAtZero: true, title: { display: true, text: 'Deals', font: fontOpts } },
+          y1: { type: 'linear', position: 'right', grid: { drawOnChartArea: false }, ticks: { font: fontOpts, callback: function(v) { return '$' + (v/1000) + 'K'; } }, title: { display: true, text: 'Revenue', font: fontOpts } }
+        }
+      }
+    });
+  }
+
+  // Revenue by source doughnut
+  var ctx2 = document.getElementById('chart-ytd-source-pie');
+  if (ctx2) {
+    activeCharts['ytd-source-pie'] = new Chart(ctx2, {
+      type: 'doughnut',
+      data: {
+        labels: ['Meta', 'Organic', 'No UTM', 'Referral', 'Hampton', 'Cold Outreach', 'Personal', 'BOA', 'Ikoni', 'Google', 'Wolfscale'],
+        datasets: [{
+          data: [140400, 49800, 41500, 39600, 35100, 26200, 24900, 22700, 18700, 16800, 16300],
+          backgroundColor: ['#2483C4', '#28c840', '#9ca3af', '#febc2e', '#6366f1', '#ff5f57', '#f472b6', '#8b5cf6', '#14b8a6', '#f59e0b', '#06b6d4'],
+          borderWidth: 2, borderColor: '#ffffff'
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '50%',
+        plugins: {
+          legend: { position: 'right', labels: { font: fontOpts, usePointStyle: true, pointStyle: 'circle', padding: 10 } },
+          tooltip: { callbacks: { label: function(ctx) { return ctx.label + ': $' + ctx.parsed.toLocaleString() + ' (' + Math.round(ctx.parsed/4320) + '%)'; } } }
+        }
+      }
+    });
+  }
+
+  // Avg deal by source bar chart
+  var ctx3 = document.getElementById('chart-ytd-avg-deal');
+  if (ctx3) {
+    activeCharts['ytd-avg-deal'] = new Chart(ctx3, {
+      type: 'bar',
+      data: {
+        labels: ['No UTM', 'Personal', 'Hampton', 'Referral', 'Cold Outreach', 'Meta', 'Ikoni', 'Organic', 'BOA', 'Google', 'Wolfscale'],
+        datasets: [{
+          label: 'Avg Deal Size',
+          data: [8300, 8300, 7020, 6600, 6550, 6382, 6233, 6225, 5675, 5600, 5433],
+          backgroundColor: ['#9ca3af', '#f472b6', '#6366f1', '#febc2e', '#ff5f57', '#2483C4', '#14b8a6', '#28c840', '#8b5cf6', '#f59e0b', '#06b6d4'],
+          borderRadius: 4
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: function(ctx) { return '$' + ctx.parsed.x.toLocaleString(); } } }
+        },
+        scales: {
+          x: { grid: gridOpts, ticks: { font: fontOpts, callback: function(v) { return '$' + v.toLocaleString(); } }, beginAtZero: true },
+          y: { grid: { display: false }, ticks: { font: fontOpts } }
+        }
+      }
+    });
+  }
+}
+
 // ===== CHART CREATION FUNCTIONS =====
 function createOutcomeChart(key) {
   var d = months[key];
@@ -2584,6 +2878,8 @@ function switchTab(tabId) {
   if (!tabEl.dataset.rendered) {
     if (tabId === 'l90') {
       tabEl.innerHTML = renderL90Tab();
+    } else if (tabId === 'ytd') {
+      tabEl.innerHTML = renderYTDTab();
     } else {
       tabEl.innerHTML = renderMonthTab(tabId);
     }
@@ -2595,6 +2891,8 @@ function switchTab(tabId) {
   // Create charts for active tab
   if (tabId === 'l90') {
     createL90Charts();
+  } else if (tabId === 'ytd') {
+    createYTDCharts();
   } else {
     createOutcomeChart(tabId);
   }
@@ -2615,13 +2913,13 @@ document.querySelectorAll('.tab-pill').forEach(function(pill) {
 
 // Default tab from hash or 'jun'
 var initialTab = window.location.hash.replace('#', '') || 'jul';
-if (!['mar','apr','may','jun','jul','l90'].includes(initialTab)) initialTab = 'jul';
+if (!['mar','apr','may','jun','jul','l90','ytd'].includes(initialTab)) initialTab = 'jul';
 switchTab(initialTab);
 
 // Handle hash changes
 window.addEventListener('hashchange', function() {
   var tab = window.location.hash.replace('#', '');
-  if (['mar','apr','may','jun','jul','l90'].includes(tab)) {
+  if (['mar','apr','may','jun','jul','l90','ytd'].includes(tab)) {
     switchTab(tab);
   }
 });
