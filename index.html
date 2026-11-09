@@ -2237,10 +2237,10 @@ const months = {
     label: "October 2026", period: "Full month of October 2026 (through 10/31)",
     booked: 72, showed: 57, showRate: 79.2, assessments: 33,
     showedToAssess: 57.9, dealCount: 16, revenue: 89400, avgDeal: 5588, assessCloseRate: 48.5,
-    metaSpend: 15072.37, googleSpend: 617, cosTotal: 0, wolfTotal: 1995.00,
-    ikoniTotal: 2000, revcadenceTotal: 1500, nllTotal: 0, dealForceTotal: 289,
+    metaSpend: 15072.37, googleSpend: 617, cosTotal: 0, wolfTotal: null,
+    ikoniTotal: 2000, revcadenceTotal: null, nllTotal: null, dealForceTotal: 289,
     hamptonTotal: 825, baTotal: 1667, prTotal: 0,
-    totalInvest: 23965.37, costPerBooked: 332.85, blendedCAC: 1498,
+    totalInvest: 20470.37, costPerBooked: 284.31, blendedCAC: 1279,
     typeform: { views: 342, starts: 161, subs: 64, completion: 39.8, overall: 18.7 },
     assessBySource: { "Meta": 16, "Unattributed": 4, "Deal Force": 2, "Next Level Leads": 2, "IG / Organic": 2, "Referral": 2, "Ikoni Digital": 2, "Organic": 1, "Google": 1, "Hampton": 1 },
     assessmentNames: {
@@ -2309,36 +2309,34 @@ const months = {
       },
       {
         name: "Wolfscale", tagClass: "cold", booked: 2, showed: 2,
-        costPerBooked: "$997.50", total: 1995.00, momPct: "0.0%", momClass: "flat",
+        costPerBooked: "Pending", total: 0.00, totalDisplay: "Pending", momPct: null, momClass: null,
         details: [
-          { label: "October Total (est, pending invoice)", value: "$1,995.00" },
+          { label: "October Total", value: "Pending invoice" },
           { label: "Status", value: "Final month. Partnership ended." },
           { label: "Sales Calls", value: "2 booked / 2 showed" },
           { label: "Partnership Calls (excluded)", value: "9" },
           { label: "October Assessments Hosted", value: "0" },
           { label: "October Deals", value: "0" },
-          { label: "September Total", value: "$1,995.00", style: "color: var(--text-muted)" },
-          { label: "MoM Change", value: "0.0%", style: "color: var(--text-muted)" }
+          { label: "September Total", value: "$1,995.00", style: "color: var(--text-muted)" }
         ],
-        footnote: "Final month with Wolfscale. Of 11 bookings, only 2 were sales conversations; the other 9 were partnership or referral calls and are excluded from booked calls and show rate. Zero assessments and zero deals across the last four months, at roughly $1,995/mo. Invoice still pending."
+        footnote: "Final month with Wolfscale. Of 11 bookings, only 2 were sales conversations; the other 9 were partnership or referral calls and are excluded from booked calls and show rate. Zero assessments and zero deals across the last four months. October invoice still outstanding and excluded from totals."
       },
       {
         name: "RevCadence", tagClass: "cold", booked: 3, showed: 3,
-        costPerBooked: "$500.00", total: 1500.00, momPct: "0.0%", momClass: "flat",
+        costPerBooked: "Pending", total: 0.00, totalDisplay: "Pending", momPct: null, momClass: null,
         details: [
-          { label: "October Total (est, pending invoice)", value: "$1,500.00" },
+          { label: "October Total", value: "Pending invoice" },
           { label: "New October Leads", value: "3 booked / 3 showed" },
           { label: "Show Rate", value: "100%" },
           { label: "October Assessments Hosted", value: "0" },
           { label: "October Deals", value: "0" },
-          { label: "September Total", value: "$1,500", style: "color: var(--text-muted)" },
-          { label: "MoM Change", value: "0.0%", style: "color: var(--text-muted)" }
+          { label: "September Total", value: "$1,500", style: "color: var(--text-muted)" }
         ],
-        footnote: "Second month delivering meetings. All 3 showed, but all 3 were disqualified as not an ICP fit. Six bookings across two months with zero assessments. Invoice still pending."
+        footnote: "Second month delivering meetings. All 3 showed, but all 3 were disqualified as not an ICP fit. Six bookings across two months with zero assessments. October invoice still outstanding and excluded from totals."
       },
       {
         name: "Next Level Leads", tagClass: "cold", booked: 5, showed: 2,
-        costPerBooked: "Pending", total: 0.00, momPct: null, momClass: null,
+        costPerBooked: "Pending", total: 0.00, totalDisplay: "Pending", momPct: null, momClass: null,
         details: [
           { label: "Pricing Model", value: "Pay per performance" },
           { label: "October Fee", value: "Pending invoice" },
@@ -2470,11 +2468,11 @@ const months = {
       { channel: "Meta Ads", tagClass: "meta", deals: 9, spend: "$15,072", cac: "$1,675", cacColor: "var(--success)" },
       { channel: "Next Level Leads", tagClass: "cold", deals: 1, spend: "Pending", cac: "Pending", cacColor: "var(--text-muted)" },
       { channel: "Ikoni Digital", tagClass: "cold", deals: 0, spend: "$2,000", cac: "N/A", cacColor: "var(--error)" },
-      { channel: "Wolfscale", tagClass: "cold", deals: 0, spend: "$1,995 (est)", cac: "N/A", cacColor: "var(--error)" },
+      { channel: "Wolfscale", tagClass: "cold", deals: 0, spend: "Pending", cac: "Pending", cacColor: "var(--text-muted)" },
       { channel: "Board of Advisors", tagClass: "hampton", deals: 0, spend: "$1,667", cac: "N/A", cacColor: "var(--error)" },
-      { channel: "RevCadence", tagClass: "cold", deals: 0, spend: "$1,500 (est)", cac: "N/A", cacColor: "var(--error)" }
+      { channel: "RevCadence", tagClass: "cold", deals: 0, spend: "Pending", cac: "Pending", cacColor: "var(--text-muted)" }
     ],
-    cacSummary: { label: "Blended CAC (All 16 Deals)", value: "$1,498" }
+    cacSummary: { label: "Blended CAC (All 16 Deals)", value: "$1,279" }
   }
 };
 
@@ -2645,7 +2643,7 @@ function renderMonthTab(key) {
 
   // Note banner
   html += '<div class="note-banner"><strong>Note:</strong> All data reflects the ' + d.period + '.';
-  if (d.isEstimate) html += ' Lead gen partner costs are estimates pending final invoices (est).';
+  if (d.isEstimate) html += ' Some lead gen partner invoices are still outstanding and show as Pending; total investment, cost per booked call and CAC will rise once they land.';
   html += '</div>';
 
   // PIPELINE FUNNEL
@@ -2710,7 +2708,7 @@ function renderMonthTab(key) {
       html += '<td>' + bookedDisplay + '</td>';
       html += '<td>' + showedDisplay + '</td>';
       html += '<td class="right">' + src.costPerBooked + '</td>';
-      html += '<td class="right">' + fmtDec(src.total) + momBadge + '</td>';
+      html += '<td class="right">' + (src.totalDisplay || fmtDec(src.total)) + momBadge + '</td>';
       html += '</tr>';
 
       html += '<tr class="invest-detail"><td colspan="5"><div class="detail-grid">';
@@ -2740,7 +2738,7 @@ function renderMonthTab(key) {
   html += '</div>';
 
   if (d.isEstimate) {
-    html += '<div style="margin-top: 12px; padding: 10px 14px; background: var(--bg-light); border-radius: 8px; font-size: 12px; color: var(--text-secondary);">Lead gen partner totals are estimates pending final end-of-month invoices (est). Hampton and BA costs are prorated monthly from annual membership fees.</div>';
+    html += '<div style="margin-top: 12px; padding: 10px 14px; background: var(--bg-light); border-radius: 8px; font-size: 12px; color: var(--text-secondary);">Lead gen partner invoices marked Pending are still outstanding and are excluded from all totals, so total investment, cost per booked call and CAC are understated for this month. Hampton and BA costs are prorated monthly from annual membership fees.</div>';
   } else {
     html += '<div style="margin-top: 12px; padding: 10px 14px; background: var(--bg-light); border-radius: 8px; font-size: 12px; color: var(--text-secondary);">Lead gen partner costs finalized from Lead Gen Partner/Ad Reporting reconciliation. Hampton and BA costs are prorated monthly from annual membership fees.</div>';
   }
@@ -2884,7 +2882,7 @@ function renderL90Tab() {
     booked: 194, showed: 147, showRate: 75.8,
     assessments: 80, showedToAssess: 54.4,
     dealCount: 30, revenue: 178500, avgDeal: 5858,
-    totalInvest: 75333.26, costPerBooked: 388.32, blendedCAC: 2511,
+    totalInvest: 71838.26, costPerBooked: 370.30, blendedCAC: 2395,
     assessCloseRate: 37.5,
     typeform: { views: 1835, starts: 709, subs: 266, overall: 14.5 }
   };
@@ -2920,7 +2918,7 @@ function renderL90Tab() {
 
   // MAIN
   html += '<div class="main">';
-  html += '<div class="note-banner"><strong>L90 Analytics:</strong> Covers August, September, and October 2026. All three months use verified hosted assessments. October partner costs for Wolfscale, RevCadence and Next Level Leads are estimates pending final invoices (est). PR was discontinued after August; Cold Outreach and Wolfscale ended after September and October respectively.</div>';
+  html += '<div class="note-banner"><strong>L90 Analytics:</strong> Covers August, September, and October 2026. All three months use verified hosted assessments. October invoices for Wolfscale, RevCadence and Next Level Leads are still outstanding and excluded from totals, so October investment and CAC are understated. PR was discontinued after August; Cold Outreach and Wolfscale ended after September and October respectively.</div>';
 
   // TREND CHARTS SECTION
   // Chart 1: Pipeline Trend
@@ -3023,7 +3021,7 @@ function renderL90Tab() {
     { metric: "Deals Closed", values: [8,6,16], unit: '', direction: 'up', severity: 'up-good', note: 'More than double any prior month in the L90.' },
     { metric: "Revenue", values: [52000,37100,89400], unit: '$', direction: 'up', severity: 'up-good', note: 'Record month. Up 141% from September.' },
     { metric: "Avg Deal Size", values: [6156,6183,5588], unit: '$', direction: 'down', severity: 'stable', note: 'Down 10% on far higher volume. Nine deals under $5.5K.' },
-    { metric: "Blended CAC", values: [3201,4293,1498], unit: '$', direction: 'down', severity: 'up-good', note: 'Down 65%. Best of the year. NLL fee still pending.' },
+    { metric: "Blended CAC", values: [3201,4293,1279], unit: '$', direction: 'down', severity: 'up-good', note: 'Best of the year, but 3 partner invoices are still pending.' },
     { metric: "Typeform Views", values: [1130,363,342], unit: '', direction: 'down', severity: 'stable', note: 'Stable at a normal level for a second month.' },
     { metric: "Typeform Subs", values: [131,71,64], unit: '', direction: 'down', severity: 'stable', note: 'Down slightly but conversion holding near 19%.' }
   ];
@@ -3057,9 +3055,9 @@ function renderL90Tab() {
     { label: 'Deals Closed', vals: [8,6,16], avg: 10.0, fmt: 'n' },
     { label: 'Revenue', vals: [52000,37100,89400], avg: 59500, fmt: '$' },
     { label: 'Avg Deal', vals: [6156,6183,5588], avg: 5976, fmt: '$' },
-    { label: 'Total Investment', vals: [25608.46,25759.43,23965.37], avg: 25111.09, fmt: '$' },
-    { label: 'Cost/Booked', vals: [492.47,367.99,332.85], avg: 397.77, fmt: '$' },
-    { label: 'Blended CAC', vals: [3201,4293,1498], avg: 2997, fmt: '$' },
+    { label: 'Total Investment', vals: [25608.46,25759.43,20470.37], avg: 23946.09, fmt: '$' },
+    { label: 'Cost/Booked', vals: [492.47,367.99,284.31], avg: 381.59, fmt: '$' },
+    { label: 'Blended CAC', vals: [3201,4293,1279], avg: 2924, fmt: '$' },
     { label: 'No-Show Rate', vals: [28.8,24.3,20.8], avg: 24.6, fmt: '%' },
     { label: 'Typeform Views', vals: [1130,363,342], avg: 611.7, fmt: 'n' },
     { label: 'Typeform Subs', vals: [131,71,64], avg: 88.7, fmt: 'n' },
@@ -3514,9 +3512,9 @@ function createL90Charts() {
       data: {
         labels: labels,
         datasets: [
-          { label: 'Total Investment', data: [25608.46,25759.43,23965.37], borderColor: '#febc2e', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#febc2e', fill: false, yAxisID: 'y' },
-          { label: 'Blended CAC', data: [3201,4293,1498], borderColor: '#ff5f57', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#ff5f57', fill: false, yAxisID: 'y1' },
-          { label: 'Cost/Booked', data: [492.47,367.99,332.85], borderColor: '#00aae9', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#00aae9', fill: false, borderDash: [5,3], yAxisID: 'y1' }
+          { label: 'Total Investment', data: [25608.46,25759.43,20470.37], borderColor: '#febc2e', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#febc2e', fill: false, yAxisID: 'y' },
+          { label: 'Blended CAC', data: [3201,4293,1279], borderColor: '#ff5f57', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#ff5f57', fill: false, yAxisID: 'y1' },
+          { label: 'Cost/Booked', data: [492.47,367.99,284.31], borderColor: '#00aae9', tension: 0.3, pointRadius: 5, pointBackgroundColor: '#00aae9', fill: false, borderDash: [5,3], yAxisID: 'y1' }
         ]
       },
       options: {
